@@ -1,0 +1,29 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 25%;
+  margin: auto;
+}
+
+.inp,
+.btn {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 2px solid gray;
+  cursor: pointer;
+  outline: none;
+}
+.input:focus {
+  border-bottom: 2px solid #269d26;
+}
+.btn {
+  background: linear-gradient(to right, #ebebebdd, #b6b6b6d4, #ebebebdd);
+  transition: transform 0.2s ease-in-out;
+}
+
+.button:hover {
+  background: linear-gradient(to right, #ebebeb, #b6b6b6, #ebebeb);
+  transform: scale(1.03);
+}
