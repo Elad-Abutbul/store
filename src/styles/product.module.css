@@ -1,10 +1,19 @@
 .singleProduct{
      display: flex;
      flex-direction: row;
-     justify-content: center;
+     justify-content: space-around;
      background-color: white;
      margin: auto;
      width: 85%;
      margin-top: 20px;
      border-radius: 10px;
+     gap: 5%;
+     align-items: center;
+}
+body{
+     height: 100vh;
+}
+.img{
+     width: 20%;
+     height: 10%;
 }
