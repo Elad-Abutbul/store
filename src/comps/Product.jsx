@@ -6,7 +6,8 @@ export default function Prodact({ val }) {
       <h2>{val.name}</h2>
       <h2>{val.desc}</h2>
       <h2>{val.price}</h2>
-      <image src={val.image}/>
+      <image src={val.image} />
+      <h1 value={ val.name}>+</h1>
     </div>
   );
 }
