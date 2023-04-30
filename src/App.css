@@ -1,3 +1,6 @@
+*{
+  cursor: default;
+}
 :root {
   --main-color-entry: #2188ef;
 }
