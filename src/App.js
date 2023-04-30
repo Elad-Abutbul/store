@@ -9,38 +9,42 @@ import Search from "./comps/Search";
 import Nav from "./comps/Nav";
 import Cart from "./comps/Cart";
 import { ROUTES } from "./constans/constans";
+import { contextApi } from "./contextApi";
 function App() {
   const [products, setProducts] = useState([]);
-  const [isLogIn, setIsLogIn] = useState(false);
+  const [userData, setUserData] = useState(false);
   useEffect(() => {
     axios.get("http://localhost:3001/allProducts").then((res) => {
       setProducts(res.data);
     });
   }, []);
-  const logOut = () => {
-    setIsLogIn(false);
+  const userDisconnect = () => {
+    setUserData(false);
   };
-  const logIn = () => {
-    setIsLogIn(true);
+  const userConnect = (user) => {
+    setUserData(user);
   };
   return (
     <div className="App">
       <BrowserRouter>
-        {isLogIn && <Nav />}
-
-        <Routes>
-          <Route path="*" element={<LogIn logIn={logIn} />} />
-          <Route path={ROUTES.SIGNUP} element={<SignUp />} />
-          <Route
-            path={ROUTES.PRODUCTS}
-            element={<Prodacts products={products} />}
-          />
-          <Route path={ROUTES.SEARCH} element={<Search />} />
-          <Route path={ROUTES.CART} element={<Cart />} />
-        </Routes>
-        {isLogIn && (
+        {userData && <Nav />}
+        <contextApi.Provider
+          value={userData}
+        >
+          <Routes>
+            <Route path="*" element={<LogIn userConnect={userConnect} />} />
+            <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+            <Route
+              path={ROUTES.PRODUCTS}
+              element={<Prodacts products={products} url={'product'} />}
+            />
+            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.CART} element={<Cart />} />
+          </Routes>
+        </contextApi.Provider>
+        {userData && (
           <Link to={"/"}>
-            <button onClick={logOut}>LogOut</button>
+            <button onClick={userDisconnect}>LogOut</button>
           </Link>
         )}
       </BrowserRouter>

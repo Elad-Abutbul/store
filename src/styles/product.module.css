@@ -17,3 +17,6 @@ body{
      width: 20%;
      height: 10%;
 }
+.plus{
+     cursor: pointer;
+}
