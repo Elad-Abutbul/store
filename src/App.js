@@ -13,8 +13,8 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLogIn, setIsLogIn] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:3001/allProducts").then((response) => {
-      setProducts(response.data);
+    axios.get("http://localhost:3001/allProducts").then((res) => {
+      setProducts(res.data);
     });
   }, []);
   const logOut = () => {
@@ -29,7 +29,7 @@ function App() {
         {isLogIn && <Nav />}
 
         <Routes>
-          <Route path="/" element={<LogIn logIn={logIn} />} />
+          <Route path="*" element={<LogIn logIn={logIn} />} />
           <Route path={ROUTES.SIGNUP} element={<SignUp />} />
           <Route
             path={ROUTES.PRODUCTS}
