@@ -11,8 +11,7 @@ export default function LogIn(props) {
       alert("Field are missing!");
     } else {
       try {
-        const res = await axios
-          .post("http://localhost:3001/login", {
+        const res = await axios.post("http://localhost:3001/login", {
             userName: userName,
             password: password,
           })

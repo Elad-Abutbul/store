@@ -13,7 +13,7 @@ import { contextApi } from "./contextApi";
 function App() {
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(false);
-  useEffect(() => {
+  useEffect( () => {
     axios.get("http://localhost:3001/allProducts").then((res) => {
       setProducts(res.data);
     });
