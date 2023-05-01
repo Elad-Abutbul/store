@@ -13,7 +13,7 @@ import { contextApi } from "./contextApi";
 function App() {
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(false);
-  useEffect( () => {
+  useEffect(() => {
     axios.get("http://localhost:3001/allProducts").then((res) => {
       setProducts(res.data);
     });
@@ -42,11 +42,8 @@ function App() {
             <Route path={ROUTES.CART} element={<Cart />} />
           </Routes>
         </contextApi.Provider>
-        {userData && (
-          <Link to={"/"}>
-            <button onClick={userDisconnect}>LogOut</button>
-          </Link>
-        )}
+      
+        
       </BrowserRouter>
     </div>
   );

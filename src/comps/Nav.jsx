@@ -14,6 +14,10 @@ export default function Nav() {
       <Link to={ROUTES.CART}>
         <button className={navCss.btn}>CART</button>
       </Link>
+      <Link to='/'>
+      <button className={navCss.btn}>LOG OUT</button>
+      </Link>
+
     </div>
   );
 }

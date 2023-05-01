@@ -1,15 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { contextApi } from "../contextApi";
 import Prodact from "./Product";
 export default function Cart() {
-  const [pay, setPay] = useState('0');
+  const [pay, setPay] = useState(0);
   const valContext = useContext(contextApi);
-  let sum;
-  valContext?.cart?.forEach(val => {
-    sum+=val.price
-  });
+  let sum = 0;
+  useEffect(() => {
+    valContext.cart.forEach(val => {
+      sum+=val.price
+    })
+    setPay(sum)
+  },[])
   
-    console.log(valContext.cart);
+ 
   return <div>
     <h1>my cart:</h1>
     {valContext?.cart?.map((val, index) => {
