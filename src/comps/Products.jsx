@@ -10,7 +10,7 @@ export default function Products(props) {
     <div>
       <h1>welcome {name} {lastName}</h1>
       {props.products.map((val,index) => {
-        return <Prodact key={index} val={val} url={props.url} />;
+        return <Prodact key={index} val={val} url='getAddToCart' />;
       })}
     </div>
   );

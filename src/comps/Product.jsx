@@ -12,7 +12,7 @@ export default function Prodact(props) {
       userNameId: valContext._id,
     });
     const data = await res.data;
-    if (data == "product added to cart!") {
+    if (data === "product added to cart!") {
       setRefreshPage(!refreshPage)
       alert(data);
     } else {
@@ -24,8 +24,8 @@ export default function Prodact(props) {
       <h2>{props.val.name}</h2>
       <h2>{props.val.description}</h2>
       <h2>{props.val.price}</h2>
-      <img src={props.val.image} className={productCss.img} />
-      {props.url == "product" && (
+      <img src={props.val.image} className={productCss.img} alt={props.val.name} />
+      {props.url === "getAddToCart" && (
         <h1 className={productCss.plus} onClick={addToCart}>
           
           +
