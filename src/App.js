@@ -36,9 +36,9 @@ function App() {
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route
               path={ROUTES.PRODUCTS}
-              element={<Prodacts products={products} url={'product'} />}
+              element={<Prodacts products={products} />}
             />
-            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.SEARCH} element={<Search url={'getPlus'}/>} />
             <Route path={ROUTES.CART} element={<Cart />} />
           </Routes>
         </contextApi.Provider>

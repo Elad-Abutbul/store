@@ -1,11 +1,9 @@
 #navBar{
-     background-color: black;
+     background-color: #333333;
      position: fixed 0;
      padding: 2vh;
      display: flex;
      flex-direction: row;
      justify-content: center;
 }
-.btn{
-  
-}
+
