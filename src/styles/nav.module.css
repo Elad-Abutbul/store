@@ -2,8 +2,10 @@
      background-color: black;
      position: fixed 0;
      padding: 2vh;
-}
-.btn{
      display: flex;
      flex-direction: row;
+     justify-content: center;
+}
+.btn{
+  
 }

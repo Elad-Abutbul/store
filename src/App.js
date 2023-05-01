@@ -42,11 +42,8 @@ function App() {
             <Route path={ROUTES.CART} element={<Cart />} />
           </Routes>
         </contextApi.Provider>
-        {userData && (
-          <Link to={"/"}>
-            <button onClick={userDisconnect}>LogOut</button>
-          </Link>
-        )}
+      
+        
       </BrowserRouter>
     </div>
   );
