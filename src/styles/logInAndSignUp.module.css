@@ -8,6 +8,7 @@
 
 .inp,
 .btn {
+  font-size: medium ;
   height: 30px;
   border: none;
   border-radius: 5px;
@@ -15,15 +16,21 @@
   cursor: pointer;
   outline: none;
 }
-.input:focus {
+.inp:focus {
   border-bottom: 2px solid #269d26;
 }
 .btn {
-  background-color: var(--main-color-entry);
-  transition: transform 0.2s ease-in-out;
+  background-color: var(--main-color-entry-btn);
+  border: 2PX solid black;
+  transition:  0.3s ease-in-out;
+  color: black;
+
 }
 
-.button:hover {
-  background: linear-gradient(to right, #ebebeb, #b6b6b6, #ebebeb);
-  transform: scale(1.03);
+.btn:hover {
+  border: 2PX solid white;
+background-color: black;
+  /* transform: scale(1.03); */
+  color: white;
+
 }

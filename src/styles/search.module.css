@@ -1,0 +1,9 @@
+.inp{
+     font-size: medium ;
+     height: 30px;
+     border: none;
+     border-radius: 5px;
+     border-bottom: 2px solid gray;
+     cursor: pointer;
+     outline: none;
+}

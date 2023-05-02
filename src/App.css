@@ -2,7 +2,7 @@
   cursor: default;
 }
 :root {
-  --main-color-entry: #2188ef;
+  --main-color-entry-btn: white;
 }
 .App {
   text-align: center;
