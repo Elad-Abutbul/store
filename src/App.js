@@ -15,18 +15,18 @@ function App() {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:3001/allProducts")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
+    const getAllProducts = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get("http://localhost:3001/allProducts");
+        const data = await res.data;
+        setProducts(data);
         setLoading(false);
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllProducts()
   }, []);
   const userDisconnect = () => {
     setUserData(false);
@@ -37,22 +37,29 @@ function App() {
   const addToCart = (valProduct) => {
     userData.cart.unshift(valProduct);
     setUserData([...userData]);
-  }
+  };
   const deleteFromCart = (indexProduct) => {
     userData.cart.splice(indexProduct, 1);
     setUserData([...userData]);
-  }
+  };
   return (
     <div className="App">
       <BrowserRouter>
-        <contextApi.Provider value={{ userData, products, userConnect, userDisconnect, addToCart, deleteFromCart }}>
-        {userData && <Nav  />}
+        <contextApi.Provider
+          value={{
+            userData,
+            products,
+            userConnect,
+            userDisconnect,
+            addToCart,
+            deleteFromCart,
+          }}
+        >
+          {userData && <Nav />}
           <Routes>
             <Route
-              path="/"
-              element={
-                loading ? <h1>loading...</h1> : <LogIn  />
-              }
+              path={ROUTES.ENTRY}
+              element={loading ? <h1>loading...</h1> : <LogIn />}
             />
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route
@@ -61,7 +68,10 @@ function App() {
             />
             <Route path={ROUTES.SEARCH} element={<Search url={"getPlus"} />} />
             <Route path={ROUTES.CART} element={<Cart />} />
-            <Route path='*' element={<h2>page not found..</h2>} />
+            <Route
+              path={ROUTES.PAGENOTFOUND}
+              element={<h2>page not found..</h2>}
+            />
           </Routes>
         </contextApi.Provider>
       </BrowserRouter>

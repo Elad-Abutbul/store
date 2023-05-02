@@ -18,21 +18,21 @@ export default function SignUp() {
     } else if (password.length < 5) {
       alert("Enter a password above 5 charcters");
     } else {
-        try {
-          const res = await axios.post("http://localhost:3001/createUsers", {
-            name: name,
-            lastName: lastName,
-            userName: userName,
-            password: password,
-          });
-          if (res.data == "exixt") {
-            alert("UserName Exixt.");
-          } else {
-            nav("/");
-          }
-        } catch (err) {
-          console.log(err);
+      try {
+        const res = await axios.post("http://localhost:3001/createUsers", {
+          name: name,
+          lastName: lastName,
+          userName: userName,
+          password: password,
+        });
+        if (res.data == "exixt") {
+          alert("UserName Exixt.");
+        } else {
+          nav("/");
         }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   return (

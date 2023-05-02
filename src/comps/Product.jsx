@@ -2,17 +2,19 @@ import React, { useContext } from "react";
 import productCss from "../styles/product.module.css";
 import axios from "axios";
 import { contextApi } from "../contextApi";
-export default function Prodact(props) {
+import { URL } from "../constans/constans";
+
+export default function Prodact({ index, url, valProduct }) {
   const valContext = useContext(contextApi);
   const addToCart = async () => {
     const res = await axios.post("http://localhost:3001/addToCart", {
-      productId: props.val._id,
+      productId: valProduct._id,
       userNameId: valContext.userData._id,
     });
     const data = await res.data;
     if (data === "product added to cart!") {
       alert(data);
-      valContext.addToCart(props.val);
+      valContext.addToCart(valProduct);
     } else {
       console.log("cannot added to cart");
     }
@@ -20,24 +22,23 @@ export default function Prodact(props) {
   const deleteIteam = async () => {
     try {
       const res = await axios.post("http://localhost:3001/deleteIteam", {
-        productId: props.val._id,
+        productId: valProduct._id,
         userNameId: valContext.userData._id,
       });
       const data = await res.data;
       if (data === "Product deleted from cart") {
         alert(data);
-        valContext.deleteFromCart(props.index)
+        valContext.deleteFromCart(index);
       } else {
         console.error(data);
       }
     } catch (err) {
       console.log(err);
     }
-    props.refresh();
   };
   return (
     <div className={productCss.singleProduct}>
-      {props.url === "cart" && (
+      {url === URL.ONCART && (
         <h1
           className={productCss.plusOrX}
           id={productCss.delete}
@@ -47,20 +48,20 @@ export default function Prodact(props) {
         </h1>
       )}
 
-      <h2>name: {props.val.name}</h2>
-      <h2>description: {props.val.description}</h2>
-      <h2>price: {props.val.price}₪ </h2>
+      <h2>name: {valProduct.name}</h2>
+      <h2>description: {valProduct.description}</h2>
+      <h2>price: {valProduct.price}₪ </h2>
       <img
-        src={props.val.image}
+        src={valProduct.image}
         className={productCss.img}
-        alt={props.val.name}
+        alt={valProduct.name}
       />
-      {props.url === "AddToCart" && (
+      {url === URL.ADDTOCART && (
         <h1 className={productCss.plusOrX} onClick={addToCart}>
           +
         </h1>
       )}
-      {props.url === "cart" && <h1 className={productCss.plusOrX}>✓</h1>}
+      {url === URL.ONCART && <h1 className={productCss.plusOrX}>✓</h1>}
     </div>
   );
 }
