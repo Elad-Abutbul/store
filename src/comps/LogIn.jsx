@@ -1,8 +1,10 @@
-import React, {  useState } from "react";
+import React, {  useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import entry from "../styles/logInAndSignUp.module.css";
 import axios from "axios";
-export default function LogIn(props) {
+import { contextApi } from "../contextApi";
+export default function LogIn() {
+  const valContext=useContext(contextApi)
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate();
@@ -16,9 +18,9 @@ export default function LogIn(props) {
             password: password,
           })
         const data = await res.data;
-        if (data.msg == 'success') {
+        if (data.msg === 'success') {
           nav('/products')
-          props.userConnect(data.user)
+          valContext.userConnect(data.user)
         } else {
           alert('user or password not found')
         }

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/constans";
-export default function Nav(props) {
+import { contextApi } from "../contextApi";
+export default function Nav() {
+  const valContext=useContext(contextApi)
   return (
     <div id={navCss.navBar}>
       <Link to={ROUTES.SEARCH}>
@@ -15,7 +17,7 @@ export default function Nav(props) {
         <button className={navCss.btn}>CART</button>
       </Link>
       <Link to='/'>
-      <button className={navCss.btn} onClick={()=>props.userDisconnect()}>LOG OUT</button>
+      <button className={navCss.btn} onClick={()=>valContext.userDisconnect()}>LOG OUT</button>
       </Link>
 
     </div>

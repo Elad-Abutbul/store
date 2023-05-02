@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import productCss from "../styles/product.module.css";
 import axios from "axios";
 import { contextApi } from "../contextApi";
@@ -7,12 +7,12 @@ export default function Prodact(props) {
   const addToCart = async () => {
     const res = await axios.post("http://localhost:3001/addToCart", {
       productId: props.val._id,
-      userNameId: valContext._id,
+      userNameId: valContext.userData._id,
     });
     const data = await res.data;
     if (data === "product added to cart!") {
       alert(data);
-
+      valContext.addToCart(props.val);
     } else {
       console.log("cannot added to cart");
     }
@@ -21,11 +21,12 @@ export default function Prodact(props) {
     try {
       const res = await axios.post("http://localhost:3001/deleteIteam", {
         productId: props.val._id,
-        userNameId: valContext._id,
+        userNameId: valContext.userData._id,
       });
       const data = await res.data;
       if (data === "Product deleted from cart") {
         alert(data);
+        valContext.deleteFromCart(props.index)
       } else {
         console.error(data);
       }
@@ -54,7 +55,7 @@ export default function Prodact(props) {
         className={productCss.img}
         alt={props.val.name}
       />
-      {props.url === "getAddToCart" && (
+      {props.url === "AddToCart" && (
         <h1 className={productCss.plusOrX} onClick={addToCart}>
           +
         </h1>
