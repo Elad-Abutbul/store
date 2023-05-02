@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "./axiosConfig";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogIn from "./comps/LogIn";
 import SignUp from "./comps/SignUp";
 import Prodacts from "./comps/Products";
@@ -40,16 +40,24 @@ function App() {
   const userConnect = (user) => {
     setUserData(user);
   };
+  const addToCart = (valProduct) => {
+    userData.cart.unshift(valProduct);
+    setUserData([...userData]);
+  }
+  const deleteFromCart = (indexProduct) => {
+    userData.cart.splice(indexProduct, 1);
+    setUserData([...userData]);
+  }
   return (
     <div className="App">
       <BrowserRouter>
-        {userData && <Nav userDisconnect={userDisconnect} />}
-        <contextApi.Provider value={{userData,products}}>
+        <contextApi.Provider value={{ userData, products, userConnect, userDisconnect, addToCart, deleteFromCart }}>
+        {userData && <Nav  />}
           <Routes>
             <Route
               path="/"
               element={
-                loading ? <h1>loading...</h1> : <LogIn userConnect={userConnect} />
+                loading ? <h1>loading...</h1> : <LogIn  />
               }
             />
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
