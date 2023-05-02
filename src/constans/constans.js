@@ -5,3 +5,6 @@ export const ROUTES = {
   LOGIN: "/logIn",
   SIGNUP: "/signUp",
 };
+export const AXIOS = {
+  baseURL:'http://localhost:3001/'
+}
