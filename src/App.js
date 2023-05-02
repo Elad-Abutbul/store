@@ -15,7 +15,6 @@ function App() {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-<<<<<<< HEAD
     setLoading(true);
     axios
       .get("http://localhost:3001/allProducts")
@@ -28,11 +27,9 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-=======
     axios.get("/allProducts").then((res) => {
       setProducts(res.data);
     });
->>>>>>> designWeb
   }, []);
   const userDisconnect = () => {
     setUserData(false);
