@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import productCss from "../styles/product.module.css";
-import axios from "axios";
+import axios from "../axiosConfig";
+
 import { contextApi } from "../contextApi";
 import { URL } from "../constans/constans";
 
 export default function Prodact({ index, url, valProduct }) {
   const valContext = useContext(contextApi);
   const addToCart = async () => {
-    const res = await axios.post("http://localhost:3001/addToCart", {
+    const res = await axios.post("/addToCart", {
       productId: valProduct._id,
       userNameId: valContext.userData._id,
     });

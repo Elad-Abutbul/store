@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../axiosConfig";
 import Prodact from "./Product";
 import searchCss from "../styles/search.module.css";
 import { URL } from "../constans/constans";
@@ -10,7 +10,7 @@ export default function Search() {
   useEffect(() => {
     const getIteams = async () => {
       if (req !== "") {
-        const res = await axios.post("http://localhost:3001/search", {
+        const res = await axios.post("/search", {
           getItem: req,
         });
         const data = await res.data;

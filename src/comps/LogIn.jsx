@@ -1,7 +1,8 @@
 import React, {  useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import entry from "../styles/logInAndSignUp.module.css";
-import axios from "axios";
+import axios from "../axiosConfig";
+
 import { contextApi } from "../contextApi";
 export default function LogIn() {
   const valContext=useContext(contextApi)
@@ -13,7 +14,7 @@ export default function LogIn() {
       alert("Field are missing!");
     } else {
       try {
-        const res = await axios.post("http://localhost:3001/login", {
+        const res = await axios.post("/login", {
             userName: userName,
             password: password,
           })

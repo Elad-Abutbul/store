@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import entry from "../styles/logInAndSignUp.module.css";
-import axios from "axios";
+import axios from "../axiosConfig";
 export default function SignUp() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,13 +19,13 @@ export default function SignUp() {
       alert("Enter a password above 5 charcters");
     } else {
       try {
-        const res = await axios.post("http://localhost:3001/createUsers", {
+        const res = await axios.post("/createUsers", {
           name: name,
           lastName: lastName,
           userName: userName,
           password: password,
         });
-        if (res.data == "exixt") {
+        if (res.data === "exixt") {
           alert("UserName Exixt.");
         } else {
           nav("/");

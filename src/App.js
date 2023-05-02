@@ -17,23 +17,18 @@ function App() {
   useEffect(() => {
     const getAllProducts = async () => {
       setLoading(true);
+      debugger
       try {
-        const res = await axios.get("http://localhost:3001/allProducts");
-        const data = await res.data;
-        setProducts(data);
+        const res =await axios.get("/allProducts")
+        const data=await res.data
+          setProducts(data)
         setLoading(false);
-<<<<<<< HEAD
-      });
-    axios.get("/allProducts").then((res) => {
-      setProducts(res.data);
-    });
-=======
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err)
       }
-    };
+    
+    }
     getAllProducts()
->>>>>>> addAndDeleteQiCart
   }, []);
   const userDisconnect = () => {
     setUserData(false);
