@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import Prodact from "./Product";
 import { contextApi } from "../contextApi";
+import productsCss from "../styles/products.module.css";
+
 export default function Products(props) {
   const valContext = useContext(contextApi);
   const name = valContext.name;
@@ -8,9 +10,9 @@ export default function Products(props) {
   
   return (
     <div>
-      <h1>welcome {name} {lastName}</h1>
+      <h1 className={productsCss.h1Name}>welcome {name} {lastName}</h1>
       {props.products.map((val,index) => {
-        return <Prodact key={index} val={val} url='getAddToCart' />;
+        return <Prodact key={index} index={index} val={val} url='getAddToCart' />;
       })}
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/constans";
-export default function Nav() {
+export default function Nav(props) {
   return (
     <div id={navCss.navBar}>
       <Link to={ROUTES.SEARCH}>
@@ -15,7 +15,7 @@ export default function Nav() {
         <button className={navCss.btn}>CART</button>
       </Link>
       <Link to='/'>
-      <button className={navCss.btn}>LOG OUT</button>
+      <button className={navCss.btn} onClick={()=>props.userDisconnect()}>LOG OUT</button>
       </Link>
 
     </div>

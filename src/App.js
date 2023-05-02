@@ -13,10 +13,20 @@ import { contextApi } from "./contextApi";
 function App() {
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:3001/allProducts").then((res) => {
-      setProducts(res.data);
-    });
+    setLoading(true);
+    axios
+      .get("http://localhost:3001/allProducts")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
   const userDisconnect = () => {
     setUserData(false);
@@ -27,23 +37,25 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {userData && <Nav />}
-        <contextApi.Provider
-          value={userData}
-        >
+        {userData && <Nav userDisconnect={userDisconnect} />}
+        <contextApi.Provider value={{userData,products}}>
           <Routes>
-            <Route path="*" element={<LogIn userConnect={userConnect} />} />
+            <Route
+              path="/"
+              element={
+                loading ? <h1>loading...</h1> : <LogIn userConnect={userConnect} />
+              }
+            />
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route
               path={ROUTES.PRODUCTS}
               element={<Prodacts products={products} />}
             />
-            <Route path={ROUTES.SEARCH} element={<Search url={'getPlus'}/>} />
+            <Route path={ROUTES.SEARCH} element={<Search url={"getPlus"} />} />
             <Route path={ROUTES.CART} element={<Cart />} />
+            <Route path='*' element={<h2>page not found..</h2>} />
           </Routes>
         </contextApi.Provider>
-      
-        
       </BrowserRouter>
     </div>
   );

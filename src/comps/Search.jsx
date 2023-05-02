@@ -10,7 +10,6 @@ export default function Search() {
       if (req !== '') {
         const res = await axios.post('http://localhost:3001/search', {getItem:req});
         const data = await res.data
-        console.log('elad');
         setProducts(data);
       } else {
         setProducts([])
@@ -22,10 +21,10 @@ export default function Search() {
 
   return (
     <div>
-      <h1>search</h1>
+      <h1 className={searchCss.h1}>search</h1>
       <input type="text" placeholder="search by name.." onChange={(e) => setReq(e.target.value)} className={searchCss.inp}/>
-      {products?.map((val) => {
-        return <Prodact val={val} url='getAddToCart'/>
+      {products?.map((val,index) => {
+        return <Prodact key={index} val={val} url='getAddToCart'/>
       })}
     </div>
   );

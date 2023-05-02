@@ -7,7 +7,6 @@
      width: 85%;
      margin-top: 20px;
      border-radius: 10px;
-     gap: 5%;
      align-items: center;
 }
 body{
@@ -17,6 +16,14 @@ body{
      width: 20%;
      height: 10%;
 }
-.plus{
+.plusOrX{
      cursor: pointer;
+     transition: all .2s ease-in-out;
+}
+.plusOrX:hover{
+     transform: scale(1.4); 
+
+}
+#delete:hover{
+     color: red;
 }

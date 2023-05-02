@@ -3,9 +3,15 @@
      position: fixed 0;
      padding: 2vh;
      display: flex;
+     position: fixed;
+     top: 0;
+     width: 100%;
      flex-direction: row;
      justify-content: center;
      gap: 10%;
+     margin: 0;
+
+     box-shadow: 3px 3px 10px #000000c2;
 }
 
 .btn{
