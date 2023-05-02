@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "./axiosConfig";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogIn from "./comps/LogIn";
 import SignUp from "./comps/SignUp";
 import Prodacts from "./comps/Products";
@@ -15,21 +15,25 @@ function App() {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:3001/allProducts")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
+    const getAllProducts = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get("http://localhost:3001/allProducts");
+        const data = await res.data;
+        setProducts(data);
         setLoading(false);
+<<<<<<< HEAD
       });
     axios.get("/allProducts").then((res) => {
       setProducts(res.data);
     });
+=======
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllProducts()
+>>>>>>> addAndDeleteQiCart
   }, []);
   const userDisconnect = () => {
     setUserData(false);
@@ -37,17 +41,32 @@ function App() {
   const userConnect = (user) => {
     setUserData(user);
   };
+  const addToCart = (valProduct) => {
+    userData.cart.unshift(valProduct);
+    setUserData([...userData]);
+  };
+  const deleteFromCart = (indexProduct) => {
+    userData.cart.splice(indexProduct, 1);
+    setUserData([...userData]);
+  };
   return (
     <div className="App">
       <BrowserRouter>
-        {userData && <Nav userDisconnect={userDisconnect} />}
-        <contextApi.Provider value={{userData,products}}>
+        <contextApi.Provider
+          value={{
+            userData,
+            products,
+            userConnect,
+            userDisconnect,
+            addToCart,
+            deleteFromCart,
+          }}
+        >
+          {userData && <Nav />}
           <Routes>
             <Route
-              path="/"
-              element={
-                loading ? <h1>loading...</h1> : <LogIn userConnect={userConnect} />
-              }
+              path={ROUTES.ENTRY}
+              element={loading ? <h1>loading...</h1> : <LogIn />}
             />
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route
@@ -56,7 +75,10 @@ function App() {
             />
             <Route path={ROUTES.SEARCH} element={<Search url={"getPlus"} />} />
             <Route path={ROUTES.CART} element={<Cart />} />
-            <Route path='*' element={<h2>page not found..</h2>} />
+            <Route
+              path={ROUTES.PAGENOTFOUND}
+              element={<h2>page not found..</h2>}
+            />
           </Routes>
         </contextApi.Provider>
       </BrowserRouter>
