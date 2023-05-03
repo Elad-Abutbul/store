@@ -14,21 +14,20 @@ function App() {
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedIteamToPay, setSelectedIteamToPay] = useState([]); 
   useEffect(() => {
     const getAllProducts = async () => {
       setLoading(true);
-      debugger
       try {
-        const res =await axios.get("/allProducts")
-        const data=await res.data
-          setProducts(data)
+        const res = await axios.get("/allProducts");
+        const data = await res.data;
+        setProducts(data);
         setLoading(false);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    
-    }
-    getAllProducts()
+    };
+    getAllProducts();
   }, []);
   const userDisconnect = () => {
     setUserData(false);
@@ -38,12 +37,33 @@ function App() {
   };
   const addToCart = (valProduct) => {
     userData.cart.unshift(valProduct);
-    setUserData([...userData]);
+    setUserData({...userData});
   };
   const deleteFromCart = (indexProduct) => {
-    userData.cart.splice(indexProduct, 1);
-    setUserData([...userData]);
+      userData.cart.splice(indexProduct, 1);
+      setUserData({...userData});
   };
+  const paymentCart = (valIteam) => {
+    let itemIndex = userData.cart.findIndex((val) => valIteam._id === val._id);
+    userData.cart.splice(itemIndex, 1);
+    setUserData({...userData});
+
+    
+  }
+  const addProductToSelectedIteamToPay = (valProduct) => {
+    selectedIteamToPay.push(valProduct);
+    setSelectedIteamToPay([...selectedIteamToPay]);
+    setUserData({...userData});
+
+  }
+  const deleteProductFromSelectedIteamToPay = (indexProduct) => {
+    if (selectedIteamToPay.length !== 0) {
+      selectedIteamToPay.splice(indexProduct, 1);
+      setSelectedIteamToPay([...selectedIteamToPay])
+    setUserData({...userData});
+
+    }
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -55,6 +75,10 @@ function App() {
             userDisconnect,
             addToCart,
             deleteFromCart,
+            paymentCart,
+            selectedIteamToPay,
+            addProductToSelectedIteamToPay,
+            deleteProductFromSelectedIteamToPay
           }}
         >
           {userData && <Nav />}
