@@ -7,6 +7,9 @@ export default function Nav() {
   const valContext = useContext(contextApi);
   return (
     <div id={navCss.navBar}>
+          <Link to={ROUTES.PROFILE}>
+        <button className={navCss.btn}>PROFILE</button>
+      </Link>
       <Link to={ROUTES.SEARCH}>
         <button className={navCss.btn}>SEARCH</button>
       </Link>
@@ -16,7 +19,9 @@ export default function Nav() {
       <Link to={ROUTES.CART}>
         <button className={navCss.btn}>CART</button>
       </Link>
-      <Link to="/">
+
+  
+      <Link to={ROUTES.ENTRY}>
         <button className={navCss.btn} onClick={valContext.userDisconnect}>
           LOG OUT
         </button>

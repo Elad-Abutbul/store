@@ -8,6 +8,7 @@
 
 .inp,
 .btn {
+  width: 110%;
   font-size: medium ;
   height: 30px;
   border: none;
