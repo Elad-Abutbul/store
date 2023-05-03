@@ -6,11 +6,10 @@ export const ROUTES = {
   LOGIN: "/logIn",
   SIGNUP: "/signUp",
   PAGENOTFOUND: "*",
+  PROFILE: "/profile",
+  PURCHES: "/purches",
 };
 export const URL = {
   ADDTOCART: "addToCart",
   ONCART: "cart",
 };
-export const AXIOS = {
-  baseURL:'http://localhost:3001/'
-}
