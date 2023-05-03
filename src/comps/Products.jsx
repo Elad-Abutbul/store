@@ -16,7 +16,11 @@ export default function Products() {
       </h1>
       {valContext.products.map((valProduct, index) => {
         return (
-          <Prodact index={index} valProduct={valProduct} url={URL.ADDTOCART} />
+          <Prodact
+            index={index}
+            valProduct={valProduct}
+            url={URL.ADDTOCART}
+          />
         );
       })}
     </div>
