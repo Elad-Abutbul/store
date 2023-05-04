@@ -28,29 +28,29 @@ export default function Profile() {
 
   return (
     <>
-      <div>
+      <div className={profileCss.container}>
         <h1 className={profileCss.h1}>Profile</h1>
-        <div id={profileCss.links}>
+        <div className={profileCss.links}>
           <button
-            className={profileCss.btn}
+            className={`${profileCss.btn} ${selectedComponent === "edit" ? profileCss.active : ""}`}
             onClick={() => handleSelectComponent("edit")}
           >
             Edit Profile
           </button>
             <button
-              className={profileCss.btn}
+              className={`${profileCss.btn} ${selectedComponent === "view" ? profileCss.active : ""}`}
               onClick={() => handleSelectComponent("view")}
             >
               View Purchases
             </button>
           <button
-            className={profileCss.btn}
+            className={`${profileCss.btn} ${selectedComponent === "delete" ? profileCss.active : ""}`}
             onClick={() => handleSelectComponent("delete")}
           >
             Delete Account
           </button>
         </div>
-        <div id={profileCss.components}>{renderComponent()}</div>
+        <div className={profileCss.components}>{renderComponent()}</div>
       </div>
     </>
   );

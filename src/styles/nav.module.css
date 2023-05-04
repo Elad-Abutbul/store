@@ -1,30 +1,44 @@
-#navBar{
-     background-color: #333333;
-     padding: 2vh;
-     display: flex;
-     position: fixed;
-     top: 0;
-     width: 100%;
-     flex-direction: row;
-     justify-content: space-around;
-     margin: 0;
-
-     box-shadow: 3px 3px 10px #000000c2;
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.605);
+  z-index: 1;
 }
 
-.btn{
-     background-color: white;
-     border: none;
-     border-radius: 20px;
-     height: 30px;
-     width: 130%;
-     font-size: x-large;
-     font-family: monospace;
-  transition:  0.3s ease-in-out;
-
+.icon {
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #f7f7f7;
 }
-.btn:hover{
-     background-color: #333333;
-     color: white;
 
+.nav {
+  display: flex;
+}
+
+.link {
+  margin-right: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #f7f7f7;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 10px 20px;
+  border-bottom:var(--main-color) solid 3px;
+}
+
+.link:hover, .link.activeLink {
+  border-bottom: #f7f7f7 solid 3px;
+}
+
+.link:active{
+  border-bottom: #f7f7f7 solid 3px;
 }

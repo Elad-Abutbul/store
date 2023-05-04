@@ -7,6 +7,7 @@ import { URL } from "../constans/constans";
 export default function Search() {
   const [products, setProducts] = useState([]);
   const [req, setReq] = useState("");
+
   useEffect(() => {
     const getIteams = async () => {
       if (req !== "") {
@@ -23,17 +24,25 @@ export default function Search() {
   }, [req]);
 
   return (
-    <div>
-      <h1 className={searchCss.h1}>search</h1>
+    <div className={searchCss.container}>
+      <h1 className={searchCss.h1}>Search</h1>
       <input
         type="text"
-        placeholder="search by name.."
+        placeholder="Search by name..."
         onChange={(e) => setReq(e.target.value)}
-        className={searchCss.inp}
+        className={searchCss.input}
       />
-      {products?.map((valProduct) => {
-        return <Prodact valProduct={valProduct} url={URL.ADDTOCART} />;
-      })}
+      <div className={searchCss.products}>
+        {products?.map((valProduct) => {
+          return (
+            <Prodact
+              key={valProduct._id}
+              valProduct={valProduct}
+              url={URL.ADDTOCART}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
