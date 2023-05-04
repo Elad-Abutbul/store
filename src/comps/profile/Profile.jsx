@@ -10,7 +10,7 @@ export default function Profile() {
   const valContext = useContext(contextApi)
   const [selectedComponent, setSelectedComponent] = useState("edit");
   const [loading, setLoading] = useState(false);
-  const [purches, setPurches] = useState();
+  const [purchases, setPurchases] = useState();
   const handleSelectComponent = (component) => {
     setSelectedComponent(component);
   };
@@ -24,7 +24,7 @@ export default function Profile() {
           userId: valContext.userData._id,
         });
         const data = await res.data;
-        setPurches(data);
+        setPurchases(data);
         setLoading(false);
       } catch (error) {}
     };
@@ -37,7 +37,7 @@ export default function Profile() {
       case "delete":
         return <DeleteAccount />;
       case "view": {
-        return loading ? <h1>Loading...</h1> : <ViewPurches purchese={purchese} />;
+        return loading ? <h1>Loading...</h1> : <ViewPurches purchases={purchases} />;
       }
       default:
         return <EditProfile />;
