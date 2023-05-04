@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import profileCss from "../../styles/profile.module.css";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../constans/constans";
 import DeleteAccount from "./comps/DeleteAccount";
 import ViewPurches from "./comps/ViewPurches";
 import EditProfile from "./comps/EditProfile";
