@@ -1,31 +1,62 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/constans";
 import { contextApi } from "../contextApi";
+
 export default function Nav() {
   const valContext = useContext(contextApi);
-  return (
-    <div id={navCss.navBar}>
-          <Link to={ROUTES.PROFILE}>
-        <button className={navCss.btn}>PROFILE</button>
-      </Link>
-      <Link to={ROUTES.SEARCH}>
-        <button className={navCss.btn}>SEARCH</button>
-      </Link>
-      <Link to={ROUTES.PRODUCTS}>
-        <button className={navCss.btn}>PRODUCTS</button>
-      </Link>
-      <Link to={ROUTES.CART}>
-        <button className={navCss.btn}>CART</button>
-      </Link>
+  const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
+const nav=useNavigate()
+  const handleLinkClick = (route) => {
+    setActiveLink(route);
+  };
 
-  
-      <Link to={ROUTES.ENTRY}>
-        <button className={navCss.btn} onClick={valContext.userDisconnect}>
+  return (
+    <nav className={navCss.navbar}>
+      <div className={navCss.icon} onClick={() => {
+        nav(ROUTES.PRODUCTS)
+      }}>Elad's Jewelry Store</div>
+      <div className={navCss.nav}>
+        <Link
+          to={ROUTES.PROFILE}
+          className={`${navCss.link} ${activeLink === ROUTES.PROFILE ? navCss.activeLink : ''}`}
+          onClick={() => handleLinkClick(ROUTES.PROFILE)}
+        >
+          PROFILE
+        </Link>
+        <Link
+          to={ROUTES.SEARCH}
+          className={`${navCss.link} ${activeLink === ROUTES.SEARCH ? navCss.activeLink : ''}`}
+          onClick={() => handleLinkClick(ROUTES.SEARCH)}
+        >
+          SEARCH
+        </Link>
+        <Link
+          to={ROUTES.PRODUCTS}
+          className={`${navCss.link} ${activeLink === ROUTES.PRODUCTS ? navCss.activeLink : ''}`}
+          onClick={() => handleLinkClick(ROUTES.PRODUCTS)}
+        >
+          PRODUCTS
+        </Link>
+        <Link
+          to={ROUTES.CART}
+          className={`${navCss.link} ${activeLink === ROUTES.CART ? navCss.activeLink : ''}`}
+          onClick={() => handleLinkClick(ROUTES.CART)}
+        >
+          CART
+        </Link>
+        <Link
+          to={ROUTES.ENTRY}
+          className={`${navCss.link} ${activeLink === ROUTES.ENTRY ? navCss.activeLink : ''}`}
+          onClick={() => {
+            handleLinkClick(ROUTES.ENTRY);
+            valContext.userDisconnect();
+          }}
+        >
           LOG OUT
-        </button>
-      </Link>
-    </div>
+        </Link>
+      </div>
+    </nav>
   );
 }

@@ -7,7 +7,15 @@
      width: 85%;
      margin-top: 20px;
      border-radius: 10px;
-     align-items: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.605);
+  align-items: center;
+  transition: all .1s ease-in-out;
+
+}
+.singleProduct:hover{
+     transform: scale(1.01); 
+     z-index: -1;
+
 }
 .img{
      width: 20%;
@@ -19,8 +27,8 @@
 }
 .plusOrX:hover{
      transform: scale(1.4); 
-
 }
 #delete:hover{
      color: red;
 }
+
