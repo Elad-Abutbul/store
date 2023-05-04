@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/constans";
 import { contextApi } from "../contextApi";
@@ -7,16 +7,14 @@ import { contextApi } from "../contextApi";
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
-const nav=useNavigate()
+
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
 
   return (
     <nav className={navCss.navbar}>
-      <div className={navCss.icon} onClick={() => {
-        nav(ROUTES.PRODUCTS)
-      }}>Elad's Jewelry Store</div>
+      <div className={navCss.icon}>Elad's Jewelry Store</div>
       <div className={navCss.nav}>
         <Link
           to={ROUTES.PROFILE}
