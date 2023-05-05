@@ -5,7 +5,7 @@ import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
 import { URL } from "../constans/constans";
 
-export default function Prodact({
+export default function Product({
   indexProduct,
   url,
   valProduct,

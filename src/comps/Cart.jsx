@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { contextApi } from "../contextApi";
-import Prodact from "./Product";
+import Product from "./Product";
 import cartCss from "../styles/cart.module.css";
 import { URL } from "../constans/constans";
 import axios from "../axiosConfig";
@@ -29,9 +29,10 @@ export default function Cart() {
         if (data === "payment succsess") {
           alert(data);
           valContext.selectedIteamToPay.map((val) => {
-            valContext.paymentCart(val);
-            setPaySum(0)
+          return  valContext.paymentCart(val);
           });
+          setPaySum(0)
+
         }
       } catch (error) {
         console.log(error);
@@ -46,7 +47,7 @@ export default function Cart() {
       <p></p>
       {valContext.userData?.cart?.map((valProduct, indexProduct) => {
         return (
-          <Prodact
+          <Product
           setPaySum={setPaySum}
             valProduct={valProduct}
             indexProduct={indexProduct}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axiosConfig";
-import Prodact from "./Product";
+import Product from "./Product";
 import searchCss from "../styles/search.module.css";
 import { URL } from "../constans/constans";
 
@@ -35,7 +35,7 @@ export default function Search() {
       <div className={searchCss.products}>
         {products?.map((valProduct) => {
           return (
-            <Prodact
+            <Product
               key={valProduct._id}
               valProduct={valProduct}
               url={URL.ADDTOCART}
