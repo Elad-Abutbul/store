@@ -9,7 +9,8 @@ export default function Prodact({
   indexProduct,
   url,
   valProduct,
- 
+  setPaySum,
+  falseRaioAfterPay,
 }) {
   const [radio, setRadio] = useState(false);
   const valContext = useContext(contextApi);
@@ -36,6 +37,9 @@ export default function Prodact({
       if (data === "Product deleted from cart") {
         alert(data);
         valContext.deleteFromCart(indexProduct);
+        setPaySum(0);
+        valContext.setSelectedIteamToPay([]);
+        setRadio(false);
       } else {
         console.error(data);
       }
@@ -45,11 +49,15 @@ export default function Prodact({
   };
   useEffect(() => {
     if (radio) {
-     valContext.addProductToSelectedIteamToPay(valProduct)
-    } else{
-      valContext.deleteProductFromSelectedIteamToPay(indexProduct)
+      valContext.addProductToSelectedIteamToPay(valProduct);
+    } else {
+      valContext.deleteProductFromSelectedIteamToPay(indexProduct);
     }
   }, [radio]);
+  useEffect(() => {
+    
+    setRadio(false);
+  }, [falseRaioAfterPay]);
   return (
     <div className={productCss.singleProduct}>
       {url === URL.ONCART && (
@@ -76,7 +84,6 @@ export default function Prodact({
         </h1>
       )}
       {url === URL.ONCART && (
-        
         <input type="radio" checked={radio} onClick={() => setRadio(!radio)} />
       )}
     </div>
