@@ -16,7 +16,7 @@ export default function Profile() {
       case "edit":
         return <EditProfile />;
       case "delete":
-        return <DeleteAccount />;
+      return <DeleteAccount />;
       case "view":
         return <ViewPurches />;
       default:
