@@ -35,10 +35,16 @@ export default function Profile() {
       case "edit":
         return <EditProfile />;
       case "delete":
+<<<<<<< HEAD
         return <DeleteAccount />;
       case "view": {
         return loading ? <h1>Loading...</h1> : <ViewPurches purchases={purchases} />;
       }
+=======
+      return <DeleteAccount />;
+      case "view":
+        return <ViewPurches />;
+>>>>>>> profileUser
       default:
         return <EditProfile />;
     }
