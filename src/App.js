@@ -44,6 +44,8 @@ function App() {
     userData.cart.splice(indexProduct, 1);
     setUserData({ ...userData });
   };
+console.log(userData.cart?.length);
+
   const paymentCart = (valIteam) => {
     let itemIndex = userData.cart.findIndex((val) => valIteam._id === val._id);
     userData.cart.splice(itemIndex, 1);
@@ -74,6 +76,7 @@ function App() {
             deleteFromCart,
             paymentCart,
             selectedIteamToPay,
+            setSelectedIteamToPay,
             addProductToSelectedIteamToPay,
             deleteProductFromSelectedIteamToPay,
           }}

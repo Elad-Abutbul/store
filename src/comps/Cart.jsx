@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { contextApi } from "../contextApi";
 import Prodact from "./Product";
 import cartCss from "../styles/cart.module.css";
@@ -6,8 +6,17 @@ import { URL } from "../constans/constans";
 import axios from "../axiosConfig";
 
 export default function Cart() {
+  
   const valContext = useContext(contextApi);
-
+  const [paySum, setPaySum] = useState(0);
+  const [falseRaioAfterPay, setFalseRaioAfterPay] = useState(false);
+  useEffect(() => {
+    let sum = 0;
+    valContext.selectedIteamToPay.forEach((val) => {
+    return  sum += val.price;
+    });
+    setPaySum(sum)
+  }, [valContext.selectedIteamToPay]);
   const pay = async () => {
     if (valContext.selectedIteamToPay.length !== 0) {
       try {
@@ -21,10 +30,14 @@ export default function Cart() {
           alert(data);
           valContext.selectedIteamToPay.map((val) => {
             valContext.paymentCart(val);
+            setPaySum(0)
           });
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
+    setFalseRaioAfterPay(!falseRaioAfterPay)
   };
 
   return (
@@ -34,15 +47,17 @@ export default function Cart() {
       {valContext.userData?.cart?.map((valProduct, indexProduct) => {
         return (
           <Prodact
+          setPaySum={setPaySum}
             valProduct={valProduct}
             indexProduct={indexProduct}
             url={URL.ONCART}
+            falseRaioAfterPay={falseRaioAfterPay}
           />
         );
       })}
-      <h3>Your Total is:</h3>
+      <h3>Your Total is: {paySum}₪</h3>
       <button className={cartCss.payAllBtn} onClick={pay}>
-        Pay All
+        Pay
       </button>
     </div>
   );
