@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import entry from "../styles/logInAndSignUp.module.css";
+import entryCss from "../styles/logInAndSignUp.module.css";
 import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
 
@@ -31,29 +31,29 @@ export default function LogIn() {
     }
   };
   return (
-    <div className={entry.container}>
-      <form className={entry.form} onSubmit={(e) => e.preventDefault()}>
-        <h1 className={entry.title}>Log In</h1>
-        <div className={entry.inputContainer}>
+    <div className={entryCss.container}>
+      <form className={entryCss.form} onSubmit={(e) => e.preventDefault()}>
+        <h1 className={entryCss.title}>Log In</h1>
+        <div className={entryCss.inputContainer}>
           <input
-            className={entry.input}
+            className={entryCss.input}
             type="text"
             placeholder="Enter Username..."
             onChange={(e) => setUserName(e.target.value)}
           />
         </div>
-        <div className={entry.inputContainer}>
+        <div className={entryCss.inputContainer}>
           <input
-            className={entry.input}
+            className={entryCss.input}
             type="password"
             placeholder="Enter Password..."
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={valid} className={entry.btn}>
+        <button onClick={valid} className={entryCss.btn}>
           Log In
         </button>
-        <Link to={"/signUp"} className={entry.link}>
+        <Link to={"/signUp"} className={entryCss.link}>
           Create an Account
         </Link>
       </form>

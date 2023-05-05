@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import entry from "../styles/logInAndSignUp.module.css";
+import entryCss from "../styles/logInAndSignUp.module.css";
 import axios from "../axiosConfig";
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -36,37 +36,51 @@ export default function SignUp() {
     }
   };
   return (
-    <div>
-      <form className={entry.form} onSubmit={(e) => e.preventDefault()}>
-        <h1>Sign Up</h1>
-        <input
-          type="text"
-          placeholder="Enter Name.."
-          className={entry.inp}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter LastName.."
-          className={entry.inp}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter UserName.."
-          className={entry.inp}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Enter Password.."
-          className={entry.inp}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={entry.btn} onClick={valid}>
+    <div className={entryCss.container}>
+      <form
+        className={entryCss.form}
+        onSubmit={(e) => e.preventDefault()}
+        className={entryCss.form}
+      >
+        <h1 className={entryCss.title}>Sign Up</h1>
+        <div className={entryCss.inputContainer}>
+          <input
+            className={entryCss.input}
+            type="text"
+            placeholder="Enter Name.."
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className={entryCss.inputContainer}>
+          <input
+            className={entryCss.input}
+            type="text"
+            placeholder="Enter LastName.."
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className={entryCss.inputContainer}>
+          <input
+            className={entryCss.input}
+            type="text"
+            placeholder="Enter UserName.."
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+        <div className={entryCss.inputContainer}>
+          {" "}
+          <input
+            className={entryCss.input}
+            type="password"
+            placeholder="Enter Password.."
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <button className={entryCss.btn} onClick={valid}>
           create account
         </button>
-        <Link to={"/"}>Go To LogIn</Link>
+        <Link to={"/"} className={entryCss.link}>Go To LogIn</Link>
       </form>
     </div>
   );
