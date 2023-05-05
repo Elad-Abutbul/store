@@ -50,9 +50,9 @@ export default function Nav() {
           onClick={() => handleLinkClick(ROUTES.CART)}
         >
           CART
-          {valContext.userData.cart?.length != 0 && (
+          {/* {valContext.userData.cart?.length != 0 && (
             <span id={navCss.cartLength}>{valContext.userData.cart.length}</span>
-          )}
+          )} */}
         </Link>
         <Link
           to={ROUTES.ENTRY}

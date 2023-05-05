@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Prodact from "./Product";
+import Product from "./Product";
 import { contextApi } from "../contextApi";
 import productsCss from "../styles/products.module.css";
 import { URL } from "../constans/constans";
@@ -16,7 +16,7 @@ export default function Products() {
       </h1>
       {valContext.products.map((valProduct, index) => {
         return (
-          <Prodact
+          <Product
             index={index}
             valProduct={valProduct}
             url={URL.ADDTOCART}

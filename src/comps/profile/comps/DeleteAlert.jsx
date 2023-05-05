@@ -27,7 +27,7 @@ export default function DeleteAlert({ changeCond }) {
        <div>
             <h2 className={deleteCss.h2Alert} >ARE YOU SURE?</h2>
             <div id={deleteCss.deleteQuestion}>
-            <button onClick={() => { deleteUser(); changeCond() }} id={deleteCss.btnConfirmDelete} className={deleteCss.yesNo}>yes</button>
+            <button onClick={() => { deleteUser()}} id={deleteCss.btnConfirmDelete} className={deleteCss.yesNo}>yes</button>
             <button onClick={changeCond} className={deleteCss.yesNo}>no</button>
             </div>
             

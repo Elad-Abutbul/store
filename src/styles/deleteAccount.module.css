@@ -16,15 +16,15 @@
 @keyframes btnDeleteHover {
   0% {
     color: red;
-    background-color: black;
+    background-color: var(--main-color);
   }
   50% {
-     color: black;
+     color: var(--main-color);
      background-color: red;
   }
   100%{
      color: red;
-     background-color: black; 
+     background-color: var(--main-color); 
   }
 }
 .h2Alert{
