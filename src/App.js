@@ -18,7 +18,7 @@ function App() {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
- 
+
   useEffect(() => {
     const getAllProducts = async () => {
       setLoading(true);
@@ -51,24 +51,55 @@ function App() {
   const paymentCart = (valIteam) => {
     let itemIndex = userData.cart.findIndex((val) => valIteam._id === val._id);
     let item = userData.cart.find((val) => valIteam._id === val._id);
-    userData.historyOfCart.push(item)
+    userData.historyOfCart.push(item);
     userData.cart.splice(itemIndex, 1);
     setUserData({ ...userData });
   };
 
-  const addProductToSelectedIteamToPay = (valProduct) => {
-    selectedIteamToPay.push(valProduct);
-    setSelectedIteamToPay([...selectedIteamToPay]);
-    setUserData({ ...userData });
-  };
-  const deleteProductFromSelectedIteamToPay = (indexProduct) => {
-    if (selectedIteamToPay.length !== 0) {
-      selectedIteamToPay.splice(indexProduct, 1);
-      setSelectedIteamToPay([...selectedIteamToPay]);
-      setUserData({ ...userData });
+  const addProductToSelectedIteamToPay = async (valProduct, indexProduct) => {
+    try {
+      const res = await axios.post("/productChooseToTrue", {
+        indexProduct: indexProduct,
+        userId: userData._id,
+      });
+      const data = await res.data;
+      if (data === "product choose switch to true") {
+        valProduct.choose = true;
+        selectedIteamToPay.push(valProduct);
+        setSelectedIteamToPay([...selectedIteamToPay]);
+        setUserData({ ...userData });
+      } else {
+        alert(data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-  console.log(userData);
+  const deleteProductFromSelectedIteamToPay = async (
+    valProduct,
+    indexProduct
+  ) => {
+    try {
+      const res = await axios.post("/productChooseToFalse", {
+        indexProduct: indexProduct,
+        userId: userData._id,
+      });
+      const data = await res.data;
+      if ("product choose switch to false") {
+        valProduct.choose = false;
+        deleteProductFromSelectedIteamUi()
+      } else {
+        alert(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteProductFromSelectedIteamUi = (indexProduct) => {
+    selectedIteamToPay.splice(indexProduct, 1);
+    setSelectedIteamToPay([...selectedIteamToPay]);
+    setUserData({ ...userData });
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -86,6 +117,7 @@ function App() {
             setSelectedIteamToPay,
             addProductToSelectedIteamToPay,
             deleteProductFromSelectedIteamToPay,
+            deleteProductFromSelectedIteamUi
           }}
         >
           {userData && <Nav />}
@@ -94,7 +126,7 @@ function App() {
               path={ROUTES.ENTRY}
               element={loading ? <h1>loading...</h1> : <LogIn />}
             />
-            <Route path={ROUTES.SIGNUP} element={<SignUp  />} />
+            <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route
               path={ROUTES.PRODUCTS}
               element={<Products products={products} />}
@@ -105,10 +137,10 @@ function App() {
               path={ROUTES.PAGENOTFOUND}
               element={<h2>page not found..</h2>}
             />
-            <Route path={ROUTES.PROFILE} element={<Profile />} >
-              <Route path='edit' element={<SignUp url='edit'/>}/>
-              <Route path='deleteAccount' element={<DeleteAccount/>}/>
-              <Route path='viewPurchases' element={<ViewPurchases/>}/>
+            <Route path={ROUTES.PROFILE} element={<Profile />}>
+              <Route path="edit" element={<SignUp url="edit" />} />
+              <Route path="deleteAccount" element={<DeleteAccount />} />
+              <Route path="viewPurchases" element={<ViewPurchases />} />
             </Route>
           </Routes>
         </contextApi.Provider>
