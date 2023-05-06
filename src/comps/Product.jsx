@@ -9,8 +9,8 @@ export default function Product({
   indexProduct,
   url,
   valProduct,
-  setPaySum,
   falseRaioAfterPay,
+  deleteIteam
 }) {
   const [radio, setRadio] = useState(false);
   const valContext = useContext(contextApi);
@@ -27,31 +27,11 @@ export default function Product({
       console.log("cannot added to cart");
     }
   };
-  const deleteIteam = async () => {
-    try {
-      const res = await axios.post("/deleteIteam", {
-        productId: valProduct._id,
-        userNameId: valContext.userData._id,
-      });
-      const data = await res.data;
-      if (data === "Product deleted from cart") {
-        alert(data);
-        valContext.deleteFromCart(indexProduct);
-        setPaySum(0);
-        valContext.setSelectedIteamToPay([]);
-        setRadio(false);
-      } else {
-        console.error(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
   useEffect(() => {
     if (radio) {
-      valContext.addProductToSelectedIteamToPay(valProduct);
+      valContext.addProductToSelectedIteamToPay(valProduct,indexProduct);
     } else {
-      valContext.deleteProductFromSelectedIteamToPay(indexProduct);
+      valContext.deleteProductFromSelectedIteamToPay(valProduct,indexProduct);
     }
   }, [radio]);
   useEffect(() => {
@@ -64,7 +44,7 @@ export default function Product({
         <h1
           className={productCss.plusOrX}
           id={productCss.delete}
-          onClick={deleteIteam}
+          onClick={()=>deleteIteam(valProduct._id,indexProduct)}
         >
           ×
         </h1>
@@ -84,7 +64,7 @@ export default function Product({
         </h1>
       )}
       {url === URL.ONCART && (
-        <input type="radio" checked={radio} onClick={() => setRadio(!radio)} />
+        <input type="radio" checked={valProduct.choose} onClick={() => setRadio(!radio)} />
       )}
     </div>
   );

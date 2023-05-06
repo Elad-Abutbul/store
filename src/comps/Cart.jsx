@@ -6,16 +6,15 @@ import { URL } from "../constans/constans";
 import axios from "../axiosConfig";
 
 export default function Cart() {
-  
   const valContext = useContext(contextApi);
   const [paySum, setPaySum] = useState(0);
   const [falseRaioAfterPay, setFalseRaioAfterPay] = useState(false);
   useEffect(() => {
     let sum = 0;
     valContext.selectedIteamToPay.forEach((val) => {
-    return  sum += val.price;
+      return (sum += val.price);
     });
-    setPaySum(sum)
+    setPaySum(sum);
   }, [valContext.selectedIteamToPay]);
   const pay = async () => {
     if (valContext.selectedIteamToPay.length !== 0) {
@@ -28,17 +27,42 @@ export default function Cart() {
 
         if (data === "payment succsess") {
           alert(data);
-          valContext.selectedIteamToPay.map((val) => {
-          return  valContext.paymentCart(val);
-          });
-          setPaySum(0)
-
+            valContext.selectedIteamToPay.map((valProduct,indexProduct) => {
+                valContext.paymentCart(valProduct)
+              valContext.deleteProductFromSelectedIteamUi(indexProduct)
+            });
+          setPaySum(0);
         }
       } catch (error) {
         console.log(error);
       }
+    } else {
+      alert(`select a product`);
     }
-    setFalseRaioAfterPay(!falseRaioAfterPay)
+    setFalseRaioAfterPay(!falseRaioAfterPay);
+  };
+  const deleteIteam = async (productId,indexProduct) => {
+    try {
+      const res = await axios.post("/deleteIteam", {
+        productId: productId,
+        userNameId: valContext.userData._id,
+      });
+      const data = await res.data;
+      if (data === "Product deleted from cart") {
+        alert(data);
+        valContext.deleteFromCart(indexProduct);
+        let sum = 0;
+        valContext.deleteProductFromSelectedIteamUi(indexProduct)
+        valContext.selectedIteamToPay.forEach((val) => {
+          return (sum += val.price);
+        });
+        setPaySum(sum);
+      } else {
+        console.error(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -48,7 +72,9 @@ export default function Cart() {
       {valContext.userData?.cart?.map((valProduct, indexProduct) => {
         return (
           <Product
-          setPaySum={setPaySum}
+            setPaySum={setPaySum}
+            paySum={paySum}
+            deleteIteam={deleteIteam}
             valProduct={valProduct}
             indexProduct={indexProduct}
             url={URL.ONCART}
