@@ -1,4 +1,34 @@
-.h1Name{
-     padding-top: 10vh;
-     color: var(--main-color);
+
+.h1Name {
+  padding-top: 12vh;
+  color: var(--main-color);
+}
+.imgType {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  gap: 5%;
+  align-items: center;
+}
+.divImg {
+  display: flex;
+  flex-direction: column;
+}
+a{
+  text-decoration: none;
+}
+.btnImg {
+  margin-top: -20%;
+  color: var(--main-color);
+  cursor: pointer;
+  border:none;
+  font-weight: 400;
+  color: black;
+}
+.btnImg:hover{
+  color: white;
+  background-color: var(--main-color);
+}
+.img {
+  cursor: pointer;
 }

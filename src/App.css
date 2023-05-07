@@ -3,6 +3,7 @@
 }
 :root {
   --main-color: #1c1c1c;
+  --background:#cccccc89;
 }
 .App {
   text-align: center;

@@ -7,10 +7,10 @@ import { ROUTES } from "../constans/constans";
 export default function SignUp({ url }) {
   const valContext = useContext(contextApi);
   const [name, setName] = useState(
-    url === "edit" ? valContext.userData.name : ""
+    url === ROUTES.EDIT  ? valContext.userData.name : ""
   );
   const [lastName, setLastName] = useState(
-    url === "edit" ? valContext.userData.lastName : ""
+    url === ROUTES.EDIT ? valContext.userData.lastName : ""
   );
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");

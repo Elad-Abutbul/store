@@ -10,7 +10,8 @@ export default function Product({
   url,
   valProduct,
   falseRaioAfterPay,
-  deleteIteam
+  deleteIteam,
+  typeProduct
 }) {
   const [radio, setRadio] = useState(false);
   const valContext = useContext(contextApi);
@@ -39,7 +40,8 @@ export default function Product({
     setRadio(false);
   }, [falseRaioAfterPay]);
   return (
-    <div className={productCss.singleProduct}>
+    
+    <div className={productCss.singleProduct} >
       {url === URL.ONCART && (
         <h1
           className={productCss.plusOrX}
@@ -49,7 +51,6 @@ export default function Product({
           ×
         </h1>
       )}
-
       <h2>name: {valProduct.name}</h2>
       <h2>description: {valProduct.description}</h2>
       <h2>price: {valProduct.price}₪ </h2>

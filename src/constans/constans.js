@@ -8,8 +8,16 @@ export const ROUTES = {
   PAGENOTFOUND: "*",
   PROFILE: "/profile",
   PURCHES: "/purches",
+  RINGS:'/rings',
+  EARRINGS:'/earrings',
+  NECKLACES:'/necklaces',
+  BRACELETS: '/bracelets',
+  EDIT: 'edit',
+  DELETEACCOUNT: 'deleteAccount',
+  VIEWPURCHASES:'viewPurchases'
 };
 export const URL = {
+  EDIT:'edit',
   ADDTOCART: "addToCart",
   ONCART: "cart",
 };
