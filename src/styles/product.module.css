@@ -10,7 +10,6 @@
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.605);
   align-items: center;
   transition: all .1s ease-in-out;
-
 }
 .singleProduct:hover{
      transform: scale(1.01); 
@@ -37,4 +36,6 @@
 #delete:hover{
      color: red;
 }
-
+.h1Type{
+     margin-top: 12vh;
+}

@@ -38,7 +38,7 @@ export default function Cart() {
       }
     } else {
       alert(`select a product`);
-    }
+    } 
     setFalseRaioAfterPay(!falseRaioAfterPay);
   };
   const deleteIteam = async (productId,indexProduct) => {

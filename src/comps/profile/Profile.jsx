@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import profileCss from "../../styles/profile.module.css";
 import { Link, Outlet } from "react-router-dom";
+import { ROUTES } from "../../constans/constans";
 
 export default function Profile() {
   const [selectedComponent, setSelectedComponent] = useState("");
@@ -14,24 +15,24 @@ export default function Profile() {
       <div className={profileCss.container}>
         <h1 className={profileCss.h1}>Profile</h1>
         <div className={profileCss.links}>
-          <Link to="edit">
+          <Link to={ROUTES.EDIT}>
             <button
                className={`${profileCss.btn} ${
-                selectedComponent === "edit" ? profileCss.active : ""
+                selectedComponent === ROUTES.EDIT ? profileCss.active : ""
               }`}
-              onClick={() => handleSelectComponent("edit")} >Edit Profile</button>
+              onClick={() => handleSelectComponent(ROUTES.EDIT)} >Edit Profile</button>
           </Link>
-          <Link to='viewPurchases'>
+          <Link to={ROUTES.VIEWPURCHASES}>
           <button    className={`${profileCss.btn} ${
-                selectedComponent === "view" ? profileCss.active : ""
+                selectedComponent === ROUTES.VIEWPURCHASES ? profileCss.active : ""
               }`}
-              onClick={() => handleSelectComponent("view")}>View Purchases</button>
+              onClick={() => handleSelectComponent(ROUTES.VIEWPURCHASES)}>View Purchases</button>
           </Link>
-          <Link to='deleteAccount'>
+          <Link to={ROUTES.DELETEACCOUNT}>
           <button    className={`${profileCss.btn} ${
-                selectedComponent === "delete" ? profileCss.active : ""
+                selectedComponent === ROUTES.DELETEACCOUNT ? profileCss.active : ""
               }`}
-              onClick={() => handleSelectComponent("delete")}>Delete Account</button>
+              onClick={() => handleSelectComponent(ROUTES.DELETEACCOUNT)}>Delete Account</button>
          </Link>
     
         </div>
