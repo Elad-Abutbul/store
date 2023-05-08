@@ -1,10 +1,12 @@
-*{
-  cursor: default;
-}
 :root {
   --main-color: #1c1c1c;
   --background:#cccccc89;
 }
+*{
+  cursor: default;
+  color:var(--main-color)
+}
+
 .App {
   text-align: center;
 }

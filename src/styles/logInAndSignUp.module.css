@@ -34,7 +34,7 @@
   border: none;
   border-bottom: 2px solid #ccc;
   outline: none;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
   font-size: 1.2rem;
 }
 
@@ -47,11 +47,11 @@
   margin-top: 30px;
   padding: 10px 20px;
   background-color: var(--main-color);
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 30px;
   font-size: 1.2rem;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn:hover {
@@ -59,14 +59,14 @@
 }
 
 .link {
+  cursor: pointer;
   margin-top: 20px;
-  color: #666;
+  color: #5d5d5d;
   text-decoration: none;
   font-size: 1rem;
-
 }
 
 .link:hover {
   text-decoration: underline;
-  color: #000;
+  color: var(--main-color);
 }

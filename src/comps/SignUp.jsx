@@ -22,7 +22,7 @@ export default function SignUp({ url }) {
       alert("Enter a lastName above 2 charcters");
     } else if (/^\s/.test(userName)) {
       alert("Enter a userName without spaces");
-    } else if (password.length < 5) {
+    } else if (password.length <= 4) {
       alert("Enter a password above 5 charcters");
     } else {
       if (url !== "edit") {
@@ -101,7 +101,7 @@ export default function SignUp({ url }) {
           <input
             value={password}
             className={entryCss.input}
-            type="text"
+            type="password"
             placeholder="Enter Password.."
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -112,7 +112,7 @@ export default function SignUp({ url }) {
         </button>
         {url !== "edit" && (
           <Link to={"/"} className={entryCss.link}>
-            Go To LogIn
+            To Log In
           </Link>
         )}
       </form>

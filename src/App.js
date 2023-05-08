@@ -93,8 +93,7 @@ function App() {
 
   const paymentCart = (valIteam) => {
     let itemIndex = userData.cart.findIndex((val) => valIteam._id === val._id);
-    let item = userData.cart.find((val) => valIteam._id === val._id);
-    userData.historyOfCart.push(item);
+    userData.historyOfCart.unshift(valIteam);
     userData.cart.splice(itemIndex, 1);
     setUserData({ ...userData });
   };
@@ -130,7 +129,7 @@ function App() {
       const data = await res.data;
       if ("product choose switch to false") {
         valProduct.choose = false;
-        deleteProductFromSelectedIteamUi();
+        deleteProductFromSelectedIteamUi(indexProduct);
       } else {
         alert(data);
       }
@@ -138,10 +137,15 @@ function App() {
       console.log(error);
     }
   };
+
   const deleteProductFromSelectedIteamUi = (indexProduct) => {
-    selectedIteamToPay.splice(indexProduct, 1);
-    setSelectedIteamToPay([...selectedIteamToPay]);
-    setUserData({ ...userData });
+    if (indexProduct !== undefined) {
+      debugger
+      selectedIteamToPay.splice(indexProduct, 1);
+      setSelectedIteamToPay([...selectedIteamToPay]);
+      setUserData({ ...userData });
+    }
+
   };
   return (
     <div className="App">

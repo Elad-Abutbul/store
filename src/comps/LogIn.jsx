@@ -54,10 +54,9 @@ export default function LogIn() {
           Log In
         </button>
         <Link to={"/signUp"} className={entryCss.link}>
-          Create an Account
+          Create An Account
         </Link>
       </form>
     </div>
   );
 }
-  

@@ -9,12 +9,15 @@ export default function Cart() {
   const valContext = useContext(contextApi);
   const [paySum, setPaySum] = useState(0);
   const [falseRaioAfterPay, setFalseRaioAfterPay] = useState(false);
-  useEffect(() => {
+  const sum = () => {
     let sum = 0;
     valContext.selectedIteamToPay.forEach((val) => {
       return (sum += val.price);
     });
     setPaySum(sum);
+  };
+  useEffect(() => {
+    sum();
   }, [valContext.selectedIteamToPay]);
   const pay = async () => {
     if (valContext.selectedIteamToPay.length !== 0) {
@@ -26,22 +29,24 @@ export default function Cart() {
         const data = await res.data;
 
         if (data === "payment succsess") {
-          alert(data);
-            valContext.selectedIteamToPay.map((valProduct,indexProduct) => {
-                valContext.paymentCart(valProduct)
-              valContext.deleteProductFromSelectedIteamUi(indexProduct)
-            });
-          setPaySum(0);
+          valContext.selectedIteamToPay.forEach((valProduct, indexProduct) => {
+            debugger
+            valContext.deleteProductFromSelectedIteamUi(indexProduct);
+            valContext.paymentCart(valProduct);
+          sum();
+
+          });
+
         }
       } catch (error) {
         console.log(error);
       }
     } else {
       alert(`select a product`);
-    } 
+    }
     setFalseRaioAfterPay(!falseRaioAfterPay);
   };
-  const deleteIteam = async (productId,indexProduct) => {
+  const deleteIteam = async (productId, indexProduct) => {
     try {
       const res = await axios.post("/deleteIteam", {
         productId: productId,
@@ -49,20 +54,18 @@ export default function Cart() {
       });
       const data = await res.data;
       if (data === "Product deleted from cart") {
+        debugger
         alert(data);
         valContext.deleteFromCart(indexProduct);
-        let sum = 0;
-        valContext.deleteProductFromSelectedIteamUi(indexProduct)
-        valContext.selectedIteamToPay.forEach((val) => {
-          return (sum += val.price);
-        });
-        setPaySum(sum);
+        valContext.deleteProductFromSelectedIteamUi(indexProduct);
+     
       } else {
         console.error(data);
       }
     } catch (err) {
       console.log(err);
     }
+    sum();
   };
 
   return (
@@ -72,6 +75,7 @@ export default function Cart() {
       {valContext.userData?.cart?.map((valProduct, indexProduct) => {
         return (
           <Product
+            sum={sum}
             setPaySum={setPaySum}
             paySum={paySum}
             deleteIteam={deleteIteam}
