@@ -109,7 +109,6 @@ function App() {
         valProduct.choose = true;
         selectedIteamToPay.push(valProduct);
         setSelectedIteamToPay([...selectedIteamToPay]);
-        setUserData({ ...userData });
       } else {
         alert(data);
       }
@@ -139,6 +138,7 @@ function App() {
   };
 
   const deleteProductFromSelectedIteamUi = (indexProduct) => {
+    
     if (indexProduct !== undefined) {
       debugger
       selectedIteamToPay.splice(indexProduct, 1);
