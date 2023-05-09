@@ -42,7 +42,6 @@ function App() {
         const resEarring = await axios.get("/allProductsOfEarring");
         const dataEarring = await resEarring.data;
         setEarringProducts(dataEarring);
-
         setTypeProductImg([
           {
             link: ROUTES.RINGS,
@@ -91,10 +90,11 @@ function App() {
     setUserData({ ...userData });
   };
 
-  const paymentCart = (valIteam) => {
-    let itemIndex = userData.cart.findIndex((val) => valIteam._id === val._id);
-    userData.historyOfCart.unshift(valIteam);
-    userData.cart.splice(itemIndex, 1);
+  const paymentCart = (valProduct) => {
+    let indexProduct = userData.cart.findIndex((val) => valProduct._id === val._id);
+    userData.historyOfCart.unshift(valProduct);
+    payProductFromSelectedIteamToPayUi()
+    userData.cart.splice(indexProduct, 1);
     setUserData({ ...userData });
   };
 
@@ -109,7 +109,6 @@ function App() {
         valProduct.choose = true;
         selectedIteamToPay.push(valProduct);
         setSelectedIteamToPay([...selectedIteamToPay]);
-        setUserData({ ...userData });
       } else {
         alert(data);
       }
@@ -129,7 +128,8 @@ function App() {
       const data = await res.data;
       if ("product choose switch to false") {
         valProduct.choose = false;
-        deleteProductFromSelectedIteamUi(indexProduct);
+        selectedIteamToPay.splice(indexProduct,1);
+        setSelectedIteamToPay([...selectedIteamToPay]);
       } else {
         alert(data);
       }
@@ -138,15 +138,13 @@ function App() {
     }
   };
 
-  const deleteProductFromSelectedIteamUi = (indexProduct) => {
-    if (indexProduct !== undefined) {
-      debugger
-      selectedIteamToPay.splice(indexProduct, 1);
-      setSelectedIteamToPay([...selectedIteamToPay]);
-      setUserData({ ...userData });
-    }
-
+  const payProductFromSelectedIteamToPayUi = () => {
+      setSelectedIteamToPay([]);
   };
+    const deleteProductFromSelectedIteamToPayUi = (inedxProductSelected) => {
+      selectedIteamToPay.splice(inedxProductSelected, 1)
+      setSelectedIteamToPay([...selectedIteamToPay])
+   }
   return (
     <div className="App">
       <BrowserRouter>
@@ -168,7 +166,8 @@ function App() {
             setSelectedIteamToPay,
             addProductToSelectedIteamToPay,
             deleteProductFromSelectedIteamToPay,
-            deleteProductFromSelectedIteamUi,
+            payProductFromSelectedIteamToPayUi,
+            deleteProductFromSelectedIteamToPayUi
           }}
         >
           {userData && <Nav />}

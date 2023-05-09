@@ -8,17 +8,20 @@ import axios from "../axiosConfig";
 export default function Cart() {
   const valContext = useContext(contextApi);
   const [paySum, setPaySum] = useState(0);
-  const [falseRaioAfterPay, setFalseRaioAfterPay] = useState(false);
+  const [falseRadioAfterPay, setFalseRadioAfterPay] = useState(false);
+
   const sum = () => {
-    let sum = 0;
-    valContext.selectedIteamToPay.forEach((val) => {
-      return (sum += val.price);
-    });
-    setPaySum(sum);
+      let sumSelected = 0;
+      valContext.selectedIteamToPay.forEach((val) => {
+        return (sumSelected += val.price);
+      });
+      setPaySum(sumSelected);
   };
+
   useEffect(() => {
     sum();
   }, [valContext.selectedIteamToPay]);
+
   const pay = async () => {
     if (valContext.selectedIteamToPay.length !== 0) {
       try {
@@ -27,16 +30,12 @@ export default function Cart() {
           userId: valContext.userData._id,
         });
         const data = await res.data;
-
-        if (data === "payment succsess") {
-          valContext.selectedIteamToPay.forEach((valProduct, indexProduct) => {
-            debugger
-            valContext.deleteProductFromSelectedIteamUi(indexProduct);
-            valContext.paymentCart(valProduct);
-          sum();
-
+        if (data === "Payment successful") {
+          alert(data);
+          valContext.selectedIteamToPay.forEach((valProductSelected) => {
+            valContext.paymentCart(valProductSelected);
           });
-
+          sum();
         }
       } catch (error) {
         console.log(error);
@@ -44,28 +43,7 @@ export default function Cart() {
     } else {
       alert(`select a product`);
     }
-    setFalseRaioAfterPay(!falseRaioAfterPay);
-  };
-  const deleteIteam = async (productId, indexProduct) => {
-    try {
-      const res = await axios.post("/deleteIteam", {
-        productId: productId,
-        userNameId: valContext.userData._id,
-      });
-      const data = await res.data;
-      if (data === "Product deleted from cart") {
-        debugger
-        alert(data);
-        valContext.deleteFromCart(indexProduct);
-        valContext.deleteProductFromSelectedIteamUi(indexProduct);
-     
-      } else {
-        console.error(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    sum();
+    setFalseRadioAfterPay(!falseRadioAfterPay);
   };
 
   return (
@@ -78,11 +56,10 @@ export default function Cart() {
             sum={sum}
             setPaySum={setPaySum}
             paySum={paySum}
-            deleteIteam={deleteIteam}
             valProduct={valProduct}
             indexProduct={indexProduct}
             url={URL.ONCART}
-            falseRaioAfterPay={falseRaioAfterPay}
+            falseRadioAfterPay={falseRadioAfterPay}
           />
         );
       })}
