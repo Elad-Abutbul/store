@@ -57,6 +57,7 @@ export default function SignUp({ url }) {
           } else {
             alert("Edit complete");
             nav('/');
+            valContext.userDisconnect()
           }
         } catch (error) {
           console.log(error);

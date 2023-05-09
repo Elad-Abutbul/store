@@ -10,7 +10,7 @@ export default function DeleteAlert({ changeCond }) {
      const deleteUser = async () => {
           try {
           
-                    const res = await axios.post('/deleteUser', { userId: valContext.userData._id });
+                    const res = await axios.delete('/deleteUser', { userId: valContext.userData._id });
                     const data = await res.data
                     if (data === 'delete the user') {
                          alert(data)
