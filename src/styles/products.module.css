@@ -1,6 +1,9 @@
 
 .h1Name {
-  padding-top: 12vh;
+  margin-left: 10px;
+
+  margin-top: 14vh;
+  font-weight: 300;
   color: var(--main-color);
 }
 .imgType {
@@ -10,6 +13,7 @@
   gap: 5%;
   align-items: center;
 }
+
 .divImg {
   display: flex;
   flex-direction: column;
@@ -17,18 +21,20 @@
 a{
   text-decoration: none;
 }
-.btnImg {
+.h3Slide {
   margin-top: -20%;
   color: var(--main-color);
   cursor: pointer;
   border:none;
   font-weight: 400;
-  color: black;
+  height: 30px;
 }
-.btnImg:hover{
-  color: white;
-  background-color: var(--main-color);
-}
+
 .img {
   cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.img:hover{
+  box-shadow: 3px 5px 10px #cccc;
+
 }

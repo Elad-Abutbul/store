@@ -13,7 +13,7 @@ export default function Nav() {
   };
   return (
     <nav className={navCss.navbar}>
-      <div className={navCss.icon} onClick={()=>nav(ROUTES.PRODUCTS)}>Elad's Jewelry Store</div>
+     <Link to={ROUTES.PRODUCTS}><h1 className={navCss.icon}>Elad's Jewelry Store</h1></Link> 
       <div className={navCss.nav}>
         <Link
           to={ROUTES.PROFILE}

@@ -5,6 +5,7 @@
 }
 
 .h1 {
+  font-weight: 400;
   text-align: center;
 }
 
@@ -15,7 +16,6 @@
 }
 
 .btn {
-  font-weight: bold;
   background-color: var(--main-color);
   border: none;
   color: white;
