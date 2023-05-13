@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { contextApi } from "../contextApi";
 import Product from "./Product";
 import cartCss from "../styles/cart.module.css";
-import { URL } from "../constans/constans";
+import { URL } from "../constans/Url";
 import axios from "../axiosConfig";
+import { POST } from "../constans/AxiosPost";
 
 export default function Cart() {
   const valContext = useContext(contextApi);
@@ -11,11 +12,11 @@ export default function Cart() {
   const [falseRadioAfterPay, setFalseRadioAfterPay] = useState(false);
 
   const sum = () => {
-      let sumSelected = 0;
-      valContext.selectedIteamToPay.forEach((val) => {
-        return (sumSelected += val.price);
-      });
-      setPaySum(sumSelected);
+    let sumSelected = 0;
+    valContext.selectedIteamToPay.forEach((val) => {
+      return (sumSelected += val.price);
+    });
+    setPaySum(sumSelected);
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Cart() {
   const pay = async () => {
     if (valContext.selectedIteamToPay.length !== 0) {
       try {
-        const res = await axios.post("/pay", {
+        const res = await axios.post(POST.PAY, {
           items: valContext.selectedIteamToPay,
           userId: valContext.userData._id,
         });
@@ -45,7 +46,10 @@ export default function Cart() {
     }
     setFalseRadioAfterPay(!falseRadioAfterPay);
   };
-
+  const geta = (indexProduct, productId) => {
+    valContext.deleteFromCart(indexProduct);
+    valContext.deleteProductFromSelectedIteamToPayUi(productId);
+  };
   return (
     <div>
       <h1 className={cartCss.h1}>My Cart:</h1>
@@ -60,6 +64,7 @@ export default function Cart() {
             indexProduct={indexProduct}
             url={URL.ONCART}
             falseRadioAfterPay={falseRadioAfterPay}
+            geta={geta}
           />
         );
       })}

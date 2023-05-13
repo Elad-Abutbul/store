@@ -16,8 +16,4 @@ export const ROUTES = {
   DELETEACCOUNT: 'deleteAccount',
   VIEWPURCHASES:'viewPurchases'
 };
-export const URL = {
-  EDIT:'edit',
-  ADDTOCART: "addToCart",
-  ONCART: "cart",
-};
+

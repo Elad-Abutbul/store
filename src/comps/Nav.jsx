@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
-import { ROUTES } from "../constans/constans";
+import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
 
 export default function Nav() {
@@ -13,7 +13,9 @@ export default function Nav() {
   };
   return (
     <nav className={navCss.navbar}>
-     <Link to={ROUTES.PRODUCTS}><h1 className={navCss.icon}>Elad's Jewelry Store</h1></Link> 
+      <Link to={ROUTES.PRODUCTS}>
+        <h1 className={navCss.icon}>Elad's Jewelry Store</h1>
+      </Link>
       <div className={navCss.nav}>
         <Link
           to={ROUTES.PROFILE}
@@ -51,7 +53,9 @@ export default function Nav() {
         >
           CART
           {valContext.userData.cart?.length != 0 && (
-            <span id={navCss.cartLength}>{valContext.userData.cart.length}</span>
+            <span id={navCss.cartLength}>
+              {valContext.userData.cart.length}
+            </span>
           )}
         </Link>
         <Link
