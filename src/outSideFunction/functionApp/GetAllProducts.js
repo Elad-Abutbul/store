@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios from '../axiosConfig';
-import { ROUTES } from '../constans/Routes';
-import { TYPEIMG } from '../constans/TypeproductImg';
-import {PRODUCTS} from  '../constans/AxiosGetOnStart'
+import axios from '../../axiosConfig';
+import { ROUTES } from '../../constans/Routes';
+import { TYPEIMG } from '../../constans/TypeproductImg';
+import {PRODUCTS} from  '../../constans/AxiosGetOnStart'
 const useProductData = () => {
   const [ringProducts, setRingProducts] = useState([]);
   const [braceletProducts, setBraceletProducts] = useState([]);

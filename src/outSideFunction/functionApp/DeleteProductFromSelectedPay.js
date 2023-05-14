@@ -1,11 +1,11 @@
-import axios from "../axiosConfig";
+import axios from "../../axiosConfig";
 const useDeleteProductFromPay = () => {
   const deleteProduct = async (
-     valProduct,
-     indexProduct,
-     userData,
-     selectedIteamToPay,
-     setSelectedIteamToPay
+    valProduct,
+    indexProduct,
+    userData,
+    selectedIteamToPay,
+    setSelectedIteamToPay
   ) => {
     try {
       const res = await axios.post("/productChooseToFalse", {
@@ -25,7 +25,7 @@ const useDeleteProductFromPay = () => {
     }
   };
   return {
-    deleteProduct
+    deleteProduct,
   };
 };
 export default useDeleteProductFromPay;

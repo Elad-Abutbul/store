@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "../axiosConfig";
+import axios from "../../axiosConfig";
 const useAddProductToPay = () => {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
-  const addProduct = async (valProduct, indexProduct,userData) => {
+  const addProduct = async (valProduct, indexProduct, userData) => {
     try {
       const res = await axios.post("/productChooseToTrue", {
         indexProduct: indexProduct,
@@ -19,9 +19,11 @@ const useAddProductToPay = () => {
     } catch (error) {
       console.log(error);
     }
-     };
-     return {
-          selectedIteamToPay,setSelectedIteamToPay,addProduct
-     }
+  };
+  return {
+    selectedIteamToPay,
+    setSelectedIteamToPay,
+    addProduct,
+  };
 };
 export default useAddProductToPay;

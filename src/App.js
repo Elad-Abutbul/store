@@ -2,11 +2,11 @@ import "./App.css";
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { contextApi } from "./contextApi";
-import useProductData from "./functionApp/GetAllProducts";
-import usePaymentCart from "./functionApp/PaymentCart";
-import AppRoutes from "./functionApp/AppRoutes";
-import useAddProductToPay from "./functionApp/AddProductToSelectedPay";
-import useDeleteProductFromPay from "./functionApp/DeleteProductFromSelectedPay";
+import useProductData from "./outSideFunction/functionApp/GetAllProducts";
+import usePaymentCart from "./outSideFunction/functionApp/PaymentCart";
+import AppRoutes from "./outSideFunction/functionApp/AppRoutes";
+import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelectedPay";
+import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
 function App() {
   const { pay, userData, setUserData } = usePaymentCart();
   const { deleteProduct } = useDeleteProductFromPay();
