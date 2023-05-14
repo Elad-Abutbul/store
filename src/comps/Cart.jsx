@@ -68,10 +68,13 @@ export default function Cart() {
           />
         );
       })}
-      <h3>Your Total is: {paySum}₪</h3>
+
+      {valContext.userData.cart.length !== 0 ?<div>
+        <h3>Your Total is: {paySum}₪</h3>
       <button className={cartCss.payAllBtn} onClick={pay}>
         Pay
       </button>
+     </div> :'There are no items in the cart'}
     </div>
   );
 }

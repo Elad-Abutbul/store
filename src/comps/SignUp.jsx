@@ -38,7 +38,7 @@ export default function SignUp({ url }) {
           if (res.data === "exixt") {
             alert("UserName Exixt.");
           } else {
-            nav("/");
+            nav(ROUTES.ENTRY);
           }
         } catch (err) {
           console.log(err);
@@ -46,7 +46,7 @@ export default function SignUp({ url }) {
       } else {
         const userData = {
           userId: valContext.userData._id,
-          name: name,
+          name: name, 
           lastName: lastName,
           userName: userName,
           password: password,

@@ -18,7 +18,7 @@ export default function Nav() {
       </Link>
       <div className={navCss.nav}>
         <Link
-          to={ROUTES.PROFILE +'/'+ROUTES.VIEWPURCHASES}
+          to={`${ROUTES.PROFILE }/${ROUTES.VIEWPURCHASES}`}
           className={`${navCss.link} ${
             activeLink === ROUTES.PROFILE ? navCss.activeLink : ""
           }`}

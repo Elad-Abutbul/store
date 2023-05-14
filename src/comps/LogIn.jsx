@@ -22,7 +22,7 @@ export default function LogIn() {
         });
         const data = await res.data;
         if (data.msg === "success") {
-          nav(ROUTES.ELADJEWELRY+'/'+ROUTES.PRODUCTS);
+          nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
           valContext.userConnect(data.user);
         } else {
           alert("User or password not found");
