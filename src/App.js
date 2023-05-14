@@ -1,6 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { contextApi } from "./contextApi";
 import useProductData from "./outSideFunction/functionApp/GetAllProducts";
 import usePaymentCart from "./outSideFunction/functionApp/PaymentCart";
@@ -8,10 +7,10 @@ import AppRoutes from "./outSideFunction/functionApp/AppRoutes";
 import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelectedPay";
 import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
 function App() {
+  const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
   const { deleteProduct } = useDeleteProductFromPay();
-  const { selectedIteamToPay, setSelectedIteamToPay, addProduct } =
-    useAddProductToPay();
+  const { addProduct } = useAddProductToPay();
   const {
     ringProducts,
     braceletProducts,
@@ -25,6 +24,7 @@ function App() {
     getAllProducts(); // Call the getAllProducts function
   }, []);
   const userDisconnect = () => {
+    setSelectedIteamToPay([]);
     setUserData(false);
   };
   const userConnect = (user) => {
@@ -45,10 +45,7 @@ function App() {
   };
 
   const addProductToSelectedIteamToPay = (valProduct, indexProduct) => {
-    addProduct(valProduct, indexProduct, userData);
-  };
-  const deleteProductFromSelectedIteamToPay = (valProduct,indexProduct,userData,selectedIteamToPay,setSelectedIteamToPay) => {
-    deleteProduct(
+    addProduct(
       valProduct,
       indexProduct,
       userData,
@@ -56,17 +53,33 @@ function App() {
       setSelectedIteamToPay
     );
   };
+  const deleteProductFromSelectedIteamToPay = async (
+    valProduct,
+    indexProduct
+  ) => {
+    if (indexProduct !== undefined) {
+      await deleteProduct(
+        valProduct,
+        indexProduct,
+        userData,
+        selectedIteamToPay,
+        setSelectedIteamToPay
+      );
+    }
+    deleteProductFromSelectedIteamToPayUi();
+  };
 
   const payProductFromSelectedIteamToPayUi = () => {
     setSelectedIteamToPay([]);
   };
-  const deleteProductFromSelectedIteamToPayUi = (inedxProductSelected) => {
-    selectedIteamToPay.splice(inedxProductSelected, 1);
-    setSelectedIteamToPay([...selectedIteamToPay]);
+  const deleteProductFromSelectedIteamToPayUi = () => {
+    let filterArr = selectedIteamToPay.filter(
+      (product) => product.choose === true
+    );
+    setSelectedIteamToPay([...filterArr]);
   };
   return (
     <div>
-      <BrowserRouter>
         <contextApi.Provider
           value={{
             userData,
@@ -83,16 +96,15 @@ function App() {
             deleteFromCart,
             paymentCart,
             selectedIteamToPay,
+            payProductFromSelectedIteamToPayUi,
             setSelectedIteamToPay,
             addProductToSelectedIteamToPay,
             deleteProductFromSelectedIteamToPay,
-            payProductFromSelectedIteamToPayUi,
             deleteProductFromSelectedIteamToPayUi,
           }}
         >
           <AppRoutes />
         </contextApi.Provider>
-      </BrowserRouter>
     </div>
   );
 }

@@ -46,13 +46,15 @@ export default function SignUp({ url }) {
       } else {
         const userData = {
           userId: valContext.userData._id,
-          name: name, 
+          name: name,
           lastName: lastName,
           userName: userName,
           password: password,
         };
         try {
-          const res = await axios.post(POST.EDITACCOUNT, { userData: userData });
+          const res = await axios.post(POST.EDITACCOUNT, {
+            userData: userData,
+          });
           const data = await res.data;
           if (data === "User not found") {
             alert(data);
@@ -111,11 +113,11 @@ export default function SignUp({ url }) {
         </div>
 
         <button className={entryCss.btn} onClick={valid}>
-          {url === "edit" ? "Edit Account" : "Create Account"}
+          {url === ROUTES.EDIT ? "Edit Account" : "Create Account"}
         </button>
-        {url !== "edit" && (
+        {url !== ROUTES.EDIT && (
           <Link to={ROUTES.ENTRY} className={entryCss.link}>
-          Go To Log In
+            Go To Log In
           </Link>
         )}
       </form>

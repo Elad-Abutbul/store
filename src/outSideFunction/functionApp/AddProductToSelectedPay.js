@@ -1,8 +1,12 @@
-import { useState } from "react";
 import axios from "../../axiosConfig";
 const useAddProductToPay = () => {
-  const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
-  const addProduct = async (valProduct, indexProduct, userData) => {
+  const addProduct = async (
+    valProduct,
+    indexProduct,
+    userData,
+    selectedIteamToPay,
+    setSelectedIteamToPay
+  ) => {
     try {
       const res = await axios.post("/productChooseToTrue", {
         indexProduct: indexProduct,
@@ -21,8 +25,6 @@ const useAddProductToPay = () => {
     }
   };
   return {
-    selectedIteamToPay,
-    setSelectedIteamToPay,
     addProduct,
   };
 };

@@ -1,3 +1,3 @@
 export const NOTFOUND = {
-NOTFOUND:'page not found..'
-}
+  NOTFOUND: "page not found..",
+};

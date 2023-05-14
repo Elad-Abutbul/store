@@ -35,12 +35,7 @@ export default function Search() {
       />
       <div className={searchCss.products}>
         {products?.map((valProduct) => {
-          return (
-            <Product
-              valProduct={valProduct}
-              url={URL.ADDTOCART}
-            />
-          );
+          return <Product valProduct={valProduct} url={URL.ADDTOCART} />;
         })}
       </div>
     </div>

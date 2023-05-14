@@ -9,7 +9,6 @@ export default function Earrings() {
   return (
     <div>
       <h1 className={typeProductsCss.h1}>Earrings</h1>
-
       {valContext.earringProducts.map((valProduct, index) => {
         return (
           <Product index={index} valProduct={valProduct} url={URL.ADDTOCART} />

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Profile from "../../comps/profile/Profile";
 import ViewPurchases from "../../comps/profile/comps/ViewPurchases";
 import DeleteAccount from "../../comps/profile/comps/DeleteAccount";
@@ -21,7 +21,8 @@ import { contextApi } from "../../contextApi";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
   return (
-    <Routes>
+    <BrowserRouter>
+        <Routes>
       <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
         <Route path={ROUTES.PRODUCTS} element={<Products />} />
         <Route path={ROUTES.RINGS} element={<Rings />} />
@@ -48,5 +49,7 @@ export default function AppRoutes() {
         element={<h2>{NOTFOUND.NOTFOUND}</h2>}
       />
     </Routes>
+    </BrowserRouter>
+  
   );
 }

@@ -4,7 +4,9 @@ import { Link, Outlet } from "react-router-dom";
 import { ROUTES } from "../../constans/Routes";
 
 export default function Profile() {
-  const [selectedComponent, setSelectedComponent] = useState(ROUTES.VIEWPURCHASES);
+  const [selectedComponent, setSelectedComponent] = useState(
+    ROUTES.VIEWPURCHASES
+  );
 
   const handleSelectComponent = (component) => {
     setSelectedComponent(component);

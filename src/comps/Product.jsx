@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import productCss from "../styles/product.module.css";
-import axios from "../axiosConfig";
-
 import { contextApi } from "../contextApi";
 import { URL } from "../constans/Url";
-import { POST } from "../constans/AxiosPost";
 import useAddToCart from "../outSideFunction/functionProduct/AddToCartPost";
+import useRadio from "../outSideFunction/functionProduct/UseRadio";
+import useDeleteItem from "../outSideFunction/functionProduct/DeleteIteam";
 
 export default function Product({
   indexProduct,
@@ -14,49 +13,36 @@ export default function Product({
   falseRadioAfterPay,
   sum,
 }) {
+  const { ifRadioTrue, radio, setRadio } = useRadio();
+  const { deleteItem } = useDeleteItem();
   const { addToCartFunc } = useAddToCart();
-  const [radio, setRadio] = useState(false);
   const valContext = useContext(contextApi);
+
   const addToCart = () => {
     addToCartFunc(valProduct._id, valContext, valProduct);
   };
+
   useEffect(() => {
-    if (radio) {
-      valContext.addProductToSelectedIteamToPay(valProduct, indexProduct);
-    } else {
-      valContext.deleteProductFromSelectedIteamToPay(valProduct, indexProduct);
-    }
+    ifRadioTrue(valContext, valProduct, indexProduct);
   }, [radio]);
-  const deleteIteam = async (productId, indexProduct) => {
-    try {
-      const res = await axios.post(POST.DELETEITEAMS, {
-        productId: productId,
-        userNameId: valContext.userData._id,
-      });
-      const data = await res.data;
-      if (data === "Product deleted from cart") {
-        alert(data);
-        valContext.deleteFromCart(indexProduct);
-        valContext.payProductFromSelectedIteamToPayUi();
-        sum();
-        setRadio(false);
-      } else {
-        console.error(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+
+  const deleteIteam = () => {
+    deleteItem(valContext, valProduct._id, valProduct, indexProduct);
+    setRadio(false);
+    sum();
   };
+
   useEffect(() => {
     setRadio(false);
   }, [falseRadioAfterPay]);
+
   return (
     <div className={productCss.singleProduct}>
       {url === URL.ONCART && (
         <h1
           className={productCss.plusOrX}
           id={productCss.delete}
-          onClick={() => deleteIteam(valProduct._id, indexProduct)}
+          onClick={() => deleteIteam()}
         >
           ×
         </h1>
@@ -75,7 +61,14 @@ export default function Product({
         </h1>
       )}
       {url === URL.ONCART && (
-        <input type="radio" checked={radio} onClick={() => setRadio(!radio)} />
+        <div>
+          <label>pay</label>
+          <input
+            type="radio"
+            checked={radio}
+            onClick={() => setRadio(!radio)}
+          />
+        </div>
       )}
     </div>
   );
