@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "../axiosConfig";
 import Product from "./Product";
 import searchCss from "../styles/search.module.css";
-import { URL } from "../constans/constans";
+import { URL } from "../constans/Url";
+import { POST } from "../constans/AxiosPost";
 
 export default function Search() {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ export default function Search() {
   useEffect(() => {
     const getIteams = async () => {
       if (req !== "") {
-        const res = await axios.post("/search", {
+        const res = await axios.post(POST.SEARCH, {
           getItem: req,
         });
         const data = await res.data;
@@ -36,7 +37,6 @@ export default function Search() {
         {products?.map((valProduct) => {
           return (
             <Product
-              key={valProduct._id}
               valProduct={valProduct}
               url={URL.ADDTOCART}
             />

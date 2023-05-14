@@ -1,22 +1,24 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
-import { ROUTES } from "../constans/constans";
+import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
 
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
-  const nav = useNavigate();
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
   return (
+    <>
     <nav className={navCss.navbar}>
-     <Link to={ROUTES.PRODUCTS}><h1 className={navCss.icon}>Elad's Jewelry Store</h1></Link> 
+      <Link to={ROUTES.PRODUCTS}>
+        <h1 className={navCss.icon}>Elad's Jewelry Store</h1>
+      </Link>
       <div className={navCss.nav}>
         <Link
-          to={ROUTES.PROFILE}
+          to={`${ROUTES.PROFILE }/${ROUTES.VIEWPURCHASES}`}
           className={`${navCss.link} ${
             activeLink === ROUTES.PROFILE ? navCss.activeLink : ""
           }`}
@@ -50,8 +52,10 @@ export default function Nav() {
           onClick={() => handleLinkClick(ROUTES.CART)}
         >
           CART
-          {valContext.userData.cart?.length != 0 && (
-            <span id={navCss.cartLength}>{valContext.userData.cart.length}</span>
+          {valContext.userData.cart?.length !== 0 && (
+            <span id={navCss.cartLength}>
+              {valContext.userData.cart.length}
+            </span>
           )}
         </Link>
         <Link
@@ -67,6 +71,9 @@ export default function Nav() {
           LOG OUT
         </Link>
       </div>
-    </nav>
+      </nav>
+      <div><Outlet/></div>
+    </>
+      
   );
 }
