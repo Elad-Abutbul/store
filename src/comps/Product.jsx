@@ -13,14 +13,8 @@ export default function Product({
   falseRadioAfterPay,
   sum,
 }) {
-  
   const [radio, setRadio] = useState(false);
   const valContext = useContext(contextApi);
-  if (radio) {
-    valContext.addProductToSelectedIteamToPay(valProduct, indexProduct);
-  } else {
-    valContext.deleteProductFromSelectedIteamToPay(valProduct, indexProduct);
-  }
   const addToCart = async () => {
     const res = await axios.post(POST.ADDTOCART, {
       productId: valProduct._id,
@@ -33,7 +27,13 @@ export default function Product({
       console.log("cannot added to cart");
     }
   };
-
+  useEffect(() => {
+    if (radio) {
+      valContext.addProductToSelectedIteamToPay(valProduct, indexProduct);
+    } else {
+      valContext.deleteProductFromSelectedIteamToPay(valProduct, indexProduct);
+    }
+  },[radio]);
   const deleteIteam = async (productId, indexProduct) => {
     try {
       const res = await axios.post(POST.DELETEITEAMS, {

@@ -4,6 +4,7 @@ import entryCss from "../styles/logInAndSignUp.module.css";
 import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
 import { POST } from "../constans/AxiosPost";
+import { ROUTES } from "../constans/Routes";
 
 export default function LogIn() {
   const valContext = useContext(contextApi);
@@ -21,7 +22,7 @@ export default function LogIn() {
         });
         const data = await res.data;
         if (data.msg === "success") {
-          nav("/products");
+          nav(ROUTES.ELADJEWELRY+'/'+ROUTES.PRODUCTS);
           valContext.userConnect(data.user);
         } else {
           alert("User or password not found");
@@ -54,7 +55,7 @@ export default function LogIn() {
         <button onClick={valid} className={entryCss.btn}>
           Log In
         </button>
-        <Link to={"/signUp"} className={entryCss.link}>
+        <Link to={ROUTES.SIGNUP} className={entryCss.link}>
           Create An Account
         </Link>
       </form>
