@@ -55,7 +55,7 @@
 }
 
 .btn:hover {
-  background-color: #414141;
+  background-color: var(--hover-color);
 }
 
 .link {

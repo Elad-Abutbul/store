@@ -12,7 +12,7 @@ export default function ImgType({ valProductImg }) {
             src={valProductImg.src}
             alt={valProductImg.alt}
           />
-          <h3 className={productsCss.h3Slide}>{valProductImg.button}</h3>
+          <h3 className={productsCss.h3}>{valProductImg.button}</h3>
         </div>
       </Link>
     </>

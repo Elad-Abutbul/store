@@ -15,41 +15,40 @@ import SignUp from "../../comps/SignUp";
 import LogIn from "../../comps/LogIn";
 import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
-import { LOADING } from "../../constans/Loading";
-import { NOTFOUND } from "../../constans/NotFound";
+import { LOADING } from "../../constans/hardCoded/appRoutes/Loading";
+import { NOTFOUND } from "../../constans/hardCoded/appRoutes/NotFound";
 import { contextApi } from "../../contextApi";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
   return (
     <BrowserRouter>
-        <Routes>
-      <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
-        <Route path={ROUTES.PRODUCTS} element={<Products />} />
-        <Route path={ROUTES.RINGS} element={<Rings />} />
-        <Route path={ROUTES.EARRINGS} element={<Earrings />} />
-        <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
-        <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
+      <Routes>
+        <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
+          <Route path={ROUTES.PRODUCTS} element={<Products />} />
+          <Route path={ROUTES.RINGS} element={<Rings />} />
+          <Route path={ROUTES.EARRINGS} element={<Earrings />} />
+          <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
+          <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
 
-        <Route path={ROUTES.SEARCH} element={<Search />} />
-        <Route path={ROUTES.CART} element={<Cart />} />
+          <Route path={ROUTES.SEARCH} element={<Search />} />
+          <Route path={ROUTES.CART} element={<Cart />} />
 
-        <Route path={ROUTES.PROFILE} element={<Profile />}>
-          <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
-          <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
-          <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+          <Route path={ROUTES.PROFILE} element={<Profile />}>
+            <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
+            <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
+            <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+          </Route>
         </Route>
-      </Route>
-      <Route
-        path={ROUTES.ENTRY}
-        element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
-      />
-      <Route path={ROUTES.SIGNUP} element={<SignUp />} />
-      <Route
-        path={ROUTES.PAGENOTFOUND}
-        element={<h2>{NOTFOUND.NOTFOUND}</h2>}
-      />
-    </Routes>
+        <Route
+          path={ROUTES.ENTRY}
+          element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
+        />
+        <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+        <Route
+          path={ROUTES.PAGENOTFOUND}
+          element={<h2>{NOTFOUND.NOTFOUND}</h2>}
+        />
+      </Routes>
     </BrowserRouter>
-  
   );
 }

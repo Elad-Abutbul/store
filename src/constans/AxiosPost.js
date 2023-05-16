@@ -6,4 +6,5 @@ export const POST = {
   DELETEITEAMS: "/deleteItem",
   SEARCH: "/search",
   ADDTOCART: "/addToCart",
+  DELETEUSER:"/deleteUser"
 };

@@ -80,31 +80,31 @@ function App() {
   };
   return (
     <div>
-        <contextApi.Provider
-          value={{
-            userData,
-            setUserData,
-            loading,
-            ringProducts,
-            earringProducts,
-            braceletProducts,
-            necklaceProducts,
-            typeProductImg,
-            userConnect,
-            userDisconnect,
-            addToCart,
-            deleteFromCart,
-            paymentCart,
-            selectedIteamToPay,
-            payProductFromSelectedIteamToPayUi,
-            setSelectedIteamToPay,
-            addProductToSelectedIteamToPay,
-            deleteProductFromSelectedIteamToPay,
-            deleteProductFromSelectedIteamToPayUi,
-          }}
-        >
-          <AppRoutes />
-        </contextApi.Provider>
+      <contextApi.Provider
+        value={{
+          userData,
+          setUserData,
+          loading,
+          ringProducts,
+          earringProducts,
+          braceletProducts,
+          necklaceProducts,
+          typeProductImg,
+          userConnect,
+          userDisconnect,
+          addToCart,
+          deleteFromCart,
+          paymentCart,
+          selectedIteamToPay,
+          payProductFromSelectedIteamToPayUi,
+          setSelectedIteamToPay,
+          addProductToSelectedIteamToPay,
+          deleteProductFromSelectedIteamToPay,
+          deleteProductFromSelectedIteamToPayUi,
+        }}
+      >
+        <AppRoutes />
+      </contextApi.Provider>
     </div>
   );
 }

@@ -4,22 +4,15 @@ import Product from "./Product";
 import searchCss from "../styles/search.module.css";
 import { URL } from "../constans/Url";
 import { POST } from "../constans/AxiosPost";
+import useSearch from "../outSideFunction/functionSearch/SearchInProducts";
 
 export default function Search() {
   const [products, setProducts] = useState([]);
   const [req, setReq] = useState("");
-
+  const { search } = useSearch();
   useEffect(() => {
-    const getIteams = async () => {
-      if (req !== "") {
-        const res = await axios.post(POST.SEARCH, {
-          getItem: req,
-        });
-        const data = await res.data;
-        setProducts(data);
-      } else {
-        setProducts([]);
-      }
+    const getIteams = () => {
+      search(req, setProducts);
     };
     getIteams();
   }, [req]);

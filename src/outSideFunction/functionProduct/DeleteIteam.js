@@ -13,7 +13,7 @@ const useDeleteItem = () => {
         productId: productId,
         userNameId: valContext.userData._id,
       });
-      const data = await res.data;
+      const data = res.data;
       if (data === "Product deleted from cart") {
         alert(data);
         valContext.deleteProductFromSelectedIteamToPay(
@@ -22,7 +22,7 @@ const useDeleteItem = () => {
         );
         valContext.deleteFromCart(indexProduct);
       } else {
-        console.error(data);
+        alert(data);
       }
     } catch (err) {
       console.log(err);

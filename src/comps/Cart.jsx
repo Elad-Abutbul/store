@@ -4,39 +4,38 @@ import Product from "./Product";
 import cartCss from "../styles/cart.module.css";
 import { URL } from "../constans/Url";
 import usePayment from "../outSideFunction/functionCart/Payment";
+import { CART } from "../constans/hardCoded/cart/CartHardCoded";
 
 export default function Cart() {
   const valContext = useContext(contextApi);
-  const [paySum, setPaySum] = useState(0);
+  const [sum, setSum] = useState(0);
   const [falseRadioAfterPay, setFalseRadioAfterPay] = useState(false);
   const { payment } = usePayment();
 
-  const sum = () => {
-    let sumSelected = 0;
+  const TotalPurchases = () => {
+    let total = 0;
     valContext.selectedIteamToPay.forEach((product) => {
-      return (sumSelected += product.price);
+      return (total += product.price);
     });
-    setPaySum(sumSelected);
+    setSum(total);
   };
 
   useEffect(() => {
-    sum();
+    TotalPurchases();
   }, [valContext.selectedIteamToPay]);
 
   const pay = async () => {
     payment(valContext);
-    sum();
+    TotalPurchases();
     setFalseRadioAfterPay(!falseRadioAfterPay);
   };
   return (
     <div>
-      <h1 className={cartCss.h1}>My Cart:</h1>
+      <h1 className={cartCss.h1}>{CART.MYCART}</h1>
       {valContext.userData?.cart?.map((valProduct, indexProduct) => {
         return (
           <Product
-            sum={sum}
-            setPaySum={setPaySum}
-            paySum={paySum}
+            TotalPurchases={TotalPurchases}
             valProduct={valProduct}
             indexProduct={indexProduct}
             url={URL.ONCART}
@@ -46,13 +45,16 @@ export default function Cart() {
       })}
       {valContext.userData.cart.length !== 0 ? (
         <div>
-          <h3>Your Total is: {paySum}₪</h3>
+          <h3>
+            {CART.YOURTOTAL} {sum}
+            {CART.SHEKEL}
+          </h3>
           <button className={cartCss.payAllBtn} onClick={pay}>
-            Pay
+            {CART.PAY}
           </button>
         </div>
       ) : (
-        "There are no items in the cart"
+        CART.NOITEMSINCART
       )}
     </div>
   );

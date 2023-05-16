@@ -5,15 +5,16 @@ import { URL } from "../constans/Url";
 import useAddToCart from "../outSideFunction/functionProduct/AddToCartPost";
 import useRadio from "../outSideFunction/functionProduct/UseRadio";
 import useDeleteItem from "../outSideFunction/functionProduct/DeleteIteam";
+import { PRODUCT } from "../constans/hardCoded/product/ProductHardCoded";
 
 export default function Product({
   indexProduct,
   url,
   valProduct,
   falseRadioAfterPay,
-  sum,
+  TotalPurchases,
 }) {
-  const { ifRadioTrue, radio, setRadio } = useRadio();
+  const { checkRadio, radio, setRadio } = useRadio();
   const { deleteItem } = useDeleteItem();
   const { addToCartFunc } = useAddToCart();
   const valContext = useContext(contextApi);
@@ -23,13 +24,13 @@ export default function Product({
   };
 
   useEffect(() => {
-    ifRadioTrue(valContext, valProduct, indexProduct);
+    checkRadio(valContext, valProduct, indexProduct);
   }, [radio]);
 
   const deleteIteam = () => {
     deleteItem(valContext, valProduct._id, valProduct, indexProduct);
     setRadio(false);
-    sum();
+    TotalPurchases();
   };
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Product({
           id={productCss.delete}
           onClick={() => deleteIteam()}
         >
-          ×
+          {PRODUCT.X}
         </h1>
       )}
       <h2 className={productCss.h2}>{valProduct.name}</h2>
@@ -57,12 +58,12 @@ export default function Product({
       />
       {url === URL.ADDTOCART && (
         <h1 className={productCss.plusOrX} onClick={addToCart}>
-          +
+          {PRODUCT.PLUS}
         </h1>
       )}
       {url === URL.ONCART && (
         <div>
-          <label>pay</label>
+          <label>{PRODUCT.SELECTPRODUCT}</label>
           <input
             type="radio"
             checked={radio}

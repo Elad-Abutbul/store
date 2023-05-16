@@ -1,45 +1,32 @@
 import React, { useContext } from "react";
-import axios from "../../../axiosConfig";
 import { contextApi } from "../../../contextApi";
 import { useNavigate } from "react-router-dom";
 import deleteCss from "../../../styles/deleteAccount.module.css";
-import { ROUTES } from "../../../constans/Routes";
+import { DELETE } from "../../../constans/hardCoded/deleteAccount/DeleteHardCoded";
+import useDeleteUser from "../../../outSideFunction/functionDeleteUser/DeleteUser";
 
 export default function DeleteAlert({ changeCond }) {
   const valContext = useContext(contextApi);
   const nav = useNavigate();
-  const deleteUser = async () => {
-    try {
-      const res = await axios.delete("/deleteUser", {
-        userId: valContext.userData._id,
-      });
-      const data = await res.data;
-      if (data === "delete the user") {
-        alert(data);
-        valContext.userDisconnect();
-        nav(ROUTES.ENTRY);
-      } else {
-        console.error(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const {deleteUser}=useDeleteUser()
+  const deleteTheUser =  () => {
+    deleteUser(valContext,nav)
   };
   return (
     <div>
-      <h2 className={deleteCss.h2Alert}>ARE YOU SURE?</h2>
+      <h2 className={deleteCss.h2Alert}>{DELETE.AREYOUSURE}</h2>
       <div id={deleteCss.deleteQuestion}>
         <button
           onClick={() => {
-            deleteUser();
+            deleteTheUser();
           }}
           id={deleteCss.btnConfirmDelete}
-          className={deleteCss.yesNo}
+          className={deleteCss.deleteOrNotDelete}
         >
-          yes
+          {DELETE.YES}
         </button>
-        <button onClick={changeCond} className={deleteCss.yesNo}>
-          no
+        <button onClick={changeCond} className={deleteCss.deleteOrNotDelete}>
+        {DELETE.NO}
         </button>
       </div>
     </div>

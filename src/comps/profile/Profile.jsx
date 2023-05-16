@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import profileCss from "../../styles/profile.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { ROUTES } from "../../constans/Routes";
+import { EMPTYSTRING } from "../../constans/EmptyString";
+import { PROFILE } from "../../constans/hardCoded/profile/ProfileHardCoded";
 
 export default function Profile() {
   const [selectedComponent, setSelectedComponent] = useState(
@@ -20,11 +22,13 @@ export default function Profile() {
           <Link to={ROUTES.EDIT}>
             <button
               className={`${profileCss.btn} ${
-                selectedComponent === ROUTES.EDIT ? profileCss.active : ""
+                selectedComponent === ROUTES.EDIT
+                  ? profileCss.active
+                  : EMPTYSTRING.EMPTYSTRING
               }`}
               onClick={() => handleSelectComponent(ROUTES.EDIT)}
             >
-              Edit Profile
+              {PROFILE.EDITPROFILE}
             </button>
           </Link>
           <Link to={ROUTES.VIEWPURCHASES}>
@@ -32,11 +36,11 @@ export default function Profile() {
               className={`${profileCss.btn} ${
                 selectedComponent === ROUTES.VIEWPURCHASES
                   ? profileCss.active
-                  : ""
+                  : EMPTYSTRING.EMPTYSTRING
               }`}
               onClick={() => handleSelectComponent(ROUTES.VIEWPURCHASES)}
             >
-              View Purchases
+              {PROFILE.VIEW_PURCHASES}
             </button>
           </Link>
           <Link to={ROUTES.DELETEACCOUNT}>
@@ -44,11 +48,11 @@ export default function Profile() {
               className={`${profileCss.btn} ${
                 selectedComponent === ROUTES.DELETEACCOUNT
                   ? profileCss.active
-                  : ""
+                  : EMPTYSTRING.EMPTYSTRING
               }`}
               onClick={() => handleSelectComponent(ROUTES.DELETEACCOUNT)}
             >
-              Delete Account
+              {PROFILE.DELETE_ACCOUNT}
             </button>
           </Link>
         </div>

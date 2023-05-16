@@ -39,7 +39,7 @@
 #btnConfirmDelete {
   background-color: red;
 }
-.yesNo {
+.deleteOrNotDelete {
   border: none;
   width: 5%;
   height: 30px;

@@ -5,6 +5,7 @@ import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
 import { POST } from "../constans/AxiosPost";
 import { ROUTES } from "../constans/Routes";
+import { LOGIN } from "../constans/hardCoded/login/LoginHardCoded";
 
 export default function LogIn() {
   const valContext = useContext(contextApi);
@@ -13,19 +14,19 @@ export default function LogIn() {
   const nav = useNavigate();
   const valid = async () => {
     if (!userName || !password) {
-      alert("Fields are missing!");
+      alert(LOGIN.FIELDSAREMISSING);
     } else {
       try {
         const res = await axios.post(POST.LOGIN, {
           userName: userName,
           password: password,
         });
-        const data = await res.data;
+        const data = res.data;
         if (data.msg === "success") {
           nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
           valContext.userConnect(data.user);
         } else {
-          alert("User or password not found");
+          alert(data);
         }
       } catch (err) {
         console.log(err);
@@ -35,7 +36,7 @@ export default function LogIn() {
   return (
     <div className={entryCss.container}>
       <form className={entryCss.form} onSubmit={(e) => e.preventDefault()}>
-        <h1 className={entryCss.title}>Log In</h1>
+        <h1 className={entryCss.title}>{LOGIN.LOGIN}</h1>
         <div className={entryCss.inputContainer}>
           <input
             className={entryCss.input}
@@ -53,10 +54,10 @@ export default function LogIn() {
           />
         </div>
         <button onClick={valid} className={entryCss.btn}>
-          Log In
+          {LOGIN.LOGIN}
         </button>
         <Link to={ROUTES.SIGNUP} className={entryCss.link}>
-          Create An Account
+          {LOGIN.CREATEACCOUNT}
         </Link>
       </form>
     </div>

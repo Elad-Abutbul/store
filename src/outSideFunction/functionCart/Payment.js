@@ -9,12 +9,14 @@ const usePayment = () => {
           items: valContext.selectedIteamToPay,
           userId: valContext.userData._id,
         });
-        const data = await res.data;
+        const data = res.data;
         if (data === "Payment successful") {
           alert(data);
           valContext.selectedIteamToPay.forEach((valProductSelected) => {
             valContext.paymentCart(valProductSelected);
           });
+        } else {
+          alert(data)
         }
       } catch (error) {
         console.log(error);

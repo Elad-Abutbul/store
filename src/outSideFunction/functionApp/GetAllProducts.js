@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "../../axiosConfig";
 import { ROUTES } from "../../constans/Routes";
-import { TYPEIMG } from "../../constans/TypeproductImg";
-import { PRODUCTS } from "../../constans/AxiosGetOnStart";
+import { TYPEIMG } from "../../constans/hardCoded/app/TypeproductImg";
+import { PRODUCTS } from "../../constans/hardCoded/app/AxiosGetOnStart";
 const useProductData = () => {
   const [ringProducts, setRingProducts] = useState([]);
   const [braceletProducts, setBraceletProducts] = useState([]);
@@ -15,18 +15,18 @@ const useProductData = () => {
     setLoading(true);
     try {
       const resRing = await axios.get(PRODUCTS.ALLRINGS);
-      const dataRing = await resRing.data;
+      const dataRing = resRing.data;
       setRingProducts(dataRing);
       const resBracelet = await axios.get(PRODUCTS.ALLBRACELETS);
-      const dataBracelet = await resBracelet.data;
+      const dataBracelet = resBracelet.data;
       setBraceletProducts(dataBracelet);
 
       const resNecklace = await axios.get(PRODUCTS.ALLNECKLACES);
-      const dataNecklace = await resNecklace.data;
+      const dataNecklace = resNecklace.data;
       setNecklaceProducts(dataNecklace);
 
       const resEarring = await axios.get(PRODUCTS.ALLEARIINGS);
-      const dataEarring = await resEarring.data;
+      const dataEarring = resEarring.data;
       setEarringProducts(dataEarring);
 
       setTypeProductImg([

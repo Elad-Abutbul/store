@@ -3,6 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
+import { NAV } from "../constans/hardCoded/nav/NavHardCoded";
+import { EMPTYSTRING } from "../constans/EmptyString";
 
 export default function Nav() {
   const valContext = useContext(contextApi);
@@ -14,44 +16,52 @@ export default function Nav() {
     <>
       <nav className={navCss.navbar}>
         <Link to={ROUTES.PRODUCTS}>
-          <h1 className={navCss.icon}>Elad's Jewelry Store</h1>
+          <h1 className={navCss.icon}>{NAV.ELAD_JEWELRY_STORE}</h1>
         </Link>
         <div className={navCss.nav}>
           <Link
             to={`${ROUTES.PROFILE}/${ROUTES.VIEWPURCHASES}`}
             className={`${navCss.link} ${
-              activeLink === ROUTES.PROFILE ? navCss.activeLink : ""
+              activeLink === ROUTES.PROFILE
+                ? navCss.activeLink
+                : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => handleLinkClick(ROUTES.PROFILE)}
           >
-            PROFILE
+            {NAV.PROFILE}
           </Link>
           <Link
             to={ROUTES.SEARCH}
             className={`${navCss.link} ${
-              activeLink === ROUTES.SEARCH ? navCss.activeLink : ""
+              activeLink === ROUTES.SEARCH
+                ? navCss.activeLink
+                : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => handleLinkClick(ROUTES.SEARCH)}
           >
-            SEARCH
+            {NAV.SEARCH}
           </Link>
           <Link
             to={ROUTES.PRODUCTS}
             className={`${navCss.link} ${
-              activeLink === ROUTES.PRODUCTS ? navCss.activeLink : ""
+              activeLink === ROUTES.PRODUCTS
+                ? navCss.activeLink
+                : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => handleLinkClick(ROUTES.PRODUCTS)}
           >
-            PRODUCTS
+            {NAV.PRODUCTS}
           </Link>
           <Link
             to={ROUTES.CART}
             className={`${navCss.link} ${
-              activeLink === ROUTES.CART ? navCss.activeLink : ""
+              activeLink === ROUTES.CART
+                ? navCss.activeLink
+                : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => handleLinkClick(ROUTES.CART)}
           >
-            CART
+            {NAV.CART}
             {valContext.userData.cart?.length !== 0 && (
               <span id={navCss.cartLength}>
                 {valContext.userData.cart?.length}
@@ -61,14 +71,16 @@ export default function Nav() {
           <Link
             to={ROUTES.ENTRY}
             className={`${navCss.link} ${
-              activeLink === ROUTES.ENTRY ? navCss.activeLink : ""
+              activeLink === ROUTES.ENTRY
+                ? navCss.activeLink
+                : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => {
               handleLinkClick(ROUTES.ENTRY);
               valContext.userDisconnect();
             }}
           >
-            LOG OUT
+            {NAV.LOGOUT}
           </Link>
         </div>
       </nav>
