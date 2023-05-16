@@ -44,6 +44,23 @@ function App() {
     payProductFromSelectedIteamToPayUi();
   };
 
+  const addProductToSelectedIteamToPay = async (valProduct, indexProduct) => {
+    try {
+      const res = await axios.post("/productChooseToTrue", {
+        indexProduct: indexProduct,
+        userId: userData._id,
+      });
+      const data = await res.data;
+      if (data === "product choose switch to true") {
+        valProduct.choose = true;
+        selectedIteamToPay.push(valProduct);
+        setSelectedIteamToPay([...selectedIteamToPay]);
+      } else {
+        alert(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   const addProductToSelectedIteamToPay = (valProduct, indexProduct) => {
     addProduct(
       valProduct,
@@ -57,6 +74,25 @@ function App() {
     valProduct,
     indexProduct
   ) => {
+    try {
+      const res = await axios.post("/productChooseToFalse", {
+        indexProduct: indexProduct,
+        userId: userData._id,
+      });
+      const data = await res.data;
+      if ("product choose switch to false") {
+        valProduct.choose = false;
+        deleteProductFromSelectedIteamUi(indexProduct);
+      } else {
+        alert(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteProductFromSelectedIteamUi = (indexProduct) => {
+    
     if (indexProduct !== undefined) {
       await deleteProduct(
         valProduct,
