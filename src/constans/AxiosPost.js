@@ -3,7 +3,7 @@ export const POST = {
   EDITACCOUNT: "/editAccount",
   PAY: "/pay",
   LOGIN: "/login",
-  DELETEITEAMS: "/deleteIteams",
+  DELETEITEAMS: "/deleteItem",
   SEARCH: "/search",
   ADDTOCART: "/addToCart",
 };

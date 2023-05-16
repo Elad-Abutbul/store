@@ -1,20 +1,19 @@
 .h1 {
-     padding-top: 10vh;
-     font-weight: 400;
-   }
-   
-   .payAllBtn {
-     background-color: var(--main-color);
-     color: white;
-     padding: 0.5rem 1rem;
-     border: none;
-     border-radius: 5px;
-     font-size: 1.2rem;
-     
-     transition: all 0.2s ease-in-out;
-   }
-   
-   .payAllBtn:hover {
-     background-color: #414141;
-   }
-   
+  padding-top: 10vh;
+  font-weight: 400;
+}
+
+.payAllBtn {
+  background-color: var(--main-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.payAllBtn:hover {
+  background-color: #414141;
+}

@@ -8,14 +8,13 @@ export default function Products() {
   const lastName = valContext.userData.lastName;
   return (
     <div>
-      
       <h1 className={productsCss.h1Name}>
         welcome {name} {lastName}
       </h1>
       <div className={productsCss.imgType}>
-        {valContext.typeProductImg.map((val) => {
-          return <ImgType val={val} />
- })}
+        {valContext.typeProductImg.map((valProductImg) => {
+          return <ImgType valProductImg={valProductImg} />;
+        })}
       </div>
     </div>
   );

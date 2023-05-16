@@ -5,12 +5,12 @@ const usePaymentCart = () => {
 
   const pay = (valProduct) => {
     let indexProduct = userData.cart.findIndex(
-      (val) => valProduct._id === val._id
+      (valProductCart) => valProduct._id === valProductCart._id
     );
     userData.historyOfCart.unshift(valProduct);
     userData.cart.splice(indexProduct, 1);
     setUserData({ ...userData });
-     };
-     return {pay,userData,setUserData}
+  };
+  return { pay, userData, setUserData };
 };
 export default usePaymentCart;

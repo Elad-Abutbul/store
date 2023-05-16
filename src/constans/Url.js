@@ -1,5 +1,5 @@
 export const URL = {
-     EDIT:'edit',
-     ADDTOCART: "addToCart",
-     ONCART: "onCart",
-   };
+  EDIT: "edit",
+  ADDTOCART: "addToCart",
+  ONCART: "onCart",
+};
