@@ -5,7 +5,7 @@
   background-color: var(--main-color);
   display: flex;
   justify-content: space-between;
-  padding:5px;
+  padding: 5px;
   align-items: center;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.605);
   z-index: 1;
@@ -39,11 +39,12 @@
   border-bottom: var(--main-color) solid 3px;
 }
 
-.link:hover, .link.activeLink {
+.link:hover,
+.link.activeLink {
   border-bottom: #f7f7f7 solid 3px;
 }
 
-.link:active{
+.link:active {
   border-bottom: #f7f7f7 solid 3px;
 }
 

@@ -3,14 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import entryCss from "../styles/logInAndSignUp.module.css";
 import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
-import { ROUTES } from "../constans/constans";
+import { URL } from "../constans/Url";
+import { ROUTES } from "../constans/Routes";
+import { POST } from "../constans/AxiosPost";
 export default function SignUp({ url }) {
   const valContext = useContext(contextApi);
   const [name, setName] = useState(
-    url === ROUTES.EDIT  ? valContext.userData.name : ""
+    url === URL.EDIT ? valContext.userData.name : ""
   );
   const [lastName, setLastName] = useState(
-    url === ROUTES.EDIT ? valContext.userData.lastName : ""
+    url === URL.EDIT ? valContext.userData.lastName : ""
   );
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -22,12 +24,12 @@ export default function SignUp({ url }) {
       alert("Enter a lastName above 2 charcters");
     } else if (/^\s/.test(userName)) {
       alert("Enter a userName without spaces");
-    } else if (password.length <= 4) {
+    } else if (password.length < 5) {
       alert("Enter a password above 5 charcters");
     } else {
-      if (url !== "edit") {
+      if (url !== URL.EDIT) {
         try {
-          const res = await axios.post("/createUsers", {
+          const res = await axios.post(POST.CREATEUSERS, {
             name: name,
             lastName: lastName,
             userName: userName,
@@ -36,7 +38,7 @@ export default function SignUp({ url }) {
           if (res.data === "exixt") {
             alert("UserName Exixt.");
           } else {
-            nav("/");
+            nav(ROUTES.ENTRY);
           }
         } catch (err) {
           console.log(err);
@@ -50,13 +52,16 @@ export default function SignUp({ url }) {
           password: password,
         };
         try {
-          const res = await axios.post("/editAccount", { userData: userData });
+          const res = await axios.post(POST.EDITACCOUNT, {
+            userData: userData,
+          });
           const data = await res.data;
           if (data === "User not found") {
             alert(data);
           } else {
             alert("Edit complete");
-            nav('/');
+            nav(ROUTES.ENTRY);
+            valContext.userDisconnect();
           }
         } catch (error) {
           console.log(error);
@@ -68,7 +73,7 @@ export default function SignUp({ url }) {
     <div className={entryCss.container}>
       <form className={entryCss.form} onSubmit={(e) => e.preventDefault()}>
         <h1 className={entryCss.title}>
-          {url === "edit" ? "Edit Account" : "Sign Up"}
+          {url === URL.EDIT ? "Edit Account" : "Sign Up"}
         </h1>
         <div className={entryCss.inputContainer}>
           <input
@@ -108,11 +113,11 @@ export default function SignUp({ url }) {
         </div>
 
         <button className={entryCss.btn} onClick={valid}>
-          {url === "edit" ? "Edit Account" : "Create Account"}
+          {url === ROUTES.EDIT ? "Edit Account" : "Create Account"}
         </button>
-        {url !== "edit" && (
-          <Link to={"/"} className={entryCss.link}>
-            To Log In
+        {url !== ROUTES.EDIT && (
+          <Link to={ROUTES.ENTRY} className={entryCss.link}>
+            Go To Log In
           </Link>
         )}
       </form>

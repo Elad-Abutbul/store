@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import productsCss from "../styles/products.module.css";
-export default function ImgType({ val }) {
+import { ROUTES } from "../constans/Routes";
+export default function ImgType({ valProductImg }) {
   return (
     <>
-      <Link to={val.link}>
+      <Link to={`${ROUTES.ELADJEWELRY}/${valProductImg.link}`}>
         <div className={productsCss.divImg}>
-          <img className={productsCss.img} src={val.src} alt={val.alt} />
-          <h3 className={productsCss.h3Slide}>{val.button}</h3>
+          <img
+            className={productsCss.img}
+            src={valProductImg.src}
+            alt={valProductImg.alt}
+          />
+          <h3 className={productsCss.h3Slide}>{valProductImg.button}</h3>
         </div>
       </Link>
     </>

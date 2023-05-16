@@ -1,50 +1,48 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import productCss from "../styles/product.module.css";
-import axios from "../axiosConfig";
-
 import { contextApi } from "../contextApi";
-import { URL } from "../constans/constans";
+import { URL } from "../constans/Url";
+import useAddToCart from "../outSideFunction/functionProduct/AddToCartPost";
+import useRadio from "../outSideFunction/functionProduct/UseRadio";
+import useDeleteItem from "../outSideFunction/functionProduct/DeleteIteam";
 
 export default function Product({
   indexProduct,
   url,
   valProduct,
-  falseRaioAfterPay,
-  deleteIteam,
+  falseRadioAfterPay,
   sum,
 }) {
-  const [radio, setRadio] = useState(false);
+  const { ifRadioTrue, radio, setRadio } = useRadio();
+  const { deleteItem } = useDeleteItem();
+  const { addToCartFunc } = useAddToCart();
   const valContext = useContext(contextApi);
-  const addToCart = async () => {
-    const res = await axios.post("/addToCart", {
-      productId: valProduct._id,
-      userNameId: valContext.userData._id,
-    });
-    const data = await res.data;
-    if (data === "product added to cart!") {
-      alert(data);
-      valContext.addToCart(valProduct);
-    } else {
-      console.log("cannot added to cart");
-    }
+
+  const addToCart = () => {
+    addToCartFunc(valProduct._id, valContext, valProduct);
   };
+
   useEffect(() => {
-    if (radio) {
-      valContext.addProductToSelectedIteamToPay(valProduct, indexProduct);
-    } else {
-      valContext.deleteProductFromSelectedIteamToPay(valProduct, indexProduct);
-    }
+    ifRadioTrue(valContext, valProduct, indexProduct);
   }, [radio]);
+
+  const deleteIteam = () => {
+    deleteItem(valContext, valProduct._id, valProduct, indexProduct);
+    setRadio(false);
+    sum();
+  };
+
   useEffect(() => {
     setRadio(false);
-  }, [falseRaioAfterPay]);
+  }, [falseRadioAfterPay]);
+
   return (
     <div className={productCss.singleProduct}>
       {url === URL.ONCART && (
         <h1
           className={productCss.plusOrX}
           id={productCss.delete}
-          onClick={() => deleteIteam(valProduct._id, indexProduct)}
+          onClick={() => deleteIteam()}
         >
           ×
         </h1>
@@ -63,11 +61,14 @@ export default function Product({
         </h1>
       )}
       {url === URL.ONCART && (
-        <input
-          type="radio"
-          checked={valProduct.choose}
-          onClick={() => setRadio(!radio)}
-        />
+        <div>
+          <label>pay</label>
+          <input
+            type="radio"
+            checked={radio}
+            onClick={() => setRadio(!radio)}
+          />
+        </div>
       )}
     </div>
   );

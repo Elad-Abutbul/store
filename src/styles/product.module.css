@@ -1,45 +1,43 @@
-.singleProduct{
-     display: flex;
-     flex-direction: row;
-     justify-content: space-around;
-     background-color: white;
-     margin: auto;
-     width: 85%;
-     margin-top: 20px;
-     border-radius: 10px;
-     box-shadow: 3px 5px 10px #b3b3b3cc;
+.singleProduct {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: white;
+  margin: auto;
+  width: 85%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 5px 10px #b3b3b3cc;
 
   align-items: center;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
-.singleProduct:hover{
-     transform: scale(1.01); 
-     z-index: -1;
-
+.singleProduct:hover {
+  transform: scale(1.01);
+  z-index: -1;
 }
-.img{
-     width: 20%;
-     height: 10%;
-     transition: all .2s ease-in-out;
-
+.img {
+  width: 20%;
+  height: 10%;
+  transition: all 0.2s ease-in-out;
 }
-.img:hover{
-     transform: scale(1.4); 
-
+.img:hover {
+  transform: scale(1.4);
 }
-.plusOrX{
-     cursor: pointer;
-     transition: all .2s ease-in-out;
+.plusOrX {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-.plusOrX:hover{
-     transform: scale(1.4); 
+.plusOrX:hover {
+  transform: scale(1.4);
 }
-#delete:hover{
-     color: red;
+#delete:hover {
+  color: red;
 }
-.h1Type{
-     margin-top: 12vh;
+.h1Type {
+  margin-top: 12vh;
 }
-.h2{
-     font-weight: 400
+.h2 {
+  font-weight: 400;
 }
