@@ -32,7 +32,8 @@ export default function SignUp({ url }) {
       alert("Enter a password above 5 charcters");
     } else {
       if (url !== URL.EDIT) {
-        createAccount(name, lastName, userName, password, nav);
+        await createAccount(name, lastName, userName, password, nav);
+        valContext.getAllUserRank();
       } else {
         editAccount(valContext, name, lastName, userName, password, nav);
       }

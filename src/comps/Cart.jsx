@@ -3,9 +3,10 @@ import { contextApi } from "../contextApi";
 import Product from "./Product";
 import cartCss from "../styles/cart.module.css";
 import { URL } from "../constans/Url";
+
 import usePayment from "../outSideFunction/functionCart/Payment";
 import { CART } from "../constans/hardCoded/cart/CartHardCoded";
-
+import { RANKSUSER } from "../constans/RanksUser";
 export default function Cart() {
   const valContext = useContext(contextApi);
   const [sum, setSum] = useState(0);
@@ -15,7 +16,10 @@ export default function Cart() {
   const TotalPurchases = () => {
     let total = 0;
     valContext.selectedIteamToPay.forEach((product) => {
-      return (total += product.price);
+      return (total +=
+        valContext.userData.rank === RANKSUSER.CEO
+          ? product.price * 0.5
+          : product.price);
     });
     setSum(total);
   };

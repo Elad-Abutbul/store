@@ -1,26 +1,36 @@
+import { useContext, useState } from "react";
 import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
 import { ROUTES } from "../../constans/Routes";
+import { contextApi } from "../../contextApi";
 
 const useDeleteUser = () => {
-  const deleteUser = async (valContext, nav) => {
+  const valContext = useContext(contextApi);
+  const [userName, setUserName] = useState("");
+  debugger;
+  const deleteUser = async (valUserName, nav) => {
     try {
-      const res = await axios.delete(POST.DELETEUSER, {
-        userId: valContext.userData._id,
+      const res = await axios.post(POST.DELETEUSER, {
+        userName: userName,
       });
       const data = res.data;
       if (data === "delete the user") {
         alert(data);
-        valContext.userDisconnect();
-        nav(ROUTES.ENTRY);
+        if (nav !== undefined) {
+          valContext.userDisconnect();
+          nav(ROUTES.ENTRY);
+        } else {
+          valContext.deleteFromRankUser(valUserName);
+          setUserName("");
+        }
       } else {
-        console.error(data);
+        alert(data);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { deleteUser };
+  return { deleteUser, userName, setUserName };
 };
 export default useDeleteUser;

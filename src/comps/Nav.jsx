@@ -5,6 +5,8 @@ import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
 import { NAV } from "../constans/hardCoded/nav/NavHardCoded";
 import { EMPTYSTRING } from "../constans/EmptyString";
+import NavManagement from "./management/comps/NavMng";
+import { RANKSUSER } from "../constans/RanksUser.js";
 
 export default function Nav() {
   const valContext = useContext(contextApi);
@@ -18,7 +20,19 @@ export default function Nav() {
         <Link to={ROUTES.PRODUCTS}>
           <h1 className={navCss.icon}>{NAV.ELAD_JEWELRY_STORE}</h1>
         </Link>
+        <Link to={ROUTES.PRODUCTS}>
+          <img
+            className={navCss.iconPhone}
+            src="https://cdn-user-icons.flaticon.com/102795/102795171/1684862033391.svg?token=exp=1684862934~hmac=96f8071cd1086958c97134a38b780846"
+          />
+        </Link>
         <div className={navCss.nav}>
+          {valContext.userData?.rank === RANKSUSER.CEO && (
+            <NavManagement
+              activeLink={activeLink}
+              handleLinkClick={handleLinkClick}
+            />
+          )}
           <Link
             to={`${ROUTES.PROFILE}/${ROUTES.VIEWPURCHASES}`}
             className={`${navCss.link} ${
@@ -76,8 +90,12 @@ export default function Nav() {
                 : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => {
-              handleLinkClick(ROUTES.ENTRY);
-              valContext.userDisconnect();
+              const loadUserRank = async () => {
+                handleLinkClick(ROUTES.ENTRY);
+                await valContext.getAllUserRank();
+                valContext.userDisconnect();
+              };
+              loadUserRank();
             }}
           >
             {NAV.LOGOUT}

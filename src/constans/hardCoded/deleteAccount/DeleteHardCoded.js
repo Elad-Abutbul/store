@@ -1,5 +1,5 @@
 export const DELETE = {
-     DELETE: 'delete',
+     DELETE: 'Delete Account',
      AREYOUSURE: 'ARE YOU SURE?',
      YES: 'Yes',
      NO:'No'

@@ -2,30 +2,35 @@ import { useState } from "react";
 import axios from "../../axiosConfig";
 import { ROUTES } from "../../constans/Routes";
 import { TYPEIMG } from "../../constans/hardCoded/app/TypeproductImg";
-import { PRODUCTS } from "../../constans/hardCoded/app/AxiosGetOnStart";
+import { GET } from "../../constans/hardCoded/app/AxiosGetOnStart";
 const useProductData = () => {
+  const [allProducts, setAllProducts] = useState([]);
   const [ringProducts, setRingProducts] = useState([]);
   const [braceletProducts, setBraceletProducts] = useState([]);
   const [necklaceProducts, setNecklaceProducts] = useState([]);
   const [earringProducts, setEarringProducts] = useState([]);
   const [typeProductImg, setTypeProductImg] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const getAllProducts = async () => {
     setLoading(true);
     try {
-      const resRing = await axios.get(PRODUCTS.ALLRINGS);
+      const resAllProduct = await axios.get(GET.GETALLPRODUCTS);
+      const dataAllProducts = resAllProduct.data;
+      setAllProducts(dataAllProducts);
+
+      const resRing = await axios.get(GET.ALLRINGS);
       const dataRing = resRing.data;
       setRingProducts(dataRing);
-      const resBracelet = await axios.get(PRODUCTS.ALLBRACELETS);
+
+      const resBracelet = await axios.get(GET.ALLBRACELETS);
       const dataBracelet = resBracelet.data;
       setBraceletProducts(dataBracelet);
 
-      const resNecklace = await axios.get(PRODUCTS.ALLNECKLACES);
+      const resNecklace = await axios.get(GET.ALLNECKLACES);
       const dataNecklace = resNecklace.data;
       setNecklaceProducts(dataNecklace);
 
-      const resEarring = await axios.get(PRODUCTS.ALLEARIINGS);
+      const resEarring = await axios.get(GET.ALLEARIINGS);
       const dataEarring = resEarring.data;
       setEarringProducts(dataEarring);
 
@@ -70,6 +75,8 @@ const useProductData = () => {
     typeProductImg,
     loading,
     getAllProducts,
+    allProducts,
+    setAllProducts,
   };
 };
 

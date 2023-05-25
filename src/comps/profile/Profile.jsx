@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import profileCss from "../../styles/profile.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { ROUTES } from "../../constans/Routes";
 import { EMPTYSTRING } from "../../constans/EmptyString";
 import { PROFILE } from "../../constans/hardCoded/profile/ProfileHardCoded";
+import { contextApi } from "../../contextApi";
+import { RANKSUSER } from "../../constans/RanksUser";
 
 export default function Profile() {
+  const valContext = useContext(contextApi);
   const [selectedComponent, setSelectedComponent] = useState(
     ROUTES.VIEWPURCHASES
   );
@@ -43,18 +46,33 @@ export default function Profile() {
               {PROFILE.VIEW_PURCHASES}
             </button>
           </Link>
-          <Link to={ROUTES.DELETEACCOUNT}>
-            <button
-              className={`${profileCss.btn} ${
-                selectedComponent === ROUTES.DELETEACCOUNT
-                  ? profileCss.active
-                  : EMPTYSTRING.EMPTYSTRING
-              }`}
-              onClick={() => handleSelectComponent(ROUTES.DELETEACCOUNT)}
-            >
-              {PROFILE.DELETE_ACCOUNT}
-            </button>
-          </Link>
+          {valContext.userData.rank !== RANKSUSER.CEO ? (
+            <Link to={ROUTES.DELETEACCOUNT}>
+              <button
+                className={`${profileCss.btn} ${
+                  selectedComponent === ROUTES.DELETEACCOUNT
+                    ? profileCss.active
+                    : EMPTYSTRING.EMPTYSTRING
+                }`}
+                onClick={() => handleSelectComponent(ROUTES.DELETEACCOUNT)}
+              >
+                {PROFILE.DELETE_ACCOUNT}
+              </button>
+            </Link>
+          ) : (
+            <Link to={PROFILE.DATA.toLowerCase()}>
+              <button
+                className={`${profileCss.btn} ${
+                  selectedComponent === PROFILE.DATA.toLowerCase()
+                    ? profileCss.active
+                    : EMPTYSTRING.EMPTYSTRING
+                }`}
+                onClick={() => handleSelectComponent(PROFILE.DATA.toLowerCase())}
+              >
+                {PROFILE.DATA}
+              </button>
+            </Link>
+          )}
         </div>
         <div id={profileCss.outlet}>
           <Outlet />

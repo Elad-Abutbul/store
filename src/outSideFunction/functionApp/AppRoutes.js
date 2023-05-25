@@ -15,9 +15,12 @@ import SignUp from "../../comps/SignUp";
 import LogIn from "../../comps/LogIn";
 import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
-import { LOADING } from "../../constans/hardCoded/appRoutes/Loading";
-import { NOTFOUND } from "../../constans/hardCoded/appRoutes/NotFound";
+import { LOADING } from "../../constans/hardCoded/appRoutes/LoadingHardCoded";
+import { NOTFOUND } from "../../constans/hardCoded/appRoutes/NotFoundHardCoded";
 import { contextApi } from "../../contextApi";
+import Users from "../../comps/management/comps/Users";
+import Data from "../../comps/management/comps/profileMng/Data";
+import { RANKSUSER } from "../../constans/RanksUser";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
   return (
@@ -37,7 +40,15 @@ export default function AppRoutes() {
             <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
             <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
             <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+            <Route path="data" element={<Data />} />
+
           </Route>
+
+          {valContext.userData?.rank === RANKSUSER.CEO && (
+            <>
+              <Route path="users" element={<Users />} />
+            </>
+          )}
         </Route>
         <Route
           path={ROUTES.ENTRY}

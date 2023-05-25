@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import { contextApi } from "../../../contextApi";
 import { useNavigate } from "react-router-dom";
 import deleteCss from "../../../styles/deleteAccount.module.css";
 import { DELETE } from "../../../constans/hardCoded/deleteAccount/DeleteHardCoded";
 import useDeleteUser from "../../../outSideFunction/functionDeleteUser/DeleteUser";
+import { useContext } from "react";
+import { contextApi } from "../../../contextApi";
 
 export default function DeleteAlert({ changeCond }) {
   const valContext = useContext(contextApi);
   const nav = useNavigate();
-  const {deleteUser}=useDeleteUser()
-  const deleteTheUser =  () => {
-    deleteUser(valContext,nav)
+  const { deleteUser } = useDeleteUser();
+  const deleteTheUser = () => {
+    deleteUser(valContext.userData.userName, nav);
   };
   return (
     <div>
@@ -26,7 +26,7 @@ export default function DeleteAlert({ changeCond }) {
           {DELETE.YES}
         </button>
         <button onClick={changeCond} className={deleteCss.deleteOrNotDelete}>
-        {DELETE.NO}
+          {DELETE.NO}
         </button>
       </div>
     </div>

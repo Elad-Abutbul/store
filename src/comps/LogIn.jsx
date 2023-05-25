@@ -16,21 +16,22 @@ export default function LogIn() {
     if (!userName || !password) {
       alert(LOGIN.FIELDSAREMISSING);
     } else {
-      try {
-        const res = await axios.post(POST.LOGIN, {
-          userName: userName,
-          password: password,
-        });
-        const data = res.data;
-        if (data.msg === "success") {
-          nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
-          valContext.userConnect(data.user);
-        } else {
-          alert(data);
+        try {
+          const res = await axios.post(POST.LOGIN, {
+            userName: userName,
+            password: password,
+          });
+          const data = res.data;
+          if (data.msg === "success") {
+            nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
+            valContext.userConnect(data.user);
+          } else {
+            alert(data);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
+      
     }
   };
   return (

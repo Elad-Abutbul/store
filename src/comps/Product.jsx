@@ -6,6 +6,8 @@ import useAddToCart from "../outSideFunction/functionProduct/AddToCartPost";
 import useRadio from "../outSideFunction/functionProduct/UseRadio";
 import useDeleteItem from "../outSideFunction/functionProduct/DeleteIteam";
 import { PRODUCT } from "../constans/hardCoded/product/ProductHardCoded";
+import { RANKSUSER } from "../constans/RanksUser";
+import { CART } from "../constans/hardCoded/cart/CartHardCoded";
 
 export default function Product({
   indexProduct,
@@ -36,7 +38,7 @@ export default function Product({
   useEffect(() => {
     setRadio(false);
   }, [falseRadioAfterPay]);
-
+  const rank = valContext.userData.rank;
   return (
     <div className={productCss.singleProduct}>
       {url === URL.ONCART && (
@@ -48,9 +50,19 @@ export default function Product({
           {PRODUCT.X}
         </h1>
       )}
+
       <h2 className={productCss.h2}>{valProduct.name}</h2>
       <h2 className={productCss.h2}>{valProduct.description}</h2>
-      <h2 className={productCss.h2}>{valProduct.price}₪ </h2>
+      <h2 className={productCss.h2}>
+        {rank === RANKSUSER.CEO ? (
+          <>
+            {valProduct.price * 0.5}
+            {CART.SHEKEL} {PRODUCT.CONSTPRISE}{" "}
+          </>
+        ) : (
+          `${valProduct.price} ${CART.SHEKEL}`
+        )}
+      </h2>
       <img
         src={valProduct.image}
         className={productCss.img}
@@ -63,7 +75,7 @@ export default function Product({
       )}
       {url === URL.ONCART && (
         <div>
-          <label>{PRODUCT.SELECTPRODUCT}</label>
+          <label>{PRODUCT.SELECTTOPAY}</label>
           <input
             type="radio"
             checked={radio}
