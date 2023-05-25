@@ -6,11 +6,13 @@ import usePaymentCart from "./outSideFunction/functionApp/PaymentCart";
 import AppRoutes from "./outSideFunction/functionApp/AppRoutes";
 import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelectedPay";
 import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
+import useRankUser from "./outSideFunction/functionMng/GetUserRank";
 function App() {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
   const { deleteProduct } = useDeleteProductFromPay();
   const { addProduct } = useAddProductToPay();
+  const { getAllUserRank, rankUser, setRankUser } = useRankUser();
   const {
     ringProducts,
     braceletProducts,
@@ -19,9 +21,12 @@ function App() {
     typeProductImg,
     loading,
     getAllProducts,
+    allProducts,
+    setAllProducts,
   } = useProductData();
   useEffect(() => {
     getAllProducts(); // Call the getAllProducts function
+    getAllUserRank();
   }, []);
   const userDisconnect = () => {
     setSelectedIteamToPay([]);
@@ -114,33 +119,44 @@ function App() {
     );
     setSelectedIteamToPay([...filterArr]);
   };
+  const deleteFromRankUser = (userName) => {
+    const indexUser = rankUser.findIndex((val) => val.userName === userName);
+    rankUser.splice(indexUser, 1);
+    setRankUser([...rankUser]);
+  };
   return (
     <div>
-        <contextApi.Provider
-          value={{
-            userData,
-            setUserData,
-            loading,
-            ringProducts,
-            earringProducts,
-            braceletProducts,
-            necklaceProducts,
-            typeProductImg,
-            userConnect,
-            userDisconnect,
-            addToCart,
-            deleteFromCart,
-            paymentCart,
-            selectedIteamToPay,
-            payProductFromSelectedIteamToPayUi,
-            setSelectedIteamToPay,
-            addProductToSelectedIteamToPay,
-            deleteProductFromSelectedIteamToPay,
-            deleteProductFromSelectedIteamToPayUi,
-          }}
-        >
-          <AppRoutes />
-        </contextApi.Provider>
+      <contextApi.Provider
+        value={{
+          userData,
+          setUserData,
+          loading,
+          ringProducts,
+          earringProducts,
+          braceletProducts,
+          necklaceProducts,
+          typeProductImg,
+          userConnect,
+          userDisconnect,
+          addToCart,
+          deleteFromCart,
+          paymentCart,
+          selectedIteamToPay,
+          payProductFromSelectedIteamToPayUi,
+          setSelectedIteamToPay,
+          addProductToSelectedIteamToPay,
+          deleteProductFromSelectedIteamToPay,
+          deleteProductFromSelectedIteamToPayUi,
+          rankUser,
+          setRankUser,
+          getAllUserRank,
+          deleteFromRankUser,
+          allProducts,
+          setAllProducts,
+        }}
+      >
+        <AppRoutes />
+      </contextApi.Provider>
     </div>
   );
 }

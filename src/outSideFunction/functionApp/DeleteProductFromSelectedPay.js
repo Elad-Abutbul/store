@@ -12,7 +12,7 @@ const useDeleteProductFromPay = () => {
         indexProduct: indexProduct,
         userId: userData._id,
       });
-      const data = await res.data;
+      const data = res.data;
       if (data === "product choose switch to false") {
         valProduct.choose = false;
         setSelectedIteamToPay([...selectedIteamToPay]);

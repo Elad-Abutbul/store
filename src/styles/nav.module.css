@@ -20,7 +20,9 @@
   margin: 0;
   padding-left: 10px;
 }
-
+.iconPhone {
+  display: none;
+}
 .nav {
   display: flex;
 }
@@ -31,7 +33,7 @@
   align-items: center;
   margin-right: 20px;
   font-size: large;
-  color: #f7f7f7;
+  color: var(--active-link);
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -41,11 +43,7 @@
 
 .link:hover,
 .link.activeLink {
-  border-bottom: #f7f7f7 solid 3px;
-}
-
-.link:active {
-  border-bottom: #f7f7f7 solid 3px;
+  border-bottom: var(--active-link) solid 3px;
 }
 
 #cartLength {
@@ -54,7 +52,7 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--active-link);
   color: var(--main-color);
   display: inline;
   display: flex;
@@ -62,4 +60,41 @@
   align-items: center;
   margin-left: 5px;
   margin-top: 5px;
+}
+
+/* Media Query for 1100px */
+@media (max-width: 1100px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .link {
+    font-size: medium;
+    padding: 8px 15px;
+  }
+
+  #cartLength {
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
+    margin-left: 3px;
+    margin-top: 3px;
+  }
+}
+@media (max-width: 950px) {
+  .iconPhone {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .icon {
+    display: none;
+    float: left;
+    
+  }
 }

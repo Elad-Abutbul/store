@@ -4,7 +4,6 @@ import productsCss from "../styles/products.module.css";
 import { ROUTES } from "../constans/Routes";
 export default function ImgType({ valProductImg }) {
   return (
-    <>
       <Link to={`${ROUTES.ELADJEWELRY}/${valProductImg.link}`}>
         <div className={productsCss.divImg}>
           <img
@@ -12,9 +11,8 @@ export default function ImgType({ valProductImg }) {
             src={valProductImg.src}
             alt={valProductImg.alt}
           />
-          <h3 className={productsCss.h3Slide}>{valProductImg.button}</h3>
+          <h3 className={productsCss.h3}>{valProductImg.button}</h3>
         </div>
       </Link>
-    </>
   );
 }

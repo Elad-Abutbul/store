@@ -1,21 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import entryCss from "../styles/logInAndSignUp.module.css";
-import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
 import { URL } from "../constans/Url";
 import { ROUTES } from "../constans/Routes";
-import { POST } from "../constans/AxiosPost";
+import useCreateAccount from "../outSideFunction/functionSignUp/CreateAccount";
+import useEditAccount from "../outSideFunction/functionEdit/EditAccount";
+import { SIGN_AND_EDIT } from "../constans/hardCoded/signUpAndEdit/SignAndEditHardCoded";
+import { EMPTYSTRING } from "../constans/EmptyString";
 export default function SignUp({ url }) {
   const valContext = useContext(contextApi);
+  const { createAccount } = useCreateAccount();
+  const { editAccount } = useEditAccount();
   const [name, setName] = useState(
-    url === URL.EDIT ? valContext.userData.name : ""
+    url === URL.EDIT ? valContext.userData.name : EMPTYSTRING.EMPTYSTRING
   );
   const [lastName, setLastName] = useState(
-    url === URL.EDIT ? valContext.userData.lastName : ""
+    url === URL.EDIT ? valContext.userData.lastName : EMPTYSTRING.EMPTYSTRING
   );
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState(EMPTYSTRING.EMPTYSTRING);
+  const [password, setPassword] = useState(EMPTYSTRING.EMPTYSTRING);
   const nav = useNavigate();
   const valid = async () => {
     if (name.length < 2) {
@@ -28,44 +32,10 @@ export default function SignUp({ url }) {
       alert("Enter a password above 5 charcters");
     } else {
       if (url !== URL.EDIT) {
-        try {
-          const res = await axios.post(POST.CREATEUSERS, {
-            name: name,
-            lastName: lastName,
-            userName: userName,
-            password: password,
-          });
-          if (res.data === "exixt") {
-            alert("UserName Exixt.");
-          } else {
-            nav(ROUTES.ENTRY);
-          }
-        } catch (err) {
-          console.log(err);
-        }
+        await createAccount(name, lastName, userName, password, nav);
+        valContext.getAllUserRank();
       } else {
-        const userData = {
-          userId: valContext.userData._id,
-          name: name,
-          lastName: lastName,
-          userName: userName,
-          password: password,
-        };
-        try {
-          const res = await axios.post(POST.EDITACCOUNT, {
-            userData: userData,
-          });
-          const data = await res.data;
-          if (data === "User not found") {
-            alert(data);
-          } else {
-            alert("Edit complete");
-            nav(ROUTES.ENTRY);
-            valContext.userDisconnect();
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        editAccount(valContext, name, lastName, userName, password, nav);
       }
     }
   };
@@ -73,7 +43,7 @@ export default function SignUp({ url }) {
     <div className={entryCss.container}>
       <form className={entryCss.form} onSubmit={(e) => e.preventDefault()}>
         <h1 className={entryCss.title}>
-          {url === URL.EDIT ? "Edit Account" : "Sign Up"}
+          {url === URL.EDIT ? SIGN_AND_EDIT.EDITACCOUNT : SIGN_AND_EDIT.SIGNUP}
         </h1>
         <div className={entryCss.inputContainer}>
           <input
@@ -95,7 +65,6 @@ export default function SignUp({ url }) {
         </div>
         <div className={entryCss.inputContainer}>
           <input
-            value={userName}
             className={entryCss.input}
             type="text"
             placeholder="Enter UserName.."
@@ -104,7 +73,6 @@ export default function SignUp({ url }) {
         </div>
         <div className={entryCss.inputContainer}>
           <input
-            value={password}
             className={entryCss.input}
             type="password"
             placeholder="Enter Password.."
@@ -113,11 +81,13 @@ export default function SignUp({ url }) {
         </div>
 
         <button className={entryCss.btn} onClick={valid}>
-          {url === ROUTES.EDIT ? "Edit Account" : "Create Account"}
+          {url === ROUTES.EDIT
+            ? SIGN_AND_EDIT.EDITACCOUNT
+            : SIGN_AND_EDIT.CREATACCOUNT}
         </button>
         {url !== ROUTES.EDIT && (
           <Link to={ROUTES.ENTRY} className={entryCss.link}>
-            Go To Log In
+            {SIGN_AND_EDIT.GOTOLOGIN}
           </Link>
         )}
       </form>

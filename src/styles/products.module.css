@@ -1,6 +1,5 @@
 .h1Name {
   margin-left: 10px;
-
   margin-top: 14vh;
   font-weight: 300;
   color: var(--main-color);
@@ -20,7 +19,7 @@
 a {
   text-decoration: none;
 }
-.h3Slide {
+.h3 {
   margin-top: -20%;
   color: var(--main-color);
   cursor: pointer;

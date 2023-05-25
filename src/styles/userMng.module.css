@@ -1,0 +1,26 @@
+#table {
+  margin: auto;
+  border: 3px solid var(--main-color);
+  width: 80%;
+  border-collapse: collapse;
+}
+.boxes {
+  border: 3px solid var(--main-color);
+  padding: 10px;
+}
+.X {
+  font-weight: 600;
+}
+.X:hover {
+  color: red;
+}
+.allUsers {
+  margin-top: 14vh;
+  font-weight: 400;
+}
+.mainContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
