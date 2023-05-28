@@ -88,6 +88,11 @@ function App() {
     rankUser.splice(indexUser, 1);
     setRankUser([...rankUser]);
   };
+  const city = (city) => {
+    userData.city.push(city);
+    setUserData({ ...userData });
+    console.log(userData);
+  };
   return (
     <div>
       <contextApi.Provider
@@ -117,6 +122,7 @@ function App() {
           deleteFromRankUser,
           allProducts,
           setAllProducts,
+          city,
         }}
       >
         <AppRoutes />

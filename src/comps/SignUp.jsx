@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import entryCss from "../styles/logInAndSignUp.module.css";
 import { contextApi } from "../contextApi";
 import { URL } from "../constans/Url";
@@ -20,7 +20,10 @@ export default function SignUp({ url }) {
   );
   const [userName, setUserName] = useState(EMPTYSTRING.EMPTYSTRING);
   const [password, setPassword] = useState(EMPTYSTRING.EMPTYSTRING);
-  const nav = useNavigate();
+
+  const [changeCity, setChangeCity] = useState(
+    url === URL.EDIT ? valContext.userData.city[0] : EMPTYSTRING.EMPTYSTRING
+  );
   const valid = async () => {
     if (name.length < 2) {
       alert("Enter a name above 2 charcters");
@@ -30,12 +33,18 @@ export default function SignUp({ url }) {
       alert("Enter a userName without spaces");
     } else if (password.length < 5) {
       alert("Enter a password above 5 charcters");
+    } else if (
+      url === url?.EDIT &&
+      valContext?.userData.city?.length !== 0 &&
+      changeCity !== ""
+    ) {
+      alert("please insert city");
     } else {
       if (url !== URL.EDIT) {
-        await createAccount(name, lastName, userName, password, nav);
+        await createAccount(name, lastName, userName, password);
         valContext.getAllUserRank();
       } else {
-        editAccount(valContext, name, lastName, userName, password, nav);
+        editAccount(name, lastName, userName, password, changeCity);
       }
     }
   };
@@ -79,6 +88,17 @@ export default function SignUp({ url }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {url === URL.EDIT && valContext.userData?.city?.length !== 0 && (
+          <div className={entryCss.inputContainer}>
+            <input
+              className={entryCss.input}
+              type="text"
+              placeholder="Enter City.."
+              value={changeCity}
+              onChange={(e) => setChangeCity(e.target.value)}
+            />
+          </div>
+        )}
 
         <button className={entryCss.btn} onClick={valid}>
           {url === ROUTES.EDIT

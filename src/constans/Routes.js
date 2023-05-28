@@ -16,4 +16,6 @@ export const ROUTES = {
   EDIT: "edit",
   DELETEACCOUNT: "deleteAccount",
   VIEWPURCHASES: "viewPurchases",
+  DATA: "data",
+  USERS: "users",
 };

@@ -7,7 +7,6 @@ import { contextApi } from "../../contextApi";
 const useDeleteUser = () => {
   const valContext = useContext(contextApi);
   const [userName, setUserName] = useState("");
-  debugger;
   const deleteUser = async (valUserName, nav) => {
     try {
       const res = await axios.post(POST.DELETEUSER, {

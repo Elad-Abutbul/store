@@ -26,30 +26,30 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
-          <Route path={ROUTES.PRODUCTS} element={<Products />} />
-          <Route path={ROUTES.RINGS} element={<Rings />} />
-          <Route path={ROUTES.EARRINGS} element={<Earrings />} />
-          <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
-          <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
+        {valContext.userData && (
+          <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
+            <Route path={ROUTES.PRODUCTS} element={<Products />} />
+            <Route path={ROUTES.RINGS} element={<Rings />} />
+            <Route path={ROUTES.EARRINGS} element={<Earrings />} />
+            <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
+            <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
+            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.CART} element={<Cart />} />
 
-          <Route path={ROUTES.SEARCH} element={<Search />} />
-          <Route path={ROUTES.CART} element={<Cart />} />
-
-          <Route path={ROUTES.PROFILE} element={<Profile />}>
-            <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
-            <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
-            <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
-            <Route path="data" element={<Data />} />
-
+            <Route path={ROUTES.PROFILE} element={<Profile />}>
+              <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
+              <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
+              <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+              <Route path={ROUTES.DATA} element={<Data />} />
+            </Route>
+            
+            {valContext.userData?.rank === RANKSUSER.CEO && (
+              <>
+                <Route path={ROUTES.USERS} element={<Users />} />
+              </>
+            )}
           </Route>
-
-          {valContext.userData?.rank === RANKSUSER.CEO && (
-            <>
-              <Route path="users" element={<Users />} />
-            </>
-          )}
-        </Route>
+        )}
         <Route
           path={ROUTES.ENTRY}
           element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
