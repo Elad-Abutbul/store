@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/Routes";
@@ -11,9 +11,20 @@ import { RANKSUSER } from "../constans/RanksUser.js";
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
+  const [cartLengthChanged, setCartLengthChanged] = useState(false);
+
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
+  useEffect(() => {
+    if (valContext.userData?.cart?.length !== 0) {
+      setCartLengthChanged(true);
+      const timer = setTimeout(() => {
+        setCartLengthChanged(false);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [valContext.userData?.cart?.length]);
   return (
     <>
       <nav className={navCss.navbar}>
@@ -77,7 +88,7 @@ export default function Nav() {
           >
             {NAV.CART}
             {valContext.userData.cart?.length !== 0 && (
-              <span id={navCss.cartLength}>
+              <span id={!cartLengthChanged && navCss.cartLength}>
                 {valContext.userData.cart?.length}
               </span>
             )}
