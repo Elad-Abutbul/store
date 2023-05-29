@@ -16,7 +16,7 @@ const useCreateAccount = () => {
         userName: userName,
         password: password,
         rank: rank,
-      });
+      },);
       if (res.data === "UserName exists") {
         alert(res.data);
       } else {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
@@ -7,12 +7,13 @@ import { NAV } from "../constans/hardCoded/nav/NavHardCoded";
 import { EMPTYSTRING } from "../constans/EmptyString";
 import NavManagement from "./management/comps/NavMng";
 import { RANKSUSER } from "../constans/RanksUser.js";
-
+import Cookies from "js-cookie";
+import { JWT } from "../constans/jwtToken";
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
   const [cartLengthChanged, setCartLengthChanged] = useState(false);
-
+  const nav = useNavigate();
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
@@ -101,12 +102,13 @@ export default function Nav() {
                 : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => {
-              const loadUserRank = async () => {
-                handleLinkClick(ROUTES.ENTRY);
-                await valContext.getAllUserRank();
+              const logOut = async () => {
                 valContext.userDisconnect();
+                Cookies.remove(JWT.TOKEN);
+                nav("/");
+                await valContext.getAllUserRank();
               };
-              loadUserRank();
+              logOut();
             }}
           >
             {NAV.LOGOUT}

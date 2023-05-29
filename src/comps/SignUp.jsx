@@ -20,7 +20,6 @@ export default function SignUp({ url }) {
   );
   const [userName, setUserName] = useState(EMPTYSTRING.EMPTYSTRING);
   const [password, setPassword] = useState(EMPTYSTRING.EMPTYSTRING);
-
   const [changeCity, setChangeCity] = useState(
     url === URL.EDIT ? valContext.userData.city[0] : EMPTYSTRING.EMPTYSTRING
   );
@@ -29,7 +28,7 @@ export default function SignUp({ url }) {
       alert("Enter a name above 2 charcters");
     } else if (lastName.length < 2) {
       alert("Enter a lastName above 2 charcters");
-    } else if (/^\s/.test(userName)) {
+    } else if (/^\s/.test(userName) || userName.length < 2) {
       alert("Enter a userName without spaces");
     } else if (password.length < 5) {
       alert("Enter a password above 5 charcters");

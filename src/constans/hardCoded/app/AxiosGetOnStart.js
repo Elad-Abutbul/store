@@ -4,4 +4,5 @@ export const GET = {
   ALLNECKLACES: "/allProducts/Necklace",
   ALLEARIINGS: "/allProducts/Earring",
   GETALLPRODUCTS: "/allProducts",
+  GETSUM: "/sumAllPurchases",
 };

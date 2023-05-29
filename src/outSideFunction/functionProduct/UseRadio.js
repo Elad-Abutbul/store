@@ -6,7 +6,7 @@ const useRadio = () => {
   const checkRadio = (valContext, valProduct, indexProduct) => {
     if (radio) {
       valContext.addProductToSelectedIteamToPay(valProduct, indexProduct);
-    } else if (valContext.userData.cart.length !== 0) {
+    } else if (valContext.userData.cart?.length !== 0) {
       valContext.deleteProductFromSelectedIteamToPay(valProduct, indexProduct);
     }
   };

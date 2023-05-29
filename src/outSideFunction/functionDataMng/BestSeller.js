@@ -5,9 +5,9 @@ const useBestSeller = () => {
   const valContext = useContext(contextApi);
   let countArr = [];
   const bestSeller = () => {
-    valContext.rankUser.map((user) =>
-      user.historyOfCart.map((historyCart) =>
-        valContext.allProducts.map((product) => {
+    valContext.rankUser.forEach((user) =>
+      user.historyOfCart.forEach((historyCart) =>
+        valContext.allProducts.forEach((product) => {
           if (historyCart.name === product.name) {
             let indexCount = countArr.findIndex(
               (item) => item.name === historyCart.name

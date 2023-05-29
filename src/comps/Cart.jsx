@@ -3,7 +3,6 @@ import { contextApi } from "../contextApi";
 import Product from "./Product";
 import cartCss from "../styles/cart.module.css";
 import { URL } from "../constans/Url";
-
 import usePayment from "../outSideFunction/functionCart/Payment";
 import { CART } from "../constans/hardCoded/cart/CartHardCoded";
 import { RANKSUSER } from "../constans/RanksUser";
@@ -41,7 +40,7 @@ export default function Cart() {
   };
   return (
     <div>
-      {showChooseCity? (
+      {showChooseCity ? (
         <ChooseCity setShowChooseCity={setShowChooseCity} />
       ) : (
         <>

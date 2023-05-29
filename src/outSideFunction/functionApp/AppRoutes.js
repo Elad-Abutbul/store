@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import Profile from "../../comps/profile/Profile";
 import ViewPurchases from "../../comps/profile/comps/ViewPurchases";
 import DeleteAccount from "../../comps/profile/comps/DeleteAccount";
@@ -16,17 +16,19 @@ import LogIn from "../../comps/LogIn";
 import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
 import { LOADING } from "../../constans/hardCoded/appRoutes/LoadingHardCoded";
-import { NOTFOUND } from "../../constans/hardCoded/appRoutes/NotFoundHardCoded";
 import { contextApi } from "../../contextApi";
 import Users from "../../comps/management/comps/Users";
 import Data from "../../comps/management/comps/profileMng/Data";
 import { RANKSUSER } from "../../constans/RanksUser";
+import Cookies from "js-cookie";
+import { JWT } from "../../constans/jwtToken";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
+
   return (
     <BrowserRouter>
       <Routes>
-        {valContext.userData && (
+        {Cookies.get(JWT.TOKEN) ? (
           <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
             <Route path={ROUTES.PRODUCTS} element={<Products />} />
             <Route path={ROUTES.RINGS} element={<Rings />} />
@@ -42,23 +44,21 @@ export default function AppRoutes() {
               <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
               <Route path={ROUTES.DATA} element={<Data />} />
             </Route>
-            
+
             {valContext.userData?.rank === RANKSUSER.CEO && (
               <>
                 <Route path={ROUTES.USERS} element={<Users />} />
               </>
             )}
           </Route>
+        ) : (
+          <Route path={ROUTES.ENTRY} element={<LogIn />} />
         )}
         <Route
           path={ROUTES.ENTRY}
           element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
         />
         <Route path={ROUTES.SIGNUP} element={<SignUp />} />
-        <Route
-          path={ROUTES.PAGENOTFOUND}
-          element={<h2>{NOTFOUND.NOTFOUND}</h2>}
-        />
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,7 @@
 export const ROUTES = {
-  ENTRY: "/",
+  ENTRY: "*",
   LOGIN: "/logIn",
   SIGNUP: "/signUp",
-  PAGENOTFOUND: "*",
   ELADJEWELRY: `/elad's_jewelry`,
   PRODUCTS: "products",
   RINGS: "rings",

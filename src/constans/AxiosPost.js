@@ -9,4 +9,5 @@ export const POST = {
   DELETEUSER: "/user/deleteUser",
   SEARCH_BY_USERNAME: "/user/searchByUserName",
   SEACH_BY_NAME: "/user/searchByNameViewPurchases",
+  CITY: "/user/city",
 };

@@ -7,12 +7,15 @@ import AppRoutes from "./outSideFunction/functionApp/AppRoutes";
 import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelectedPay";
 import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
 import useRankUser from "./outSideFunction/functionMng/GetUserRank";
+import useSumPurchases from "./outSideFunction/functionApp/getSumPurchases";
 function App() {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
   const { deleteProduct } = useDeleteProductFromPay();
   const { addProduct } = useAddProductToPay();
   const { getAllUserRank, rankUser, setRankUser } = useRankUser();
+  const { getSumPurchases } = useSumPurchases();
+  const [sumAllPurchases, setSumAllPurchases] = useState(0);
   const {
     ringProducts,
     braceletProducts,
@@ -27,6 +30,7 @@ function App() {
   useEffect(() => {
     getAllProducts(); // Call the getAllProducts function
     getAllUserRank();
+    getSumPurchases(setSumAllPurchases);
   }, []);
   const userDisconnect = () => {
     setSelectedIteamToPay([]);
@@ -73,7 +77,6 @@ function App() {
     }
     deleteProductFromSelectedIteamToPayUi();
   };
-
   const payProductFromSelectedIteamToPayUi = () => {
     setSelectedIteamToPay([]);
   };
@@ -91,7 +94,6 @@ function App() {
   const city = (city) => {
     userData.city.push(city);
     setUserData({ ...userData });
-    console.log(userData);
   };
   return (
     <div>
@@ -123,6 +125,8 @@ function App() {
           allProducts,
           setAllProducts,
           city,
+          sumAllPurchases,
+          getSumPurchases
         }}
       >
         <AppRoutes />

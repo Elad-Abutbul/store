@@ -22,7 +22,7 @@ export default function Profile() {
   const [temp, setTemp] = useState("");
   const [weatherDesc, setWeatherDesc] = useState("");
   useEffect(() => {
-    if (valContext.userData.city.length !== 0) {
+    if (valContext.userData?.city?.length !== 0) {
       const apiWeather = async () => {
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${valContext.userData.city[0]}&APPID=8bbe2224a732eb2a389b79953a4a0ffd&units=metric`;
         const res = await axios.get(url);
