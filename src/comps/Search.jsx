@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axiosConfig";
 import Product from "./Product";
 import searchCss from "../styles/search.module.css";
 import { URL } from "../constans/Url";
-import { POST } from "../constans/AxiosPost";
+
 import useSearch from "../outSideFunction/functionSearch/SearchInProducts";
 
 export default function Search() {

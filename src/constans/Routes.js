@@ -1,8 +1,7 @@
 export const ROUTES = {
-  ENTRY: "/",
+  ENTRY: "*",
   LOGIN: "/logIn",
   SIGNUP: "/signUp",
-  PAGENOTFOUND: "*",
   ELADJEWELRY: `/elad's_jewelry`,
   PRODUCTS: "products",
   RINGS: "rings",
@@ -16,4 +15,6 @@ export const ROUTES = {
   EDIT: "edit",
   DELETEACCOUNT: "deleteAccount",
   VIEWPURCHASES: "viewPurchases",
+  DATA: "data",
+  USERS: "users",
 };

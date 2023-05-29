@@ -26,15 +26,14 @@ export default function Data() {
     let sortCount = countArr.sort((a, b) => b.count - a.count);
     bestProductDB(sortCount, setBestProduct);
   });
-
   return (
     <div>
       <h3>
-        {USERMNG.ALL_PURCHASES}: {sumAll}
+        {USERMNG.ALL_PURCHASES}: {valContext.sumAllPurchases}
         {CART.SHEKEL}
         <div>
           <h4>{DATA.BEST_SELLER}</h4>
-          {bestProduct.map((valProduct) => {
+          {bestProduct?.map((valProduct) => {
             return <Product valProduct={valProduct} />;
           })}
         </div>

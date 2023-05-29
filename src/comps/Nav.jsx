@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import navCss from "../styles/nav.module.css";
 import { ROUTES } from "../constans/Routes";
 import { contextApi } from "../contextApi";
@@ -7,13 +7,25 @@ import { NAV } from "../constans/hardCoded/nav/NavHardCoded";
 import { EMPTYSTRING } from "../constans/EmptyString";
 import NavManagement from "./management/comps/NavMng";
 import { RANKSUSER } from "../constans/RanksUser.js";
-
+import Cookies from "js-cookie";
+import { JWT } from "../constans/jwtToken";
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
+  const [cartLengthChanged, setCartLengthChanged] = useState(false);
+  const nav = useNavigate();
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
+  useEffect(() => {
+    if (valContext.userData?.cart?.length !== 0) {
+      setCartLengthChanged(true);
+      const timer = setTimeout(() => {
+        setCartLengthChanged(false);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [valContext.userData?.cart?.length]);
   return (
     <>
       <nav className={navCss.navbar}>
@@ -77,7 +89,7 @@ export default function Nav() {
           >
             {NAV.CART}
             {valContext.userData.cart?.length !== 0 && (
-              <span id={navCss.cartLength}>
+              <span id={!cartLengthChanged && navCss.cartLength}>
                 {valContext.userData.cart?.length}
               </span>
             )}
@@ -90,12 +102,13 @@ export default function Nav() {
                 : EMPTYSTRING.EMPTYSTRING
             }`}
             onClick={() => {
-              const loadUserRank = async () => {
-                handleLinkClick(ROUTES.ENTRY);
-                await valContext.getAllUserRank();
+              const logOut = async () => {
                 valContext.userDisconnect();
+                Cookies.remove(JWT.TOKEN);
+                nav("/");
+                await valContext.getAllUserRank();
               };
-              loadUserRank();
+              logOut();
             }}
           >
             {NAV.LOGOUT}

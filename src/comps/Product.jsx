@@ -74,12 +74,14 @@ export default function Product({
         </h1>
       )}
       {url === URL.ONCART && (
-        <div>
-          <label>{PRODUCT.SELECTTOPAY}</label>
+        <div className={productCss.radioContainer}>
+          <label className={productCss.radioLabel}>{PRODUCT.SELECTTOPAY}</label>
+
           <input
             type="radio"
             checked={radio}
             onClick={() => setRadio(!radio)}
+            className={productCss.radioInput}
           />
         </div>
       )}

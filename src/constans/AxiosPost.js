@@ -1,12 +1,13 @@
 export const POST = {
   CREATEUSERS: "/createUsers",
-  EDITACCOUNT: "/editAccount",
-  PAY: "/pay",
+  EDITACCOUNT: "/user/editAccount",
+  PAY: "/user/pay",
   LOGIN: "/login",
-  DELETEITEAMS: "/deleteItem",
-  SEARCH: "/search",
-  ADDTOCART: "/addToCart",
-  DELETEUSER: "/deleteUser",
-  SEARCH_BY_USERNAME: '/searchByUserName',
-  SEACH_BY_NAME: '/searchByNameViewPurchases'
+  DELETEITEAMS: "/user/deleteItem",
+  SEARCH: "/user/search",
+  ADDTOCART: "/user/addToCart",
+  DELETEUSER: "/user/deleteUser",
+  SEARCH_BY_USERNAME: "/user/searchByUserName",
+  SEACH_BY_NAME: "/user/searchByNameViewPurchases",
+  CITY: "/user/city",
 };

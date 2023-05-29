@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
 import { RANKSUSER } from "../../constans/RanksUser";
@@ -5,7 +6,9 @@ import { ROUTES } from "../../constans/Routes";
 
 const useCreateAccount = () => {
   const rank = RANKSUSER.USER;
-  const createAccount = async (name, lastName, userName, password, nav) => {
+  const nav = useNavigate();
+
+  const createAccount = async (name, lastName, userName, password) => {
     try {
       const res = await axios.post(POST.CREATEUSERS, {
         name: name,
@@ -13,10 +16,9 @@ const useCreateAccount = () => {
         userName: userName,
         password: password,
         rank: rank,
-      });
-      const data = res.data;
-      if (data === "UserName exists") {
-        alert(data);
+      },);
+      if (res.data === "UserName exists") {
+        alert(res.data);
       } else {
         nav(ROUTES.ENTRY);
       }
