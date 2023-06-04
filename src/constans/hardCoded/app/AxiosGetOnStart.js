@@ -5,4 +5,5 @@ export const GET = {
   ALLEARIINGS: "/allProducts/Earring",
   GETALLPRODUCTS: "/allProducts",
   GETSUM: "/sumAllPurchases",
+  ALLRANKUSER: "/allRankUser",
 };

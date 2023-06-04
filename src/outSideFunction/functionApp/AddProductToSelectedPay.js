@@ -1,8 +1,8 @@
 import axios from "../../axiosConfig";
-import { PRODUCT } from "../../constans/hardCoded/product/ProductHardCoded";
 import { JWT } from "../../constans/jwtToken";
 import Cookies from "js-cookie";
 import { ROUTES } from "../../constans/Routes";
+import { POST } from "../../constans/AxiosPost";
 const useAddProductToPay = () => {
   const addProduct = async (
     valProduct,
@@ -13,9 +13,8 @@ const useAddProductToPay = () => {
   ) => {
     try {
       const token = Cookies.get(JWT.TOKEN);
-      debugger
       const res = await axios.post(
-        PRODUCT.PRODUCT_CHOOSE_TO_TRUE,
+        POST.PRODUCT_CHOOSE_TO_TRUE,
         {
           indexProduct: indexProduct,
           userId: userData._id,
@@ -27,7 +26,6 @@ const useAddProductToPay = () => {
         }
       );
       const data = res.data;
-      debugger
       if (data === "product choose switch to true") {
         valProduct.choose = true;
         selectedIteamToPay.push(valProduct);

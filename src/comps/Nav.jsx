@@ -17,12 +17,18 @@ export default function Nav() {
   const handleLinkClick = (route) => {
     setActiveLink(route);
   };
+  const logOut = async () => {
+    valContext.userDisconnect();
+    Cookies.remove(JWT.TOKEN);
+    nav("/");
+    await valContext.getAllUserRank();
+  };
   useEffect(() => {
     if (valContext.userData?.cart?.length !== 0) {
       setCartLengthChanged(true);
       const timer = setTimeout(() => {
         setCartLengthChanged(false);
-      }, 0);
+      }, 10);
       return () => clearTimeout(timer);
     }
   }, [valContext.userData?.cart?.length]);
@@ -101,15 +107,7 @@ export default function Nav() {
                 ? navCss.activeLink
                 : EMPTYSTRING.EMPTYSTRING
             }`}
-            onClick={() => {
-              const logOut = async () => {
-                valContext.userDisconnect();
-                Cookies.remove(JWT.TOKEN);
-                nav("/");
-                await valContext.getAllUserRank();
-              };
-              logOut();
-            }}
+            onClick={logOut}
           >
             {NAV.LOGOUT}
           </Link>

@@ -34,7 +34,7 @@ const useDeleteItem = () => {
           indexProduct
         );
         valContext.deleteFromCart(indexProduct);
-        Cookies.set(JWT.TOKEN, data.token, { expires: 10 / (24 * 60) });
+        Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) });
       } else {
         alert(data);
         Cookies.remove(JWT.TOKEN);

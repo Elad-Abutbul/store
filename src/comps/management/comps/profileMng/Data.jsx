@@ -33,9 +33,10 @@ export default function Data() {
         {CART.SHEKEL}
         <div>
           <h4>{DATA.BEST_SELLER}</h4>
-          {bestProduct?.map((valProduct) => {
-            return <Product valProduct={valProduct} />;
-          })}
+          {bestProduct &&
+            bestProduct?.map((valProduct) => {
+              return <Product valProduct={valProduct} />;
+            })}
         </div>
       </h3>
     </div>

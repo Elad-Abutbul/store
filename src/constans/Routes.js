@@ -17,4 +17,6 @@ export const ROUTES = {
   VIEWPURCHASES: "viewPurchases",
   DATA: "data",
   USERS: "users",
+  LIST_OF_ALL_USERS: "listOfUsers",
+  LIST_OF_DELETING_USERS: "listOfDeletingUsers",
 };

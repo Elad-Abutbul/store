@@ -24,6 +24,7 @@
   margin: 0 10px;
   border-radius: 20px;
   transition: all 0.2s ease;
+  margin-bottom: 10px;
 }
 
 .btn:hover {
@@ -33,6 +34,7 @@
 .btn.active {
   background-color: white;
   color: var(--main-color);
+  box-shadow: 3px 3px 5px #8888;
 }
 
 .components {

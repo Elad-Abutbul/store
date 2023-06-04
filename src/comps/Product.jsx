@@ -26,12 +26,12 @@ export default function Product({
   };
 
   useEffect(() => {
-    checkRadio(valContext, valProduct, indexProduct);
+    if (url === "onCart") checkRadio(valContext, valProduct, indexProduct);
   }, [radio]);
 
   const deleteIteam = () => {
     deleteItem(valContext, valProduct._id, valProduct, indexProduct);
-    setRadio(false);
+    valContext.setSelectedIteamToPay([]);
     TotalPurchases();
   };
 
@@ -57,7 +57,7 @@ export default function Product({
         {rank === RANKSUSER.CEO ? (
           <>
             {valProduct.price * 0.5}
-            {CART.SHEKEL} {PRODUCT.CONSTPRISE}{" "}
+            {CART.SHEKEL} {PRODUCT.CONSTPRISE}
           </>
         ) : (
           `${valProduct.price} ${CART.SHEKEL}`

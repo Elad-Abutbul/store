@@ -11,9 +11,10 @@ const useProductData = () => {
   const [earringProducts, setEarringProducts] = useState([]);
   const [typeProductImg, setTypeProductImg] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const getAllProducts = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const resAllProduct = await axios.get(GET.GETALLPRODUCTS);
       const dataAllProducts = resAllProduct.data;
       setAllProducts(dataAllProducts);
@@ -63,7 +64,7 @@ const useProductData = () => {
 
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
 

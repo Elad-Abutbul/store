@@ -1,18 +1,17 @@
 import Cookies from "js-cookie";
 import axios from "../../axiosConfig";
 import { JWT } from "../../constans/jwtToken";
-import { ROUTES } from "../../constans/Routes";
 import { POST } from "../../constans/AxiosPost";
-const useDeleteProductFromPay = () => {
-  const deleteProduct = async (
+const useProductChooseToFalse = () => {
+  const token = Cookies.get(JWT.TOKEN);
+
+  const productChooseToFalse = async (
     valProduct,
     indexProduct,
-    userData,
-    selectedIteamToPay,
-    setSelectedIteamToPay
+    deleteProductFromSelectedIteamUi,
+    userData
   ) => {
     try {
-      const token = Cookies.get(JWT.TOKEN);
       const res = await axios.post(
         POST.PRODUCT_CHOOSE_TO_FALSE,
         {
@@ -25,22 +24,17 @@ const useDeleteProductFromPay = () => {
           },
         }
       );
-      
-      const data = res.data;
-      if (data === "product choose switch to false") {
+      const data = await res.data;
+      if ("product choose switch to false") {
         valProduct.choose = false;
-        setSelectedIteamToPay([...selectedIteamToPay]);
+        deleteProductFromSelectedIteamUi(indexProduct, valProduct);
       } else {
         alert(data);
-        window.location.href = ROUTES.ENTRY;
-        Cookies.remove(JWT.TOKEN);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  return {
-    deleteProduct,
-  };
+  return { productChooseToFalse };
 };
-export default useDeleteProductFromPay;
+export default useProductChooseToFalse;

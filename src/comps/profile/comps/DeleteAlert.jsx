@@ -10,7 +10,7 @@ export default function DeleteAlert({ changeCond }) {
   const nav = useNavigate();
   const { deleteUser } = useDeleteUser();
   const deleteTheUser = () => {
-    deleteUser(valContext.userData.userName, nav);
+    deleteUser(valContext.userData, nav);
   };
   return (
     <div>

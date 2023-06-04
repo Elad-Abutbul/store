@@ -29,6 +29,7 @@ const usePayment = () => {
           valContext.sumAllPurchases = data.sum?.totalSum;
           valContext.selectedIteamToPay.forEach((valProductSelected) => {
             valContext.paymentCart(valProductSelected);
+            Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) });
           });
         } else {
           alert(data);

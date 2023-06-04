@@ -7,7 +7,12 @@ export const POST = {
   SEARCH: "/user/search",
   ADDTOCART: "/user/addToCart",
   DELETEUSER: "/user/deleteUser",
-  SEARCH_BY_USERNAME: "/user/searchByUserName",
+  SEARCH_BY_USERNAME_MNG: "/ceo/searchByUserNameMng",
+  SEARCH_BY_USERNAME_DELET_MNG: "/ceo/searchByUserNameDeleteMng",
   SEACH_BY_NAME: "/user/searchByNameViewPurchases",
   CITY: "/user/city",
+  REMOVE_FROM_DELETE_LIST: "/ceo/removeFromDeleteList",
+  PRODUCT_CHOOSE_TO_TRUE: "/user/productChooseToTrue",
+  PRODUCT_CHOOSE_TO_FALSE: "/user/productChooseToFalse",
+  BESTPRODUCT:'/ceo/bestProduct'
 };

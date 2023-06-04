@@ -16,12 +16,13 @@ export default function Cart() {
 
   const TotalPurchases = () => {
     let total = 0;
-    valContext.selectedIteamToPay.forEach((product) => {
-      return (total +=
-        valContext.userData.rank === RANKSUSER.CEO
-          ? product.price * 0.5
-          : product.price);
-    });
+    valContext.selectedIteamToPay.length !== 0 &&
+      valContext.selectedIteamToPay.forEach((product) => {
+        return (total +=
+          valContext.userData.rank === RANKSUSER.CEO
+            ? product.price * 0.5
+            : product.price);
+      });
     setSum(total);
   };
 
@@ -38,10 +39,19 @@ export default function Cart() {
       setShowChooseCity(true);
     }
   };
+  useEffect(() => {
+    if (valContext.userData.city.length === 0) {
+      setShowChooseCity(true);
+    }
+  },[]);
+  const ifChooseCityTrue = () => {
+    return <ChooseCity setShowChooseCity={setShowChooseCity} />;
+  };
+
   return (
     <div>
       {showChooseCity ? (
-        <ChooseCity setShowChooseCity={setShowChooseCity} />
+        ifChooseCityTrue()
       ) : (
         <>
           <h1 className={cartCss.h1}>{CART.MYCART}</h1>
@@ -62,7 +72,7 @@ export default function Cart() {
                 {CART.YOURTOTAL} {sum}
                 {CART.SHEKEL}
               </h3>
-              <button className={cartCss.payAllBtn} onClick={pay}>
+              <button className={cartCss.Btn} onClick={pay}>
                 {CART.PAY}
               </button>
             </div>

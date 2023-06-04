@@ -8,10 +8,13 @@ import useCreateAccount from "../outSideFunction/functionSignUp/CreateAccount";
 import useEditAccount from "../outSideFunction/functionEdit/EditAccount";
 import { SIGN_AND_EDIT } from "../constans/hardCoded/signUpAndEdit/SignAndEditHardCoded";
 import { EMPTYSTRING } from "../constans/EmptyString";
+import useWeather from "../outSideFunction/functionApp/Weather";
 export default function SignUp({ url }) {
   const valContext = useContext(contextApi);
   const { createAccount } = useCreateAccount();
   const { editAccount } = useEditAccount();
+  const { apiWeather, infoWeather } = useWeather();
+
   const [name, setName] = useState(
     url === URL.EDIT ? valContext.userData.name : EMPTYSTRING.EMPTYSTRING
   );
@@ -20,10 +23,12 @@ export default function SignUp({ url }) {
   );
   const [userName, setUserName] = useState(EMPTYSTRING.EMPTYSTRING);
   const [password, setPassword] = useState(EMPTYSTRING.EMPTYSTRING);
-  const [changeCity, setChangeCity] = useState(
-    url === URL.EDIT ? valContext.userData.city[0] : EMPTYSTRING.EMPTYSTRING
-  );
   const valid = async () => {
+    debugger;
+
+    if (url === "edit") {
+      await apiWeather(userName, false);
+    }
     if (name.length < 2) {
       alert("Enter a name above 2 charcters");
     } else if (lastName.length < 2) {
@@ -33,17 +38,22 @@ export default function SignUp({ url }) {
     } else if (password.length < 5) {
       alert("Enter a password above 5 charcters");
     } else if (
-      url === url?.EDIT &&
-      valContext?.userData.city?.length !== 0 &&
-      changeCity !== ""
+      valContext.selectCity === "" &&
+      infoWeather === false
     ) {
-      alert("please insert city");
+      alert("please insert a valid city");
     } else {
-      if (url !== URL.EDIT) {
-        await createAccount(name, lastName, userName, password);
+      if (url !== "edit") {
+        let valUser = {
+          name,
+          lastName,
+          userName,
+          password,
+        };
+        await createAccount(valUser);
         valContext.getAllUserRank();
       } else {
-        editAccount(name, lastName, userName, password, changeCity);
+        editAccount(name, lastName, userName, password);
       }
     }
   };
@@ -93,8 +103,8 @@ export default function SignUp({ url }) {
               className={entryCss.input}
               type="text"
               placeholder="Enter City.."
-              value={changeCity}
-              onChange={(e) => setChangeCity(e.target.value)}
+              value={valContext.userData?.city[0]}
+              onChange={(e) => valContext.setSelectCity(e.target.value)}
             />
           </div>
         )}

@@ -8,7 +8,7 @@ import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelect
 import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
 import useRankUser from "./outSideFunction/functionMng/GetUserRank";
 import useSumPurchases from "./outSideFunction/functionApp/getSumPurchases";
-import axios from "./axiosConfig";
+import useProductChooseToFalse from "./outSideFunction/functionApp/ProductChooseToFalse";
 function App() {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
@@ -16,7 +16,9 @@ function App() {
   const { addProduct } = useAddProductToPay();
   const { getAllUserRank, rankUser, setRankUser } = useRankUser();
   const { getSumPurchases } = useSumPurchases();
+  const { productChooseToFalse } = useProductChooseToFalse();
   const [sumAllPurchases, setSumAllPurchases] = useState(0);
+  const [selectCity, setSelectCity] = useState("");
   const {
     ringProducts,
     braceletProducts,
@@ -30,8 +32,8 @@ function App() {
   } = useProductData();
   useEffect(() => {
     getAllProducts(); // Call the getAllProducts function
-    getAllUserRank();
     getSumPurchases(setSumAllPurchases);
+    getAllUserRank();
   }, []);
   const userDisconnect = () => {
     setSelectedIteamToPay([]);
@@ -48,31 +50,20 @@ function App() {
     userData.cart.splice(indexProduct, 1);
     setUserData({ ...userData });
   };
-
   const paymentCart = (valProduct) => {
     pay(valProduct);
-    payProductFromSelectedIteamToPayUi();
+    setSelectedIteamToPay([]);
   };
-
   const deleteProductFromSelectedIteamToPay = async (
     valProduct,
     indexProduct
   ) => {
-    try {
-      const res = await axios.post("/productChooseToFalse", {
-        indexProduct: indexProduct,
-        userId: userData._id,
-      });
-      const data = await res.data;
-      if ("product choose switch to false") {
-        valProduct.choose = false;
-        deleteProductFromSelectedIteamUi(indexProduct, valProduct);
-      } else {
-        alert(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    productChooseToFalse(
+      valProduct,
+      indexProduct,
+      deleteProductFromSelectedIteamUi,
+      userData
+    );
   };
   const addProductToSelectedIteamToPay = (valProduct, indexProduct) => {
     addProduct(
@@ -95,9 +86,7 @@ function App() {
     }
     deleteProductFromSelectedIteamToPayUi();
   };
-  const payProductFromSelectedIteamToPayUi = () => {
-    setSelectedIteamToPay([]);
-  };
+
   const deleteProductFromSelectedIteamToPayUi = () => {
     let filterArr = selectedIteamToPay.filter(
       (product) => product.choose === true
@@ -109,8 +98,25 @@ function App() {
     rankUser.splice(indexUser, 1);
     setRankUser([...rankUser]);
   };
-  const city = (city) => {
+  const addToRankUser = (name, lastName, userName, password, rank) => {
+    const userObj = { name, lastName, userName, password, rank };
+    rankUser.unshift(userObj);
+    setRankUser([...rankUser]);
+  };
+  const pushCityToUserData = (city) => {
     userData.city.push(city);
+    setUserData({ ...userData });
+  };
+  const addToListOfDeletingUsersMng = (valUser) => {
+    userData.deleteUsers.unshift(valUser);
+    setUserData({ ...userData });
+  };
+
+  const deleteFromListOfDeletingUsersMng = (userName) => {
+    const userIndex = userData.deleteUsers.findIndex(
+      (val) => val.userName === userName
+    );
+    userData.deleteUsers.splice(userIndex, 1);
     setUserData({ ...userData });
   };
   return (
@@ -131,7 +137,6 @@ function App() {
           deleteFromCart,
           paymentCart,
           selectedIteamToPay,
-          payProductFromSelectedIteamToPayUi,
           setSelectedIteamToPay,
           addProductToSelectedIteamToPay,
           deleteProductFromSelectedIteamToPay,
@@ -140,11 +145,16 @@ function App() {
           setRankUser,
           getAllUserRank,
           deleteFromRankUser,
+          addToRankUser,
           allProducts,
           setAllProducts,
-          city,
+          pushCityToUserData,
           sumAllPurchases,
           getSumPurchases,
+          addToListOfDeletingUsersMng,
+          deleteFromListOfDeletingUsersMng,
+          setSelectCity,
+          selectCity,
         }}
       >
         <AppRoutes />

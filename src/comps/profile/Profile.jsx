@@ -6,38 +6,25 @@ import { EMPTYSTRING } from "../../constans/EmptyString";
 import { PROFILE } from "../../constans/hardCoded/profile/ProfileHardCoded";
 import { contextApi } from "../../contextApi";
 import { RANKSUSER } from "../../constans/RanksUser";
-import axios from "axios";
+import useWeather from "../../outSideFunction/functionApp/Weather";
 
 export default function Profile() {
   const valContext = useContext(contextApi);
   const [selectedComponent, setSelectedComponent] = useState(
     ROUTES.VIEWPURCHASES
   );
+  const { apiWeather, infoWeather } = useWeather();
 
   const handleSelectComponent = (component) => {
     setSelectedComponent(component);
   };
-  const [name, setName] = useState("");
-  const [wind, setWind] = useState("");
-  const [temp, setTemp] = useState("");
-  const [weatherDesc, setWeatherDesc] = useState("");
   useEffect(() => {
-    if (valContext.userData.city.length !== 0) {
-      const apiWeather = async () => {
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${valContext.userData.city[0]}&APPID=8bbe2224a732eb2a389b79953a4a0ffd&units=metric`;
-        const res = await axios.get(url);
-        setWind(res.data.wind.speed);
-        setName(res.data.name);
-        setTemp(res.data.main.temp);
-        setWeatherDesc(res.data.weather[0].description);
-      };
-      apiWeather();
-    }
-  });
+    valContext.userData?.city[0] && apiWeather();
+  }, []);
   return (
     <>
       <div className={profileCss.container}>
-        <h1 className={profileCss.h1}>Profile</h1>
+        <h1 className={profileCss.h1}>{PROFILE.PROFILE}</h1>
         <div className={profileCss.links}>
           <Link to={ROUTES.EDIT}>
             <button
@@ -93,14 +80,24 @@ export default function Profile() {
             </Link>
           )}
         </div>
-        {name !== EMPTYSTRING.EMPTYSTRING && (
-          <div className={profileCss.weather}>
-            <h4>{name}</h4>
-            <p>Celsius: {temp} C° </p>
-            <p>wind: {wind} kmh</p>
-            <p>weather desc: {weatherDesc} </p>
-          </div>
-        )}
+        {infoWeather?.map((valWeather) => {
+          return (
+            <div className={profileCss.weather}>
+              <h3>{valWeather.name}</h3>
+              <p>
+                {PROFILE.CELSIUS} {valWeather.temp}
+                {PROFILE.SIGN_CELSIUS}
+              </p>
+              <p>
+                {PROFILE.WEATHER_DESC} {valWeather.desc}
+              </p>
+              <p>
+                {PROFILE.WIND} {valWeather.wind}
+                {PROFILE.KMH}
+              </p>
+            </div>
+          );
+        })}
 
         <div id={profileCss.outlet}>
           <Outlet />

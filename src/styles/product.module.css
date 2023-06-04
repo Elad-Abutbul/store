@@ -20,6 +20,7 @@
   width: 20%;
   height: 10%;
   transition: all 0.2s ease-in-out;
+  /* mix-blend-mode: color-burn; */
 }
 .img:hover {
   transform: scale(1.4);

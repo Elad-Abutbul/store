@@ -1,15 +1,21 @@
 #table {
-  margin: auto;
   border: 3px solid var(--main-color);
-  width: 80%;
+  margin: auto;
   border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 8px 8px 3px #8888;
 }
 .boxes {
   border: 3px solid var(--main-color);
   padding: 10px;
 }
-.X {
+.X,
+.vi {
   font-weight: 600;
+  cursor: pointer;
+}
+.vi:hover {
+  color: rgb(0, 212, 0);
 }
 .X:hover {
   color: red;
@@ -18,9 +24,15 @@
   margin-top: 14vh;
   font-weight: 400;
 }
-.mainContainer {
+/* .mainContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
+} */
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

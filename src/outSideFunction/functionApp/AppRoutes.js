@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Profile from "../../comps/profile/Profile";
 import ViewPurchases from "../../comps/profile/comps/ViewPurchases";
 import DeleteAccount from "../../comps/profile/comps/DeleteAccount";
@@ -17,11 +17,14 @@ import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
 import { LOADING } from "../../constans/hardCoded/appRoutes/LoadingHardCoded";
 import { contextApi } from "../../contextApi";
-import Users from "../../comps/management/comps/Users";
+import Users from "../../comps/management/comps/usersMng/Users";
 import Data from "../../comps/management/comps/profileMng/Data";
 import { RANKSUSER } from "../../constans/RanksUser";
 import Cookies from "js-cookie";
 import { JWT } from "../../constans/jwtToken";
+import ListOfAllUsers from "../../comps/management/comps/usersMng/ListOfAllUsers";
+import ListOfAllDeletingUsers from "../../comps/management/comps/usersMng/ListOfAllDeletingUsers";
+import Loading from "../../comps/Loading";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
 
@@ -47,16 +50,28 @@ export default function AppRoutes() {
 
             {valContext.userData?.rank === RANKSUSER.CEO && (
               <>
-                <Route path={ROUTES.USERS} element={<Users />} />
+                <Route path={ROUTES.USERS} element={<Users />}>
+                  <Route
+                    path={ROUTES.LIST_OF_ALL_USERS}
+                    element={<ListOfAllUsers />}
+                  />
+                  <Route
+                    path={ROUTES.LIST_OF_DELETING_USERS}
+                    element={<ListOfAllDeletingUsers />}
+                  />
+                </Route>
               </>
             )}
           </Route>
         ) : (
-          <Route path={ROUTES.ENTRY} element={<LogIn />} />
+          <Route
+            path={ROUTES.ENTRY}
+            element={valContext.loading ? <Loading /> : <LogIn />}
+          />
         )}
         <Route
           path={ROUTES.ENTRY}
-          element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
+          element={valContext.loading ? <Loading /> : <LogIn />}
         />
         <Route path={ROUTES.SIGNUP} element={<SignUp />} />
       </Routes>
