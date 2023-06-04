@@ -44,9 +44,11 @@
 .weather {
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 15vh;
 }
+
 p {
   margin: 5px;
   padding: 0;

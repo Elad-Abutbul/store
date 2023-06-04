@@ -8,6 +8,7 @@ import useAddProductToPay from "./outSideFunction/functionApp/AddProductToSelect
 import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProductFromSelectedPay";
 import useRankUser from "./outSideFunction/functionMng/GetUserRank";
 import useSumPurchases from "./outSideFunction/functionApp/getSumPurchases";
+import axios from "./axiosConfig";
 function App() {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
@@ -53,32 +54,6 @@ function App() {
     payProductFromSelectedIteamToPayUi();
   };
 
-  const addProductToSelectedIteamToPay = async (valProduct, indexProduct) => {
-    try {
-      const res = await axios.post("/productChooseToTrue", {
-        indexProduct: indexProduct,
-        userId: userData._id,
-      });
-      const data = await res.data;
-      if (data === "product choose switch to true") {
-        valProduct.choose = true;
-        selectedIteamToPay.push(valProduct);
-        setSelectedIteamToPay([...selectedIteamToPay]);
-      } else {
-        alert(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  const addProductToSelectedIteamToPay = (valProduct, indexProduct) => {
-    addProduct(
-      valProduct,
-      indexProduct,
-      userData,
-      selectedIteamToPay,
-      setSelectedIteamToPay
-    );
-  };
   const deleteProductFromSelectedIteamToPay = async (
     valProduct,
     indexProduct
@@ -91,7 +66,7 @@ function App() {
       const data = await res.data;
       if ("product choose switch to false") {
         valProduct.choose = false;
-        deleteProductFromSelectedIteamUi(indexProduct);
+        deleteProductFromSelectedIteamUi(indexProduct, valProduct);
       } else {
         alert(data);
       }
@@ -99,9 +74,16 @@ function App() {
       console.log(error);
     }
   };
-
-  const deleteProductFromSelectedIteamUi = (indexProduct) => {
-    
+  const addProductToSelectedIteamToPay = (valProduct, indexProduct) => {
+    addProduct(
+      valProduct,
+      indexProduct,
+      userData,
+      selectedIteamToPay,
+      setSelectedIteamToPay
+    );
+  };
+  const deleteProductFromSelectedIteamUi = async (indexProduct, valProduct) => {
     if (indexProduct !== undefined) {
       await deleteProduct(
         valProduct,
@@ -162,7 +144,7 @@ function App() {
           setAllProducts,
           city,
           sumAllPurchases,
-          getSumPurchases
+          getSumPurchases,
         }}
       >
         <AppRoutes />

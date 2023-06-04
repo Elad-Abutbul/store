@@ -27,7 +27,7 @@ const useAddToCart = () => {
         valContext.addToCart(valProduct);
         Cookies.set(JWT.TOKEN, data.token, { expires: 10 / (24 * 60) });
       } else {
-        alert("Cannot added to cart");
+        alert("pls log in");
         Cookies.remove(JWT.TOKEN);
         nav(ROUTES.ENTRY);
       }

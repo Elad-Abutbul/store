@@ -3,7 +3,6 @@ import axios from "../../axiosConfig";
 const useSumPurchases = () => {
   const getSumPurchases = async (setSumAllPurchases) => {
     try {
-      debugger
       const res = await axios.get(GET.GETSUM);
       if (res.data[0]?.totalSum !== undefined) {
         setSumAllPurchases(res.data[0].totalSum);
