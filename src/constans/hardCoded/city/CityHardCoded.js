@@ -1,4 +1,4 @@
 export const CITY = {
   SUMBIT: "sumbit",
-  CITY_DELIVER: "choose city to deliver",
+  CITY_DELIVER: "Choose a city to deliver",
 };

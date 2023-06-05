@@ -3,20 +3,9 @@
   font-weight: 300;
   color: var(--main-color);
   text-shadow: 3px 3px 3px #88888898;
-  animation: myAnimation 3s ease-in-out infinite;
   display: inline-block;
 }
-@keyframes myAnimation {
-  0% {
-    transform: scale(1);
 
-  }
-  50% {
-    transform: scale(1.03);
-
-  }
- 
-}
 
 .imgType {
   display: flex;

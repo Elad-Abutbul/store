@@ -8,15 +8,15 @@ export default function ChooseCity({ setShowChooseCity }) {
   const valContext = useContext(contextApi);
   const { apiWeather } = useWeather();
   const valid = async () => {
-    debugger
-    if (valContext.selectCity === "") return alert("put a city");
+    debugger;
+    if (valContext.selectCity === "") return alert("choose a city");
     apiWeather(setShowChooseCity);
   };
   useEffect(() => {
     valContext.setSelectedIteamToPay([]);
   }, []);
   return (
-    <div>
+    <div className={cartCss.containerCity}>
       <h1 className={cartCss.h1}>{CITY.CITY_DELIVER}</h1>
       <input
         type="text"
@@ -26,7 +26,7 @@ export default function ChooseCity({ setShowChooseCity }) {
       <button className={cartCss.btnCity} onClick={valid}>
         {CITY.SUMBIT}
       </button>
-      <h2 onClick={() => setShowChooseCity(false)}>{PRODUCT.X}</h2>
+      <h2 onClick={() => setShowChooseCity(false)} className={cartCss.xCity}>{PRODUCT.X}</h2>
     </div>
   );
 }

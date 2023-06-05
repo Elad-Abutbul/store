@@ -14,7 +14,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.btnCity  :hover {
+.btnCity :hover {
   background-color: var(--hover-color);
 }
 
@@ -26,10 +26,25 @@
   color: white;
   cursor: pointer;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   margin: auto;
 }
 .Btn:active {
-  transform: translate(5px,5px);
-  transition-duration: .3s;
+  transform: translate(5px, 5px);
+  transition-duration: 0.3s;
+}
+.containerCity {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto;
+}
+.xCity{
+  transition: .3s;
+  cursor: pointer;
+}
+.xCity:hover{
+  transform: scale(1.2);
 }
