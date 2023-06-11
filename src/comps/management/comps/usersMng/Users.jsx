@@ -10,7 +10,7 @@ export default function Users() {
 
   return (
     <div className={userMngCss.mainContainer}>
-      <h1 className={userMngCss.allUsers}>{USERMNG.ALL_USERS}</h1>
+      <h1 className={userMngCss.h1}>{USERMNG.ALL_USERS}</h1>
       <div>
         <Link to={ROUTES.LIST_OF_ALL_USERS}>
           <button

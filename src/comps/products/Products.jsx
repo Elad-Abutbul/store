@@ -8,7 +8,7 @@ export default function Products() {
   const name = valContext.userData.name;
   const lastName = valContext.userData.lastName;
   return (
-    <div>
+    <div className={productsCss.container}>
       <h1 className={productsCss.h1Name}>
         {PRODUCT.WELCOME} {name} {lastName}
       </h1>

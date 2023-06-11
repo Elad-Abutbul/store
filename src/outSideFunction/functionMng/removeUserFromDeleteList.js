@@ -4,9 +4,11 @@ import { POST } from "../../constans/AxiosPost";
 import { JWT } from "../../constans/jwtToken";
 import { useContext } from "react";
 import { contextApi } from "../../contextApi";
+import { useNavigate } from "react-router-dom";
 
 const useRemoveFromDeleteList = () => {
   const valContext = useContext(contextApi);
+  const nav = useNavigate();
   const removeFromDeleteList = async (valUser) => {
     const token = Cookies.get(JWT.TOKEN);
     const res = await axios.post(
@@ -24,6 +26,7 @@ const useRemoveFromDeleteList = () => {
       alert(res.data.msg);
       valContext.getAllUserRank();
       valContext.deleteFromListOfDeletingUsersMng(valUser.userName);
+      valContext.setUserData(res.data.userData);
       valContext.addToRankUser(
         valUser.name,
         valUser.lastName,
@@ -35,6 +38,9 @@ const useRemoveFromDeleteList = () => {
         valUser.historyOfCart
       );
       Cookies.set(JWT.TOKEN, res.data.token, { expires: 30 / (24 * 60) });
+    } else {
+      Cookies.remove(JWT.TOKEN);
+      nav("/");
     }
   };
 

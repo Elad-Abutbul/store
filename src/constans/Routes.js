@@ -16,7 +16,11 @@ export const ROUTES = {
   DELETEACCOUNT: "deleteAccount",
   VIEWPURCHASES: "viewPurchases",
   DATA: "data",
-  USERS: "users",
+  USERSCEO: "usersCEO",
+  PRODUCTSCEO: "productsCEO",
+  ADDPRODUCTS: "addProducts",
+  LIST_OF_DELETING_PRODUCTS: "listOfdeletingProducts",
   LIST_OF_ALL_USERS: "listOfUsers",
   LIST_OF_DELETING_USERS: "listOfDeletingUsers",
+  EDITPRODUCT: "/editProduct",
 };

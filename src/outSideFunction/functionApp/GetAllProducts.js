@@ -1,8 +1,11 @@
 import { useState } from "react";
-import axios from "../../axiosConfig";
 import { ROUTES } from "../../constans/Routes";
 import { TYPEIMG } from "../../constans/hardCoded/app/TypeproductImg";
-import { GET } from "../../constans/hardCoded/app/AxiosGetOnStart";
+import { getRing } from "./getSpecificProducts/getRings";
+import { getBraclets } from "./getSpecificProducts/getBraclets";
+import { getNecklaces } from "./getSpecificProducts/getNecklaces";
+import { getEarrings } from "./getSpecificProducts/getEarrings";
+import { getAllProductsSpecific } from "./getSpecificProducts/getAllProductsSpecific";
 const useProductData = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [ringProducts, setRingProducts] = useState([]);
@@ -15,26 +18,11 @@ const useProductData = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const resAllProduct = await axios.get(GET.GETALLPRODUCTS);
-      const dataAllProducts = resAllProduct.data;
-      setAllProducts(dataAllProducts);
-
-      const resRing = await axios.get(GET.ALLRINGS);
-      const dataRing = resRing.data;
-      setRingProducts(dataRing);
-
-      const resBracelet = await axios.get(GET.ALLBRACELETS);
-      const dataBracelet = resBracelet.data;
-      setBraceletProducts(dataBracelet);
-
-      const resNecklace = await axios.get(GET.ALLNECKLACES);
-      const dataNecklace = resNecklace.data;
-      setNecklaceProducts(dataNecklace);
-
-      const resEarring = await axios.get(GET.ALLEARIINGS);
-      const dataEarring = resEarring.data;
-      setEarringProducts(dataEarring);
-
+      await getAllProductsSpecific(setAllProducts);
+      await getRing(setRingProducts);
+      await getBraclets(setBraceletProducts);
+      await getNecklaces(setNecklaceProducts);
+      await getEarrings(setEarringProducts);
       setTypeProductImg([
         {
           link: ROUTES.RINGS,
@@ -78,6 +66,10 @@ const useProductData = () => {
     getAllProducts,
     allProducts,
     setAllProducts,
+    setRingProducts,
+    setBraceletProducts,
+    setNecklaceProducts,
+    setEarringProducts,
   };
 };
 

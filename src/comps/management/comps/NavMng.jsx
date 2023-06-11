@@ -6,18 +6,30 @@ import { ROUTES } from "../../../constans/Routes";
 
 export default function NavManagement({ activeLink, handleLinkClick }) {
   return (
-    <div id={navCss.navMng}>
+    <>
+      {" "}
       <Link
-        to={`${ROUTES.USERS}/${ROUTES.LIST_OF_ALL_USERS}`}
+        to={`${ROUTES.USERSCEO}/${ROUTES.LIST_OF_ALL_USERS}`}
         className={`${navCss.link} ${
-          activeLink === ROUTES.USERS
+          activeLink === ROUTES.USERSCEO
             ? navCss.activeLink
             : EMPTYSTRING.EMPTYSTRING
         }`}
-        onClick={() => handleLinkClick(`${ROUTES.USERS}`)}
+        onClick={() => handleLinkClick(`${ROUTES.USERSCEO}`)}
       >
-        USERS
+        USERS CEO
       </Link>
-    </div>
+      <Link
+        to={`${ROUTES.PRODUCTSCEO}/${ROUTES.ADDPRODUCTS}`}
+        className={`${navCss.link} ${
+          activeLink === ROUTES.PRODUCTSCEO
+            ? navCss.activeLink
+            : EMPTYSTRING.EMPTYSTRING
+        }`}
+        onClick={() => handleLinkClick(`${ROUTES.PRODUCTSCEO}`)}
+      >
+        PRODUCTS CEO
+      </Link>
+    </>
   );
 }

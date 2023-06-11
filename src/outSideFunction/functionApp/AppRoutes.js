@@ -15,16 +15,19 @@ import SignUp from "../../comps/SignUp";
 import LogIn from "../../comps/LogIn";
 import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
-import { LOADING } from "../../constans/hardCoded/appRoutes/LoadingHardCoded";
 import { contextApi } from "../../contextApi";
 import Users from "../../comps/management/comps/usersMng/Users";
 import Data from "../../comps/management/comps/profileMng/Data";
 import { RANKSUSER } from "../../constans/RanksUser";
 import Cookies from "js-cookie";
 import { JWT } from "../../constans/jwtToken";
-import ListOfAllUsers from "../../comps/management/comps/usersMng/ListOfAllUsers";
-import ListOfAllDeletingUsers from "../../comps/management/comps/usersMng/ListOfAllDeletingUsers";
+import ListOfAllUsers from "../../comps/management/comps/usersMng/comps/ListOfAllUsers";
+import ListOfAllDeletingUsers from "../../comps/management/comps/usersMng/comps/ListOfAllDeletingUsers";
 import Loading from "../../comps/Loading";
+import ProductsCEO from "../../comps/management/comps/productsMng/ProductsCEO";
+import AddProducts from "../../comps/management/comps/productsMng/comps/addProductsCeo/AddProducts";
+import ListOfDeletingProducts from "../../comps/management/comps/productsMng/comps/ListOfDeletingProducts";
+import EditProduct from "../../comps/management/comps/productsMng/EditProduct.jsx/EditProduct";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
 
@@ -50,7 +53,7 @@ export default function AppRoutes() {
 
             {valContext.userData?.rank === RANKSUSER.CEO && (
               <>
-                <Route path={ROUTES.USERS} element={<Users />}>
+                <Route path={ROUTES.USERSCEO} element={<Users />}>
                   <Route
                     path={ROUTES.LIST_OF_ALL_USERS}
                     element={<ListOfAllUsers />}
@@ -60,6 +63,21 @@ export default function AppRoutes() {
                     element={<ListOfAllDeletingUsers />}
                   />
                 </Route>
+                <Route path={ROUTES.PRODUCTSCEO} element={<ProductsCEO />}>
+                  <Route path={ROUTES.ADDPRODUCTS} element={<AddProducts />} />
+                  <Route
+                    path={ROUTES.LIST_OF_DELETING_PRODUCTS}
+                    element={<ListOfDeletingProducts />}
+                  />
+                </Route>
+                {valContext.allProducts.map((product) => {
+                  return (
+                    <Route
+                      path={`${ROUTES.ELADJEWELRY}${ROUTES.EDITPRODUCT}/${product.type}`}
+                      element={<EditProduct />}
+                    />
+                  );
+                })}
               </>
             )}
           </Route>

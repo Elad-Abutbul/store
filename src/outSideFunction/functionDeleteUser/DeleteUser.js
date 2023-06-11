@@ -12,7 +12,8 @@ const useDeleteUser = () => {
 
   const deleteUser = async (valUser, nav) => {
     try {
-      const token = Cookies.get(JWT.TOKEN); 
+      const token = Cookies.get(JWT.TOKEN);
+
       const res = await axios.post(
         POST.DELETEUSER,
         {
@@ -34,7 +35,6 @@ const useDeleteUser = () => {
         } else {
           valContext.deleteFromRankUser(valUser.userName);
           Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) });
-          ;
           if (valContext.userData.rank === RANKSUSER.CEO) {
             valContext.addToListOfDeletingUsersMng(valUser);
           }

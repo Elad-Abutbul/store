@@ -12,11 +12,10 @@ const useEditAccount = () => {
   const editAccount = async (name, lastName, userName, password) => {
     const token = Cookies.get(JWT.TOKEN);
     try {
-      debugger
       const res = await axios.post(
         POST.EDITACCOUNT,
         {
-          userId: valContext.userData._id,
+          userId: valContext.userData?._id,
           name: name,
           lastName: lastName,
           userName: userName,
@@ -29,7 +28,6 @@ const useEditAccount = () => {
           },
         }
       );
-      debugger
       const data = res.data;
       if (data === "Username already exists") {
         alert(data);

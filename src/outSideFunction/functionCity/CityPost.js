@@ -11,12 +11,11 @@ const useCity = () => {
   const nav = useNavigate();
   const cityPost = async (setShowChooseCity) => {
     const token = Cookies.get(JWT.TOKEN);
-    debugger
     const res = await axios.post(
       POST.CITY,
       {
         city: valContext.selectCity,
-        userId: valContext.userData._id,
+        userId: valContext.userData?._id,
       },
       {
         headers: {
@@ -24,7 +23,6 @@ const useCity = () => {
         },
       }
     );
-    debugger
     if (res.data.msg === "complete") {
       alert(res.data.msg);
       valContext.pushCityToUserData(valContext.selectCity);

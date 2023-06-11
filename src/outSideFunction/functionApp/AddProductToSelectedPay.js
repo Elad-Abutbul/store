@@ -32,7 +32,7 @@ const useAddProductToPay = () => {
         setSelectedIteamToPay([...selectedIteamToPay]);
       } else {
         alert(data);
-        window.location.headers = ROUTES.ENTRY;
+        window.location.href = ROUTES.ENTRY;
         Cookies.remove(JWT.TOKEN);
       }
     } catch (error) {

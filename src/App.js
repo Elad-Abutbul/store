@@ -29,6 +29,10 @@ function App() {
     getAllProducts,
     allProducts,
     setAllProducts,
+    setRingProducts,
+    setBraceletProducts,
+    setNecklaceProducts,
+    setEarringProducts,
   } = useProductData();
   useEffect(() => {
     getAllProducts(); // Call the getAllProducts function
@@ -119,6 +123,13 @@ function App() {
     userData.deleteUsers.splice(userIndex, 1);
     setUserData({ ...userData });
   };
+  const removeFromDeleteProductListCEO = (nameProduct) => {
+    const indexProduct = userData.deleteProducts.findIndex(
+      (product) => nameProduct === product.name
+    );
+    userData.deleteProducts.splice(indexProduct, 1);
+    setUserData({ ...userData });
+  };
   return (
     <div>
       <contextApi.Provider
@@ -130,6 +141,10 @@ function App() {
           earringProducts,
           braceletProducts,
           necklaceProducts,
+          setRingProducts,
+          setBraceletProducts,
+          setNecklaceProducts,
+          setEarringProducts,
           typeProductImg,
           userConnect,
           userDisconnect,
@@ -155,6 +170,7 @@ function App() {
           deleteFromListOfDeletingUsersMng,
           setSelectCity,
           selectCity,
+          removeFromDeleteProductListCEO,
         }}
       >
         <AppRoutes />

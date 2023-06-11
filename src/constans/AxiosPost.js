@@ -14,5 +14,9 @@ export const POST = {
   REMOVE_FROM_DELETE_LIST: "/ceo/removeFromDeleteList",
   PRODUCT_CHOOSE_TO_TRUE: "/user/productChooseToTrue",
   PRODUCT_CHOOSE_TO_FALSE: "/user/productChooseToFalse",
-  BESTPRODUCT:'/ceo/bestProduct'
+  BESTPRODUCT: "/ceo/bestProduct",
+  ADDPRODUCT: "/ceo/addProduct",
+  DELETEPRODUCT: "/ceo/deleteProduct",
+  IF_NAME_EXIXT_PRODUCT: "/ceo/ifNameOfTheProductExixt",
+  UPDATE_PRODUCT_CEO: "/ceo/updateProductCEO",
 };

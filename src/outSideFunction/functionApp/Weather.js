@@ -8,7 +8,6 @@ const useWeather = () => {
   const { cityPost } = useCity();
 
   const apiWeather = async (setShowChooseCity, boolean) => {
-    debugger;
     let url;
     try {
       if (setShowChooseCity !== undefined) {

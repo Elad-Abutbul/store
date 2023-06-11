@@ -1,34 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import userMngCss from "../../../../styles/userMng.module.css";
-import { contextApi } from "../../../../contextApi";
-import { USERMNG } from "../../../../constans/hardCoded/mangement/usersMng/UsersMngHardCoded";
-import { DELETE } from "../../../../constans/hardCoded/deleteAccount/DeleteHardCoded";
-import { CART } from "../../../../constans/hardCoded/cart/CartHardCoded";
-import { PRODUCT } from "../../../../constans/hardCoded/product/ProductHardCoded";
-import useDeleteUser from "../../../../outSideFunction/functionDeleteUser/DeleteUser";
-import useSearchByUserName from "../../../../outSideFunction/functionMng/SearchByUserName";
-export default function ListOfAllUsers() {
+import userMngCss from "../../../../../styles/userMng.module.css";
+import { contextApi } from "../../../../../contextApi";
+import { USERMNG } from "../../../../../constans/hardCoded/mangement/usersMng/UsersMngHardCoded";
+import { CART } from "../../../../../constans/hardCoded/cart/CartHardCoded";
+import useSearchByUserNameDelete from "../../../../../outSideFunction/functionMng/SearchByUserNameDeleteUsers";
+import useCreateAccount from "../../../../../outSideFunction/functionSignUp/CreateAccount";
+export default function ListOfAllDeletingUsers() {
   const valContext = useContext(contextApi);
   const [search, setSearch] = useState([]);
   const [userName, setUserName] = useState("");
-
-  const { deleteUser } = useDeleteUser();
-  const { searchByUserName } = useSearchByUserName();
-
+  const { createAccount } = useCreateAccount();
+  const { searchByUserNameDelete } = useSearchByUserNameDelete();
   useEffect(() => {
-    searchByUserName(userName, setSearch);
+    searchByUserNameDelete(userName, setSearch);
   }, [userName]);
 
   const searchUsers = () => {
-    if (valContext.rankUser.length !== 0 && search.length !== 0) {
+    if (valContext.userData.deleteUsers.length !== 0 && search.length !== 0) {
       return search;
-    } else if (valContext.rankUser.length !== 0 && search.length === 0) {
-      return valContext.rankUser;
+    } else if (
+      valContext.userData.deleteUsers.length !== 0 &&
+      search.length === 0
+    ) {
+      return valContext.userData.deleteUsers;
     }
   };
-
   const getUsers = () => {
-    return valContext.rankUser.length !== 0 ? (
+    return valContext.userData.deleteUsers.length !== 0 ? (
       <>
         <input
           type="text"
@@ -44,12 +42,11 @@ export default function ListOfAllUsers() {
               <th className={userMngCss.boxes}>
                 {USERMNG.TOTAL_PRICE_PURCHASES}
               </th>
-              <th className={userMngCss.boxes}>{DELETE.DELETE}</th>
+              <th className={userMngCss.boxes}>{USERMNG.RECOVER}</th>
             </tr>
-
             {searchUsers().map((val) => {
               let sum = 0;
-              val.historyOfCart?.forEach((valHistory) => {
+              val.historyOfCart.forEach((valHistory) => {
                 return (sum += valHistory.price);
               });
               return (
@@ -67,12 +64,12 @@ export default function ListOfAllUsers() {
                       {CART.SHEKEL}
                     </td>
                     <td
-                      className={` ${userMngCss.boxes} ${userMngCss.X}`}
+                      className={` ${userMngCss.boxes} ${userMngCss.vi}`}
                       onClick={() => {
-                        deleteUser(val);
+                        createAccount(val);
                       }}
                     >
-                      {PRODUCT.X}
+                      {USERMNG.VI}
                     </td>
                   </tr>
                 </>

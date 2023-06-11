@@ -12,14 +12,18 @@ const useLogin = () => {
   const valContext = useContext(contextApi);
   const loginPost = async (userName, password) => {
     try {
+      debugger
       const res = await axios.post(POST.LOGIN, {
         userName: userName,
         password: password,
       });
       const data = res.data;
+      debugger
       if (data.msg === "success") {
+        debugger
         nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
         valContext.userConnect(data.user);
+        valContext.getAllUserRank()
         Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) }); // Set the expiration time to 30 minutes
       } else {
         alert(data);

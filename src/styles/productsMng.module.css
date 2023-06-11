@@ -1,0 +1,15 @@
+.containerAddProducts {
+  border: 3px var(--main-color) dashed;
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+  width: 60%;
+  box-shadow: 8px 8px 8px  #8888;
+}
+.addProduct{
+cursor: pointer;
+font-weight: 500;
+}
+.containerEditProduct{
+  margin-top: 20vh;
+}

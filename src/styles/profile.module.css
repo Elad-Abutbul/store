@@ -1,5 +1,5 @@
 .container {
-  margin-top: 10vh;
+  margin-top: 7vh;
   padding: 20px;
   border-radius: 10px;
 }
@@ -54,4 +54,9 @@
 p {
   margin: 5px;
   padding: 0;
+}
+@media (max-width: 800) {
+.weather{
+  display: none;
+}
 }

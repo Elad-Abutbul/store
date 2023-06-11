@@ -15,7 +15,6 @@ const useCreateAccount = () => {
   const valContext = useContext(contextApi);
   const createAccount = async (valUser) => {
     try {
-      debugger;
       const res = await axios.post(POST.CREATEUSERS, {
         name: valUser.name,
         lastName: valUser.lastName,
@@ -25,13 +24,13 @@ const useCreateAccount = () => {
         historyOfCart: valUser.historyOfCart,
         cart: valUser.cart,
         city: valUser.city,
-        ceoId: valContext.userData._id,
+        ceoId: valContext.userData?._id,
       });
       if (res.data === "UserName exists") {
         alert(res.data);
       } else {
-        if (valContext.userData.rank !== "ceo") {
-          nav(ROUTES.ENTRY);
+        if (valContext.userData?.rank !== "ceo") {
+          nav('/');
         } else {
           removeFromDeleteList(valUser);
         }

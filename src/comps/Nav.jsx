@@ -9,20 +9,29 @@ import NavManagement from "./management/comps/NavMng";
 import { RANKSUSER } from "../constans/RanksUser.js";
 import Cookies from "js-cookie";
 import { JWT } from "../constans/jwtToken";
+import diamond from './diamond.png'
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [cartLengthChanged, setCartLengthChanged] = useState(false);
   const nav = useNavigate();
   const handleLinkClick = (route) => {
     setActiveLink(route);
+    setIsNavOpen(false);
   };
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   const logOut = async () => {
     valContext.userDisconnect();
     Cookies.remove(JWT.TOKEN);
     nav("/");
     await valContext.getAllUserRank();
   };
+
   useEffect(() => {
     if (valContext.userData?.cart?.length !== 0) {
       setCartLengthChanged(true);
@@ -32,19 +41,27 @@ export default function Nav() {
       return () => clearTimeout(timer);
     }
   }, [valContext.userData?.cart?.length]);
+
   return (
     <>
       <nav className={navCss.navbar}>
         <Link to={ROUTES.PRODUCTS}>
-          <h1 className={navCss.icon}>{NAV.ELAD_JEWELRY_STORE}</h1>
+          <h1 className={`${navCss.icon}`}>{NAV.ELAD_JEWELRY_STORE}</h1>
         </Link>
-        <Link to={ROUTES.PRODUCTS}>
-          <img
-            className={navCss.iconPhone}
-            src="https://cdn-user-icons.flaticon.com/102795/102795171/1684862033391.svg?token=exp=1684862934~hmac=96f8071cd1086958c97134a38b780846"
-          />
-        </Link>
-        <div className={navCss.nav}>
+        <div className={navCss.phone}>
+          <h1 className={navCss.menuIcon} onClick={toggleNav}>
+            ☰
+          </h1>
+          <Link to={ROUTES.PRODUCTS}>
+            <img
+              className={navCss.iconPhone}
+              src={diamond}
+              alt="dimondIcon"
+            />
+          </Link>
+        </div>
+
+        <div className={`${navCss.nav} ${isNavOpen ? navCss.open : ""}`}>
           {valContext.userData?.rank === RANKSUSER.CEO && (
             <NavManagement
               activeLink={activeLink}

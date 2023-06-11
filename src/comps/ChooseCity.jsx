@@ -8,7 +8,6 @@ export default function ChooseCity({ setShowChooseCity }) {
   const valContext = useContext(contextApi);
   const { apiWeather } = useWeather();
   const valid = async () => {
-    debugger;
     if (valContext.selectCity === "") return alert("choose a city");
     apiWeather(setShowChooseCity);
   };
@@ -26,7 +25,9 @@ export default function ChooseCity({ setShowChooseCity }) {
       <button className={cartCss.btnCity} onClick={valid}>
         {CITY.SUMBIT}
       </button>
-      <h2 onClick={() => setShowChooseCity(false)} className={cartCss.xCity}>{PRODUCT.X}</h2>
+      <h2 onClick={() => setShowChooseCity(false)} className={cartCss.xCity}>
+        {PRODUCT.X}
+      </h2>
     </div>
   );
 }

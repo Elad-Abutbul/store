@@ -15,7 +15,7 @@ const usePayment = () => {
           POST.PAY,
           {
             items: valContext.selectedIteamToPay,
-            userId: valContext.userData._id,
+            userId: valContext.userData?._id,
           },
           {
             headers: {

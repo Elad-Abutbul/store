@@ -10,6 +10,7 @@ export default function Data() {
   const valContext = useContext(contextApi);
   const [bestProduct, setBestProduct] = useState([]);
   let sumAll = 0;
+
   const { bestSeller, countArr } = useBestSeller();
   const { bestProductDB } = useBestProductDB();
   const allPurchases = () => {
@@ -25,7 +26,7 @@ export default function Data() {
     bestSeller();
     let sortCount = countArr.sort((a, b) => b.count - a.count);
     bestProductDB(sortCount, setBestProduct);
-  });
+  }, []);
   return (
     <div>
       <h3>

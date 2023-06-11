@@ -18,7 +18,7 @@ const useDeleteItem = () => {
         POST.DELETEITEAMS,
         {
           productId: productId,
-          userNameId: valContext.userData._id,
+          userNameId: valContext.userData?._id,
         },
         {
           headers: {

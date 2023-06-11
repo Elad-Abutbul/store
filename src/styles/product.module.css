@@ -16,11 +16,16 @@
   transform: scale(1.01);
   z-index: -1;
 }
-.img {
+.editImg {
+  width: 3%;
+  height: 3%;
+}
+.productImg {
   width: 20%;
   height: 10%;
+}
+.img {
   transition: all 0.2s ease-in-out;
-  /* mix-blend-mode: color-burn; */
 }
 .img:hover {
   transform: scale(1.4);
@@ -32,7 +37,10 @@
 .plusOrX:hover {
   transform: scale(1.4);
 }
-#delete:hover {
+.delete{
+  font-weight:500;
+}
+.delete:hover {
   color: red;
 }
 .h1Type {
@@ -69,4 +77,9 @@
 
 .radioInput:checked::before {
   opacity: 1;
+}
+@media (max-width: 600px) {
+  .h2 {
+    font-size: 16px;
+  }
 }

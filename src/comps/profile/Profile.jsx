@@ -67,12 +67,12 @@ export default function Profile() {
             <Link to={PROFILE.DATA.toLowerCase()}>
               <button
                 className={`${profileCss.btn} ${
-                  selectedComponent === PROFILE.DATA.toLowerCase()
+                  selectedComponent === PROFILE.DATA
                     ? profileCss.active
                     : EMPTYSTRING.EMPTYSTRING
                 }`}
                 onClick={() =>
-                  handleSelectComponent(PROFILE.DATA.toLowerCase())
+                  handleSelectComponent(PROFILE.DATA)
                 }
               >
                 {PROFILE.DATA}

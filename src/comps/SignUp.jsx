@@ -24,7 +24,6 @@ export default function SignUp({ url }) {
   const [userName, setUserName] = useState(EMPTYSTRING.EMPTYSTRING);
   const [password, setPassword] = useState(EMPTYSTRING.EMPTYSTRING);
   const valid = async () => {
-    debugger;
 
     if (url === "edit") {
       await apiWeather(userName, false);

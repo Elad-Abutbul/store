@@ -18,7 +18,7 @@ const useSearchByNameProduct = () => {
           POST.SEACH_BY_NAME,
           {
             getItem: name,
-            userId: valContext.userData._id,
+            userId: valContext.userData?._id,
           },
           {
             headers: {

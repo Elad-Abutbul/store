@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "../../axiosConfig";
 import { GET } from "../../constans/hardCoded/app/AxiosGetOnStart";
-
 const useRankUser = () => {
   const [rankUser, setRankUser] = useState([]);
   const getAllUserRank = async () => {

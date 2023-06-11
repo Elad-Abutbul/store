@@ -20,6 +20,7 @@
 .title {
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px #8888;
+  font-weight: 400;
 }
 
 .inputContainer {
@@ -43,7 +44,6 @@
 .input:active {
   border-bottom: 2px solid var(--main-color);
   box-shadow: 3px 3px 3px #8888;
-
 }
 
 .btn {
@@ -55,15 +55,13 @@
   cursor: pointer;
   outline: none;
   border-radius: 3px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .btn:hover {
   box-shadow: 3px 3px 3px #8888;
   transform: scale(1.1);
 }
-
-
 
 /* .btn:after {
   content: "";
@@ -95,4 +93,9 @@
 .link:hover {
   text-decoration: underline;
   color: var(--main-color);
+}
+@media only screen and (max-width: 600px) {
+.form{
+  width: 50%;
+}
 }

@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import entryCss from "../styles/logInAndSignUp.module.css";
-import axios from "../axiosConfig";
 import { contextApi } from "../contextApi";
-import { POST } from "../constans/AxiosPost";
 import { ROUTES } from "../constans/Routes";
 import { LOGIN } from "../constans/hardCoded/login/LoginHardCoded";
 import { JWT } from "../constans/jwtToken";
@@ -22,8 +20,11 @@ export default function LogIn() {
       nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
       const decodToken = jwtDecode(token);
       valContext.userConnect(decodToken.findUser);
+    } else {
+      valContext.userDisconnect();
+      Cookies.remove(JWT.TOKEN);
     }
-  }, []);
+  },[]);
   const valid = async () => {
     if (!userName || !password) {
       alert(LOGIN.FIELDSAREMISSING);

@@ -7,7 +7,6 @@ const useSearchByUserName = () => {
   const searchByUserName = async (userName, setSearch) => {
     const token = Cookies.get(JWT.TOKEN);
     if (userName !== "") {
-      debugger
       const res = await axios.post(
         POST.SEARCH_BY_USERNAME_MNG,
         {
