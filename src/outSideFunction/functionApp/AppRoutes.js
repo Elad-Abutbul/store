@@ -30,11 +30,11 @@ import ListOfDeletingProducts from "../../comps/management/comps/productsMng/com
 import EditProduct from "../../comps/management/comps/productsMng/EditProduct.jsx/EditProduct";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
-
+  const token = Cookies.get(JWT.TOKEN);
   return (
     <BrowserRouter>
       <Routes>
-        {Cookies.get(JWT.TOKEN) ? (
+        {token && (
           <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
             <Route path={ROUTES.PRODUCTS} element={<Products />} />
             <Route path={ROUTES.RINGS} element={<Rings />} />
@@ -81,11 +81,6 @@ export default function AppRoutes() {
               </>
             )}
           </Route>
-        ) : (
-          <Route
-            path={ROUTES.ENTRY}
-            element={valContext.loading ? <Loading /> : <LogIn />}
-          />
         )}
         <Route
           path={ROUTES.ENTRY}

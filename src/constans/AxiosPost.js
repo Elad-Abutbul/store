@@ -19,4 +19,5 @@ export const POST = {
   DELETEPRODUCT: "/ceo/deleteProduct",
   IF_NAME_EXIXT_PRODUCT: "/ceo/ifNameOfTheProductExixt",
   UPDATE_PRODUCT_CEO: "/ceo/updateProductCEO",
+  SEARCH_IN_DELETE_PRODUCT_LIST: "/ceo/searchInDeleteProductList",
 };

@@ -12,15 +12,12 @@ const useLogin = () => {
   const valContext = useContext(contextApi);
   const loginPost = async (userName, password) => {
     try {
-      debugger
       const res = await axios.post(POST.LOGIN, {
         userName: userName,
         password: password,
       });
       const data = res.data;
-      debugger
       if (data.msg === "success") {
-        debugger
         nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
         valContext.userConnect(data.user);
         valContext.getAllUserRank()

@@ -10,7 +10,7 @@ export default function ProductsCEO() {
 
   return (
     <div className={userMngCss.mainContainer}>
-      <h1 className={userMngCss.h1}>{USERMNG.ALL_USERS}</h1>
+      <h1 className={userMngCss.h1}>Product CEO</h1>
       <div>
         <Link to={ROUTES.ADDPRODUCTS}>
           <button

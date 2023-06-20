@@ -11,7 +11,6 @@ import { JWT } from "../../constans/jwtToken";
 const useDeleteProduct = () => {
   const valContext = useContext(contextApi);
   const deleteTheProduct = async (valProduct) => {
-    debugger;
     const token = Cookies.get(JWT.TOKEN);
     try {
       const res = await axios.post(

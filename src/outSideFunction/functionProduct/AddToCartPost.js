@@ -10,7 +10,6 @@ const useAddToCart = () => {
   const addToCartFunc = async (productId, valContext, valProduct) => {
     const token = Cookies.get(JWT.TOKEN);
     try {
-      debugger
       const res = await axios.post(
         POST.ADDTOCART,
         {

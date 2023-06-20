@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import productMng from "../../../../../styles/productsMng.module.css";
 import useUpdateProduct from "../../../../../outSideFunction/functionMng/updateProductCEO";
 import useCheckNameExixt from "../../../../../outSideFunction/functionMng/checkIfNameExixtProduct";
+import productMngCss from "../../../../../styles/productsMng.module.css";
+
 export default function EditProduct() {
   const location = useLocation();
 
@@ -13,7 +15,7 @@ export default function EditProduct() {
   const { updateProduct } = useUpdateProduct();
   const { chceckIfNameExixt } = useCheckNameExixt();
   const nav = useNavigate();
-
+  console.log();
   const validateImageUrl = async (url) => {
     return new Promise((resolve) => {
       const img = new Image();
@@ -25,7 +27,12 @@ export default function EditProduct() {
   const valid = async () => {
     if (!name || !desc || !image || !price) {
       alert("Fields Are Missing");
-    } else if (await chceckIfNameExixt(name)) {
+    } else if (
+      await chceckIfNameExixt(
+        name,
+        location.state._id,
+      )
+    ) {
       alert("Name of the product already exists");
     } else if (!/^[0-9]+$/.test(price)) {
       alert("Enter a price without letters and spaces");
@@ -48,7 +55,7 @@ export default function EditProduct() {
     <div>
       <div className={productMng.containerEditProduct}>
         <h1>Edit The Product {location.state.name}</h1>
-        <div className={productMng.formEditProduct}>
+        <div className={productMng.containerForm}>
           <input
             type="text"
             value={name}
@@ -73,12 +80,14 @@ export default function EditProduct() {
             placeholder="Enter Image"
             onChange={(e) => setImage(e.target.value)}
           />
-          <select>
+          <select className={productMngCss.select}>
             <option value="" disabled selected>
               {location.state.type}
             </option>
           </select>
-          <button onClick={valid}>Edit Product</button>
+          <button className={productMng.btn} onClick={valid}>
+            Edit Product
+          </button>
         </div>
       </div>
       <button onClick={() => nav(-1)}>return back</button>

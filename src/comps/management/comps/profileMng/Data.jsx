@@ -10,7 +10,6 @@ export default function Data() {
   const valContext = useContext(contextApi);
   const [bestProduct, setBestProduct] = useState([]);
   let sumAll = 0;
-
   const { bestSeller, countArr } = useBestSeller();
   const { bestProductDB } = useBestProductDB();
   const allPurchases = () => {

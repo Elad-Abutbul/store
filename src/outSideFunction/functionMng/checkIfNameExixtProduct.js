@@ -9,13 +9,15 @@ import { useNavigate } from "react-router-dom";
 const useCheckNameExixt = () => {
   const valContext = useContext(contextApi);
   const nav = useNavigate();
-  const chceckIfNameExixt = async (name) => {
+  const chceckIfNameExixt = async (name, productId) => {
+
     const token = Cookies.get(JWT.TOKEN);
     const res = await axios.post(
       POST.IF_NAME_EXIXT_PRODUCT,
       {
         nameProduct: name,
         ceoId: valContext.userData?._id,
+        productId: productId,
       },
       {
         headers: {

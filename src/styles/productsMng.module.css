@@ -4,12 +4,40 @@
   justify-content: center;
   margin: 10px auto;
   width: 60%;
-  box-shadow: 8px 8px 8px  #8888;
+  box-shadow: 8px 8px 8px #8888;
 }
-.addProduct{
-cursor: pointer;
-font-weight: 500;
+.addProduct {
+  cursor: pointer;
+  font-weight: 500;
 }
-.containerEditProduct{
-  margin-top: 20vh;
+.containerEditProduct {
+  margin-top: 16vh;
+}
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 40%;
+  margin: 20px auto;
+}
+.btn {
+  padding: 10px;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  color: white;
+  border: none;
+  transition: 0.3s;
+}
+.btn:hover {
+  transform: scale(1.02);
+}
+.select{
+  padding: 10px;
+}
+h1{
+  font-weight: 500;
+}
+button{
+  padding: 10px;
+  background-color: gray;
 }

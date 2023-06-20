@@ -11,9 +11,8 @@ import { getEarrings } from "../functionApp/getSpecificProducts/getEarrings";
 import { useNavigate } from "react-router-dom";
 const useUpdateProduct = () => {
   const valContext = useContext(contextApi);
-  useNavigate();
+  const nav = useNavigate();
   const updateProduct = async (product) => {
-    debugger;
     const token = Cookies.get(JWT.TOKEN);
     const res = await axios.post(
       POST.UPDATE_PRODUCT_CEO,
@@ -27,7 +26,6 @@ const useUpdateProduct = () => {
         },
       }
     );
-    debugger;
     if (res.data.msg === "update product suc") {
       alert(res.data.msg);
       Cookies.set(JWT.TOKEN, res.data.token, { expires: 30 / (24 * 60) });
@@ -40,6 +38,13 @@ const useUpdateProduct = () => {
       } else if (product.type === "earring") {
         getEarrings(valContext.setEarringProducts);
       }
+    } else if (
+      res.data === "Failed to authenticate token" ||
+      res.data === "No token provided"
+    ) {
+      alert(res.data);
+      Cookies.remove(JWT.TOKEN);
+      nav("/");
     } else {
       alert(res.data);
     }

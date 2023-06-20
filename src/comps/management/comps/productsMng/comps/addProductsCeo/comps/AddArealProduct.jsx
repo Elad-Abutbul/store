@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAddProductToDB from "../../../../../../../outSideFunction/functionMng/addProduct";
 import useCheckNameExixt from "../../../../../../../outSideFunction/functionMng/checkIfNameExixtProduct";
-
+import productMngCss from "../../../../../../../styles/productsMng.module.css";
 export default function AddArealProduct({ setShowAddProduct }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -21,7 +21,6 @@ export default function AddArealProduct({ setShowAddProduct }) {
   };
 
   const valid = async () => {
-    debugger;
     if (!name || !desc || !linkImg || !type || !price) {
       alert("Fields Are Missing");
     } else if (await chceckIfNameExixt(name)) {
@@ -36,7 +35,7 @@ export default function AddArealProduct({ setShowAddProduct }) {
   };
 
   return (
-    <div>
+    <div className={productMngCss.containerForm}>
       <input
         type="text"
         placeholder="Name Of The Product.."
@@ -57,16 +56,19 @@ export default function AddArealProduct({ setShowAddProduct }) {
         placeholder="Link To Img"
         onChange={(e) => setLinkImg(e.target.value)}
       />
-      <select onChange={(e) => setType(e.target.value)}>
-        <option value="" disabled selected>
+      <select
+        onChange={(e) => setType(e.target.value)}
+        className={productMngCss.select}
+      >
+        <option value="" disabled selected  >
           Enter A Type
         </option>
-        <option value="ring">ring</option>
-        <option value="bracelet">bracelet</option>
-        <option value="necklace">necklace</option>
-        <option value="earring">earring</option>
+        <option value="ring" className={productMngCss.option}>ring</option>
+        <option value="bracelet" className={productMngCss.option}>bracelet</option>
+        <option value="necklace" className={productMngCss.option}>necklace</option>
+        <option value="earring" className={productMngCss.option}>earring</option>
       </select>
-      <button onClick={valid}>Submit</button>
+      <button onClick={valid} className={productMngCss.btn}>Submit</button>
     </div>
   );
 }
