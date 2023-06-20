@@ -5,8 +5,8 @@ export const USERMNG = {
   ALL_PURCHASES: "All Purchases",
   TOTAL_PRICE_PURCHASES: "Total Price Purchases",
   ALL_USERS: "All Users",
-  ALL_DELETING_USERS:'All Deleting Users',
+  ALL_DELETING_USERS: "All Deleting Users",
   VI: "✔",
   RECOVER: "Recover",
-  
+  USERS_CEO: "USERS CEO",
 };

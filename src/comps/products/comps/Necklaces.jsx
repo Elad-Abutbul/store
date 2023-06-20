@@ -3,12 +3,13 @@ import { contextApi } from "../../../contextApi";
 import Product from "../../Product";
 import { URL } from "../../../constans/Url";
 import typeProductsCss from "../../../styles/typeProducts.module.css";
+import { PRODUCTS } from "../../../constans/hardCoded/mangement/productsMng/products";
 
 export default function Necklaces() {
   const valContext = useContext(contextApi);
   return (
     <div>
-      <h1 className={typeProductsCss.h1}>Necklaces</h1>
+      <h1 className={typeProductsCss.h1}>{PRODUCTS.NECKLACE}</h1>
 
       {valContext.necklaceProducts.map((valProduct, index) => {
         return (

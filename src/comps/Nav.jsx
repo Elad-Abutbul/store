@@ -9,7 +9,7 @@ import NavManagement from "./management/comps/NavMng";
 import { RANKSUSER } from "../constans/RanksUser.js";
 import Cookies from "js-cookie";
 import { JWT } from "../constans/jwtToken";
-import diamond from './diamond.png'
+import diamond from "./diamond.png";
 export default function Nav() {
   const valContext = useContext(contextApi);
   const [activeLink, setActiveLink] = useState(ROUTES.PRODUCTS);
@@ -53,11 +53,7 @@ export default function Nav() {
             ☰
           </h1>
           <Link to={ROUTES.PRODUCTS}>
-            <img
-              className={navCss.iconPhone}
-              src={diamond}
-              alt="dimondIcon"
-            />
+            <img className={navCss.iconPhone} src={diamond} alt="dimondIcon" />
           </Link>
         </div>
 

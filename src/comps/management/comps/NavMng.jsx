@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import navCss from "../../../styles/nav.module.css";
 import { EMPTYSTRING } from "../../../constans/EmptyString";
 import { ROUTES } from "../../../constans/Routes";
+import { PRODUCTS } from "../../../constans/hardCoded/mangement/productsMng/products";
+import { USERMNG } from "../../../constans/hardCoded/mangement/usersMng/UsersMngHardCoded";
 
 export default function NavManagement({ activeLink, handleLinkClick }) {
   return (
     <>
-      {" "}
       <Link
         to={`${ROUTES.USERSCEO}/${ROUTES.LIST_OF_ALL_USERS}`}
         className={`${navCss.link} ${
@@ -17,7 +18,7 @@ export default function NavManagement({ activeLink, handleLinkClick }) {
         }`}
         onClick={() => handleLinkClick(`${ROUTES.USERSCEO}`)}
       >
-        USERS CEO
+        {USERMNG.USERS_CEO}
       </Link>
       <Link
         to={`${ROUTES.PRODUCTSCEO}/${ROUTES.ADDPRODUCTS}`}
@@ -28,7 +29,7 @@ export default function NavManagement({ activeLink, handleLinkClick }) {
         }`}
         onClick={() => handleLinkClick(`${ROUTES.PRODUCTSCEO}`)}
       >
-        PRODUCTS CEO
+        {PRODUCTS.PRODUCTS_CEO}
       </Link>
     </>
   );

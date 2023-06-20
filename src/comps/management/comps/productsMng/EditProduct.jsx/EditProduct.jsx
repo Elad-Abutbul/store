@@ -4,10 +4,11 @@ import productMng from "../../../../../styles/productsMng.module.css";
 import useUpdateProduct from "../../../../../outSideFunction/functionMng/updateProductCEO";
 import useCheckNameExixt from "../../../../../outSideFunction/functionMng/checkIfNameExixtProduct";
 import productMngCss from "../../../../../styles/productsMng.module.css";
+import { EDIT_PRODUCT } from "../../../../../constans/hardCoded/mangement/editProductMng/editProductHardCoded";
+import { validateImageUrl } from "../../../../../outSideFunction/checkImage/ImageValidation";
 
 export default function EditProduct() {
   const location = useLocation();
-
   const [name, setName] = useState(location.state.name);
   const [desc, setDesc] = useState(location.state.description);
   const [price, setPrice] = useState(location.state.price);
@@ -15,24 +16,10 @@ export default function EditProduct() {
   const { updateProduct } = useUpdateProduct();
   const { chceckIfNameExixt } = useCheckNameExixt();
   const nav = useNavigate();
-  console.log();
-  const validateImageUrl = async (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = url;
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-    });
-  };
   const valid = async () => {
     if (!name || !desc || !image || !price) {
       alert("Fields Are Missing");
-    } else if (
-      await chceckIfNameExixt(
-        name,
-        location.state._id,
-      )
-    ) {
+    } else if (await chceckIfNameExixt(name, location.state._id)) {
       alert("Name of the product already exists");
     } else if (!/^[0-9]+$/.test(price)) {
       alert("Enter a price without letters and spaces");
@@ -54,7 +41,9 @@ export default function EditProduct() {
   return (
     <div>
       <div className={productMng.containerEditProduct}>
-        <h1>Edit The Product {location.state.name}</h1>
+        <h1>
+          {EDIT_PRODUCT.EDIT_PRODUCT} {location.state.name}
+        </h1>
         <div className={productMng.containerForm}>
           <input
             type="text"
@@ -86,11 +75,11 @@ export default function EditProduct() {
             </option>
           </select>
           <button className={productMng.btn} onClick={valid}>
-            Edit Product
+            {EDIT_PRODUCT.EDIT_PRODUCT}
           </button>
         </div>
       </div>
-      <button onClick={() => nav(-1)}>return back</button>
+      <button onClick={() => nav(-1)}>{EDIT_PRODUCT.RETURN_BACK}</button>
     </div>
   );
 }

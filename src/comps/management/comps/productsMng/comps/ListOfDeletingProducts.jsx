@@ -8,6 +8,7 @@ import { getBraclets } from "../../../../../outSideFunction/functionApp/getSpeci
 import { getRing } from "../../../../../outSideFunction/functionApp/getSpecificProducts/getRings";
 import { getEarrings } from "../../../../../outSideFunction/functionApp/getSpecificProducts/getEarrings";
 import useSearchInDeleteProductList from "../../../../../outSideFunction/functionMng/searchInDeleteProductList";
+import { PRODUCTS } from "../../../../../constans/hardCoded/mangement/productsMng/products";
 
 export default function ListOfDeletingProducts() {
   const valContext = useContext(contextApi);
@@ -41,9 +42,11 @@ export default function ListOfDeletingProducts() {
           <table id={userMngCss.table}>
             <tbody>
               <tr>
-                <th className={userMngCss.boxes}>Name Of Product</th>
-                <th className={userMngCss.boxes}>Image Of Product</th>
-                <th className={userMngCss.boxes}>revive</th>
+                <th className={userMngCss.boxes}>{PRODUCTS.NAME_OF_PRODUCT}</th>
+                <th className={userMngCss.boxes}>
+                  {PRODUCTS.IMAGE_OF_PRODUCT}
+                </th>
+                <th className={userMngCss.boxes}>{PRODUCTS.REVIVE}</th>
               </tr>
               {ifSearchWork().map((valProduct) => {
                 return (
@@ -85,7 +88,7 @@ export default function ListOfDeletingProducts() {
           </table>
         </>
       ) : (
-        <p>No Products To Show..</p>
+        <p>{PRODUCTS.NO_PRODUCTS_TO_SHOW}</p>
       )}
     </div>
   );
