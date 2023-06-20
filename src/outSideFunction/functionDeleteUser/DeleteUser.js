@@ -1,23 +1,50 @@
+import { useContext } from "react";
 import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
 import { ROUTES } from "../../constans/Routes";
+import { contextApi } from "../../contextApi";
+import { JWT } from "../../constans/jwtToken";
+import Cookies from "js-cookie";
+import { RANKSUSER } from "../../constans/RanksUser";
 
 const useDeleteUser = () => {
-  const deleteUser = async (valContext, nav) => {
+  const valContext = useContext(contextApi);
+
+  const deleteUser = async (valUser, nav) => {
     try {
-      const res = await axios.delete(POST.DELETEUSER, {
-        userId: valContext.userData._id,
-      });
+      const token = Cookies.get(JWT.TOKEN);
+
+      const res = await axios.post(
+        POST.DELETEUSER,
+        {
+          userName: valUser.userName,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = res.data;
-      if (data === "delete the user") {
-        alert(data);
-        valContext.userDisconnect();
-        nav(ROUTES.ENTRY);
+      if (data.msg === "delete the user") {
+        alert(data.msg);
+        if (nav !== undefined) {
+          valContext.userDisconnect();
+          Cookies.remove(JWT.TOKEN);
+          nav(ROUTES.ENTRY);
+        } else {
+          valContext.deleteFromRankUser(valUser.userName);
+          Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) });
+          if (valContext.userData.rank === RANKSUSER.CEO) {
+            valContext.addToListOfDeletingUsersMng(valUser);
+          }
+        }
       } else {
-        console.error(data);
+        alert(data);
       }
     } catch (error) {
       console.log(error);
+      alert("An error occurred while deleting the user");
     }
   };
 

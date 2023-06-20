@@ -15,39 +15,78 @@ import SignUp from "../../comps/SignUp";
 import LogIn from "../../comps/LogIn";
 import { ROUTES } from "../../constans/Routes";
 import { URL } from "../../constans/Url";
-import { LOADING } from "../../constans/hardCoded/appRoutes/Loading";
-import { NOTFOUND } from "../../constans/hardCoded/appRoutes/NotFound";
 import { contextApi } from "../../contextApi";
+import Users from "../../comps/management/comps/usersMng/Users";
+import Data from "../../comps/management/comps/profileMng/Data";
+import { RANKSUSER } from "../../constans/RanksUser";
+import Cookies from "js-cookie";
+import { JWT } from "../../constans/jwtToken";
+import ListOfAllUsers from "../../comps/management/comps/usersMng/comps/ListOfAllUsers";
+import ListOfAllDeletingUsers from "../../comps/management/comps/usersMng/comps/ListOfAllDeletingUsers";
+import Loading from "../../comps/Loading";
+import ProductsCEO from "../../comps/management/comps/productsMng/ProductsCEO";
+import AddProducts from "../../comps/management/comps/productsMng/comps/addProductsCeo/AddProducts";
+import ListOfDeletingProducts from "../../comps/management/comps/productsMng/comps/ListOfDeletingProducts";
+import EditProduct from "../../comps/management/comps/productsMng/EditProduct.jsx/EditProduct";
 export default function AppRoutes() {
   const valContext = useContext(contextApi);
+  const token = Cookies.get(JWT.TOKEN);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
-          <Route path={ROUTES.PRODUCTS} element={<Products />} />
-          <Route path={ROUTES.RINGS} element={<Rings />} />
-          <Route path={ROUTES.EARRINGS} element={<Earrings />} />
-          <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
-          <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
+        {token && (
+          <Route path={ROUTES.ELADJEWELRY} element={<Nav />}>
+            <Route path={ROUTES.PRODUCTS} element={<Products />} />
+            <Route path={ROUTES.RINGS} element={<Rings />} />
+            <Route path={ROUTES.EARRINGS} element={<Earrings />} />
+            <Route path={ROUTES.BRACELETS} element={<Bracelets />} />
+            <Route path={ROUTES.NECKLACES} element={<Necklaces />} />
+            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.CART} element={<Cart />} />
 
-          <Route path={ROUTES.SEARCH} element={<Search />} />
-          <Route path={ROUTES.CART} element={<Cart />} />
+            <Route path={ROUTES.PROFILE} element={<Profile />}>
+              <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
+              <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
+              <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+              <Route path={ROUTES.DATA} element={<Data />} />
+            </Route>
 
-          <Route path={ROUTES.PROFILE} element={<Profile />}>
-            <Route path={ROUTES.EDIT} element={<SignUp url={URL.EDIT} />} />
-            <Route path={ROUTES.DELETEACCOUNT} element={<DeleteAccount />} />
-            <Route path={ROUTES.VIEWPURCHASES} element={<ViewPurchases />} />
+            {valContext.userData?.rank === RANKSUSER.CEO && (
+              <>
+                <Route path={ROUTES.USERSCEO} element={<Users />}>
+                  <Route
+                    path={ROUTES.LIST_OF_ALL_USERS}
+                    element={<ListOfAllUsers />}
+                  />
+                  <Route
+                    path={ROUTES.LIST_OF_DELETING_USERS}
+                    element={<ListOfAllDeletingUsers />}
+                  />
+                </Route>
+                <Route path={ROUTES.PRODUCTSCEO} element={<ProductsCEO />}>
+                  <Route path={ROUTES.ADDPRODUCTS} element={<AddProducts />} />
+                  <Route
+                    path={ROUTES.LIST_OF_DELETING_PRODUCTS}
+                    element={<ListOfDeletingProducts />}
+                  />
+                </Route>
+                {valContext.allProducts.map((product) => {
+                  return (
+                    <Route
+                      path={`${ROUTES.ELADJEWELRY}${ROUTES.EDITPRODUCT}/${product.type}`}
+                      element={<EditProduct />}
+                    />
+                  );
+                })}
+              </>
+            )}
           </Route>
-        </Route>
+        )}
         <Route
           path={ROUTES.ENTRY}
-          element={valContext.loading ? <h1>{LOADING.LOADING}</h1> : <LogIn />}
+          element={valContext.loading ? <Loading /> : <LogIn />}
         />
         <Route path={ROUTES.SIGNUP} element={<SignUp />} />
-        <Route
-          path={ROUTES.PAGENOTFOUND}
-          element={<h2>{NOTFOUND.NOTFOUND}</h2>}
-        />
       </Routes>
     </BrowserRouter>
   );

@@ -18,8 +18,9 @@
 }
 
 .title {
-  font-size: 2rem;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 4px #8888;
+  font-weight: 400;
 }
 
 .inputContainer {
@@ -33,6 +34,7 @@
   width: 90%;
   border: none;
   border-bottom: 2px solid #ccc;
+  border-radius: 5px;
   outline: none;
   transition: all 0.4s ease-in-out;
   font-size: 1.2rem;
@@ -41,22 +43,44 @@
 .input:focus,
 .input:active {
   border-bottom: 2px solid var(--main-color);
+  box-shadow: 3px 3px 3px #8888;
 }
 
 .btn {
-  margin-top: 30px;
-  padding: 10px 20px;
+  position: relative;
   background-color: var(--main-color);
+  padding: 10px 20px;
+  font-size: 16px;
   color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
+  border-radius: 3px;
+  transition: 0.2s;
 }
 
 .btn:hover {
-  background-color: var(--hover-color);
+  box-shadow: 3px 3px 3px #8888;
+  transform: scale(1.1);
 }
+
+/* .btn:after {
+  content: "";
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.btn:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+} */
 
 .link {
   cursor: pointer;
@@ -69,4 +93,9 @@
 .link:hover {
   text-decoration: underline;
   color: var(--main-color);
+}
+@media only screen and (max-width: 600px) {
+.form{
+  width: 50%;
+}
 }

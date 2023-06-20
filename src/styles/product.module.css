@@ -4,7 +4,7 @@
   justify-content: space-around;
   background-color: white;
   margin: auto;
-  width: 85%;
+  width: 90%;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -16,9 +16,15 @@
   transform: scale(1.01);
   z-index: -1;
 }
-.img {
+.editImg {
+  width: 3%;
+  height: 3%;
+}
+.productImg {
   width: 20%;
   height: 10%;
+}
+.img {
   transition: all 0.2s ease-in-out;
 }
 .img:hover {
@@ -31,7 +37,10 @@
 .plusOrX:hover {
   transform: scale(1.4);
 }
-#delete:hover {
+.delete {
+  font-weight: 500;
+}
+.delete:hover {
   color: red;
 }
 .h1Type {
@@ -39,4 +48,44 @@
 }
 .h2 {
   font-weight: 400;
+}
+.radioContainer {
+  display: flex;
+  align-items: center;
+}
+
+.radioInput {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.radioInput::before {
+  content: "";
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.radioInput:checked::before {
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .h2 {
+    font-size: 12px;
+  }
+  /* .delete {
+    font-size: 14px;
+  } */
+  .plusOrX {
+    font-size: 22px;
+  }
 }

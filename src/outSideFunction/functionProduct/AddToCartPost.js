@@ -1,17 +1,38 @@
+import Cookies from "js-cookie";
 import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../constans/Routes";
+import { JWT } from "../../constans/jwtToken";
 
 const useAddToCart = () => {
+  const nav = useNavigate();
   const addToCartFunc = async (productId, valContext, valProduct) => {
-    const res = await axios.post(POST.ADDTOCART, {
-      productId: productId,
-      userNameId: valContext.userData._id,
-    });
-    const data = res.data;
-    if (data === "Product added to cart!") {
-      valContext.addToCart(valProduct);
-    } else {
-      alert("Cannot added to cart");
+    const token = Cookies.get(JWT.TOKEN);
+    try {
+      const res = await axios.post(
+        POST.ADDTOCART,
+        {
+          productId: productId,
+          userNameId: valContext.userData?._id,
+        },
+        {
+          headers: {
+            authorization: `${JWT.BEARER} ${token}`,
+          },
+        }
+      );
+      const data = res.data;
+      if (data.msg === "Product added to cart!") {
+        valContext.addToCart(valProduct);
+        Cookies.set(JWT.TOKEN, data.token, { expires: 30 / (24 * 60) });
+      } else {
+        alert("pls log in");
+        Cookies.remove(JWT.TOKEN);
+        nav(ROUTES.ENTRY);
+      }
+    } catch (error) {
+      alert(error);
     }
   };
   return { addToCartFunc };

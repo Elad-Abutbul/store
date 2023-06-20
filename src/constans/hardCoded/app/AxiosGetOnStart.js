@@ -1,6 +1,9 @@
-export const PRODUCTS = {
-  ALLRINGS: "/allProductsOfRing",
-  ALLBRACELETS: "/allProductsOfBracelet",
-  ALLNECKLACES: "/allProductsOfNecklace",
-  ALLEARIINGS: "/allProductsOfEarring",
+export const GET = {
+  ALLRINGS: "/allProducts/Ring",
+  ALLBRACELETS: "/allProducts/Bracelet",
+  ALLNECKLACES: "/allProducts/Necklace",
+  ALLEARIINGS: "/allProducts/Earring",
+  GETALLPRODUCTS: "/allProducts",
+  GETSUM: "/sumAllPurchases",
+  ALLRANKUSER: "/allRankUser",
 };

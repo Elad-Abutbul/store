@@ -1,5 +1,7 @@
 export const PRODUCT = {
   X: "X",
   PLUS: "+",
-  SELECTPRODUCT: "select product",
+  SELECTTOPAY: "Select to pay",
+  CONSTPRISE: "Const Prise",
+  WELCOME: "Welcome",
 };

@@ -3,7 +3,7 @@
   font-weight: 400;
 }
 
-.payAllBtn {
+.btnCity {
   background-color: var(--main-color);
   color: white;
   padding: 0.5rem 1rem;
@@ -14,6 +14,42 @@
   transition: all 0.2s ease-in-out;
 }
 
-.payAllBtn:hover {
+.btnCity :hover {
   background-color: var(--hover-color);
+}
+
+.Btn {
+  width: 130px;
+  height: 40px;
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+  transition-duration: 0.3s;
+  margin: auto;
+}
+.Btn:active {
+  transform: translate(5px, 5px);
+  transition-duration: 0.3s;
+}
+.containerCity {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto;
+}
+.xCity{
+  transition: .3s;
+  cursor: pointer;
+}
+.xCity:hover{
+  transform: scale(1.2);
+}
+@media (max-width: 600px) {
+.containerCity{
+  width: 70%;
+}
 }
