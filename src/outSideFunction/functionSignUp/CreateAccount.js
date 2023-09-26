@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
 import { RANKSUSER } from "../../constans/RanksUser";
-import { ROUTES } from "../../constans/Routes";
 import { useContext } from "react";
 import { contextApi } from "../../contextApi";
 import useRemoveFromDeleteList from "../functionMng/removeUserFromDeleteList";
