@@ -3,12 +3,10 @@ import axios from "../../axiosConfig";
 import { POST } from "../../constans/AxiosPost";
 import { contextApi } from "../../contextApi";
 import Cookies from "js-cookie";
-import { getRing } from "../functionApp/getSpecificProducts/getRings";
-import { getBraclets } from "../functionApp/getSpecificProducts/getBraclets";
-import { getNecklaces } from "../functionApp/getSpecificProducts/getNecklaces";
-import { getEarrings } from "../functionApp/getSpecificProducts/getEarrings";
 import { JWT } from "../../constans/jwtToken";
+import useWhatTypeTheProductment from "../whatTypeTheProduct/whatTypeTheProduct";
 const useDeleteProduct = () => {
+  const { whatTypeTheProduct } = useWhatTypeTheProductment();
   const valContext = useContext(contextApi);
   const deleteTheProduct = async (valProduct) => {
     const token = Cookies.get(JWT.TOKEN);
@@ -29,15 +27,7 @@ const useDeleteProduct = () => {
         alert(res.data.msg);
         valContext.setUserData(res.data.findUser);
         Cookies.set(JWT.TOKEN, res.data.token, { expires: 30 / (24 * 60) });
-        if (valProduct.type === "ring") {
-          getRing(valContext.setRingProducts);
-        } else if (valProduct.type === "bracelet") {
-          getBraclets(valContext.setBraceletProducts);
-        } else if (valContext.type === "necklace") {
-          getNecklaces(valContext.setNecklaceProducts);
-        } else if (valContext.type === "earring") {
-          getEarrings(valContext.setEarringProducts);
-        }
+        whatTypeTheProduct(valProduct.type);
       }
     } catch (error) {
       console.log(error);

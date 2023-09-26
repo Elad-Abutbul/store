@@ -9,6 +9,7 @@ import useDeleteProductFromPay from "./outSideFunction/functionApp/DeleteProduct
 import useRankUser from "./outSideFunction/functionMng/GetUserRank";
 import useSumPurchases from "./outSideFunction/functionApp/getSumPurchases";
 import useProductChooseToFalse from "./outSideFunction/functionApp/ProductChooseToFalse";
+
 function App() {
   const [selectedIteamToPay, setSelectedIteamToPay] = useState([]);
   const { pay, userData, setUserData } = usePaymentCart();
@@ -35,7 +36,7 @@ function App() {
     setEarringProducts,
   } = useProductData();
   useEffect(() => {
-    getAllProducts(); // Call the getAllProducts function
+    getAllProducts(); 
     getSumPurchases(setSumAllPurchases);
     getAllUserRank();
   }, []);
