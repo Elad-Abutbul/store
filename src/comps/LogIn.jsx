@@ -16,10 +16,11 @@ export default function LogIn() {
   const { loginPost } = useLogin();
   useEffect(() => {
     let token = Cookies.get(JWT.TOKEN);
+   
     if (token) {
       nav(`${ROUTES.ELADJEWELRY}/${ROUTES.PRODUCTS}`);
       const decodToken = jwtDecode(token);
-      valContext.userConnect(decodToken.findUser);
+      valContext.userConnect(decodToken);
     } else {
       valContext.userDisconnect();
       Cookies.remove(JWT.TOKEN);
